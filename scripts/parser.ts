@@ -3,14 +3,28 @@ import {
   StepIngredient,
 } from '@cooklang/cooklang-ts';
 
+interface Ingredient {
+  name: string;
+  detailName?: string;
+  metric: {
+    amount: number;
+    unit: string;
+  };
+  imperal?: {
+    amount: number | string;
+    unit: string;
+  }[];
+}
+
 interface IRecipe {
   name: string;
   mainIngredients: string[];
   specialCookwares: string[];
-  ingredients: string[];
+  ingredients: Ingredient[];
   dependencies: string[];
   course: string;
   time: number;
+  storage?: string;
 }
 
 export class Recipe implements IRecipe {
@@ -18,7 +32,7 @@ export class Recipe implements IRecipe {
 
   public specialCookwares: string[] = [];
 
-  public ingredients: string[] = [];
+  public ingredients: Ingredient[] = [];
 
   public dependencies: string[] = [];
 
@@ -26,7 +40,11 @@ export class Recipe implements IRecipe {
 
   public time = 0;
 
+  public storage?: string;
+
   #ast: ParseResult;
+
+  #ingredients: Map<string, Ingredient> = new Map();
 
   constructor(public name: string, source: string) {
     this.#ast = new Parser().parse(source);
@@ -36,13 +54,14 @@ export class Recipe implements IRecipe {
 
   private parse() {
     this.course = this.#ast.metadata.course;
+    this.storage = this.#ast.metadata.storage;
 
     this.normalizeTime(this.#ast.metadata.time);
 
     this.#ast.steps.forEach(this.parseStep.bind(this));
 
     this.mainIngredients = Array.from(new Set(this.mainIngredients));
-    this.ingredients = Array.from(new Set(this.ingredients));
+    this.ingredients = [...this.#ingredients.values()];
     this.specialCookwares = Array.from(new Set(this.specialCookwares));
   }
 
@@ -90,12 +109,89 @@ export class Recipe implements IRecipe {
     return name + affixes;
   }
 
+  private normalizeUnits(metricQuantity: number, rawUnits = '') {
+    const units = [] as { amount: number | string; unit: string }[];
+    rawUnits.split(',').forEach((unit, index) => {
+      if (index === 0) {
+        units.push({ amount: metricQuantity, unit });
+      } else {
+        const [quantity, u] = unit.trim().split('%');
+        units.push({ amount: quantity, unit: u });
+      }
+    });
+    return units;
+  }
+
   private handleIngredient(part: StepIngredient) {
     const name = this.normalizeName(part.name);
     if (part.name.startsWith('*')) {
       this.mainIngredients.push(name);
     }
 
-    this.ingredients.push(name);
+    const amounts = this.normalizeUnits(part.quantity as number, part.units);
+
+    if (this.#ingredients.has(name)) {
+      const ingredient = this.#ingredients.get(name)!;
+      const [metric, ...imperal] = amounts;
+      if (metric.unit === ingredient?.metric.unit) {
+        ingredient.metric.amount += metric.amount as number;
+      }
+      ingredient.imperal = imperal;
+    } else {
+      this.#ingredients.set(name, {
+        name,
+        detailName: this.normalizeName(part.name, true),
+        metric: { amount: amounts[0].amount as number, unit: amounts[0].unit },
+        imperal: amounts.slice(1),
+      });
+    }
+  }
+
+  public toMarkdown() {
+    return `
+# ${this.name}
+
+类型：${this.course.split('/').map((course, i, courses) => {
+    const link = courses.reduce((acc, cur, j) => (j <= i ? `${acc}/${cur}` : acc), '/recipes');
+    return `[${course}](${link})`;
+  }).join('/')}
+
+准备时长：${this.time} min
+
+储存方式：${this.storage}
+
+## Ingredients
+
+${this.ingredients.map((ingredient) => {
+    let name = ingredient.detailName ?? ingredient.name;
+    if (this.mainIngredients.includes(ingredient.name)) {
+      name = `**${name}**`;
+    }
+    const amount = `, ${ingredient.metric.amount} ${ingredient.metric.unit}`;
+    const imperal = ingredient.imperal?.map((i) => `${i.amount} ${i.unit}`).join(', ');
+    return `- ${name}${amount}${imperal ? ` (${imperal})` : ''}`;
+  }).join('\n')}
+
+## Special Cookwares
+
+${this.specialCookwares.map((cookware) => `- ${cookware}`).join('\n')}
+
+## Steps
+
+${this.#ast.steps.map((step) => `
+  ${step.map((part) => {
+    switch (part.type) {
+      case 'ingredient':
+        return `${part.quantity} ${part.units}\`${this.normalizeName(part.name)}\``;
+      case 'cookware':
+        return `\`${part.name}\``;
+      case 'timer':
+        return `\`${part.quantity} ${part.units}\``;
+      default:
+        return part.value;
+    }
+  }).join(' ')}
+`).join('\n\n')}
+`;
   }
 }
