@@ -31,4 +31,7 @@ sync('./recipes/**/*.md').forEach((file) => {
   copyFileSync(file, file.replace('./', 'docs/'));
 });
 
+if (!existsSync('./docs/.vuepress')) {
+  mkdirSync('./docs/.vuepress', { recursive: true });
+}
 copyFileSync('./scripts/config.ts', 'docs/.vuepress/config.ts');
