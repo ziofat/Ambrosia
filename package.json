@@ -23,6 +23,7 @@
   "dependencies": {
     "@cooklang/cooklang-ts": "^1.0.0",
     "fast-glob": "^3.2.11",
+    "vuepress": "^2.0.0-beta.36",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
@@ -34,7 +35,6 @@
     "eslint-plugin-import": "^2.25.4",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.2",
-    "vuepress": "^2.0.0-beta.36",
     "webpack": "^5.70.0"
   }
 }
