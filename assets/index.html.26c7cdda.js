@@ -1,0 +1,1 @@
+const t={key:"v-8f46e306",path:"/recipes/basic/stock/",title:"\u9AD8\u6C64 Stock",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:null,contributors:[]},filePathRelative:"recipes/basic/stock/README.md"};export{t as data};

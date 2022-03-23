@@ -1,0 +1,1 @@
+const e={key:"v-b29fbbba",path:"/recipes/",title:"Ambrosia",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:null,contributors:[]},filePathRelative:"recipes/README.md"};export{e as data};
