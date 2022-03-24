@@ -1,6 +1,13 @@
 module.exports = {
   root: true,
-  parser: '@typescript-eslint/parser',
+  parser: 'vue-eslint-parser',
+  parserOptions: {
+    parser: '@typescript-eslint/parser',
+    extraFileExtensions: ['.vue'],
+    tsconfigRootDir: __dirname,
+    ecmaVersion: 2018,
+    sourceType: 'module',
+  },
   plugins: [
     '@typescript-eslint',
   ],
@@ -8,6 +15,7 @@ module.exports = {
     'airbnb-base',
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:vue/base',
   ],
   rules: {
     'import/prefer-default-export': 'off',

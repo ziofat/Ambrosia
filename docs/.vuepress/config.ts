@@ -1,11 +1,12 @@
 import { defineUserConfig } from 'vuepress';
 import type { DefaultThemeOptions } from 'vuepress';
+import path from 'path';
 
 export default defineUserConfig<DefaultThemeOptions>({
   lang: 'zh-CN',
   title: 'Ambrosia.Kitchen',
   description: 'Well structured modernist recipes',
-  theme: '@vuepress/theme-default',
+  theme: path.resolve(__dirname, '../../theme/index.ts'),
   themeConfig: {
     navbar: [
       {
