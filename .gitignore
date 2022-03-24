@@ -106,6 +106,9 @@ dist
 # Vuepress
 .cache
 .temp
+docs/.vuepress/dist
 
 # Build
-docs
+docs/recipes/
+docs/handbook/
+docs/howto/
