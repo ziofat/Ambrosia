@@ -13,7 +13,7 @@
             </RouterLink>
 
             <div class="links">
-                <!-- <NavLinks class="can-hide" /> -->
+                <NavLinks />
             </div>
         </div>
     </header>
@@ -22,9 +22,13 @@
 <script>
 import { computed, defineComponent } from 'vue';
 import { useSiteData } from '@vuepress/client';
+import NavLinks from './nav-links.vue';
 
 export default defineComponent({
     name: 'Navbar',
+    components: {
+        NavLinks,
+    },
     setup() {
         const site = useSiteData();
 
@@ -40,20 +44,27 @@ export default defineComponent({
 <style lang="scss">
 header.navbar {
     height: 100px;
-    display: flex;
 
     .container {
-        padding: 40px 80px;
+        padding: 20px 80px;
         width: 100%;
+        height: 100%;
         border-bottom: 1px solid var(--c-border);
+        display: flex;
+        align-items: center;
     }
 
     .site-name {
         font-size: 24px;
+        font-weight: 600;
         color: var(--c-text);
         & > span.brand-name {
             color: var(--c-brand);
         }
+    }
+
+    .links {
+        margin-left: auto;
     }
 }
 </style>
