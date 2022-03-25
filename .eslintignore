@@ -1,0 +1,3 @@
+!docs/.vuepress
+.vuepress/*
+!docs/.vuepress/*.ts

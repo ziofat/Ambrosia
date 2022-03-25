@@ -1,23 +1,22 @@
 <template>
-    <div class="theme-container"
-        :class="pageClasses">
+    <div class="theme-container">
         <!-- <Navbar :class="{'--fluid': shouldShowSidebar}" /> -->
 
         <main class="main-content">
             <!-- <Home v-if="isHome"/>
             <Page v-else /> -->
+            <Content />
         </main>
     </div>
 </template>
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 // import Home from '../views/home.vue';
 // import Page from '../views/page.vue';
 // import Navbar from '../components/nav/navbar.vue';
 // import Sidebar from '../components/sidebar/sidebar.vue';
 
-
-export default Vue.extend({
+export default defineComponent({
     // components: {
     //     Home,
     //     Page,
@@ -36,4 +35,3 @@ export default Vue.extend({
 });
 
 </script>
-
