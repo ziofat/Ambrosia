@@ -1,11 +1,59 @@
 <template>
+    <header class="navbar" ref="navbar">
+        <div class="container">
+            <RouterLink to="/" class="home-link">
+                <div ref="siteName"
+                    class="site-name"
+                    v-if="title"
+                >
+                    <span class="brand-name">{{title[0]}}</span>
+                    <span v-if="title[1]">.</span>
+                    <span v-if="title[1]">{{title[1]}}</span>
+                </div>
+            </RouterLink>
 
+            <div class="links">
+                <!-- <NavLinks class="can-hide" /> -->
+            </div>
+        </div>
+    </header>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
+
+<script>
+import { computed, defineComponent } from 'vue';
+import { useSiteData } from '@vuepress/client';
 
 export default defineComponent({
-    name: 'ak-navbar',
-});
+    name: 'Navbar',
+    setup() {
+        const site = useSiteData();
 
+        const title = computed(() => site.value.title.split('.'));
+
+        return {
+            title,
+        };
+    },
+});
 </script>
+
+<style lang="scss">
+header.navbar {
+    height: 100px;
+    display: flex;
+
+    .container {
+        padding: 40px 80px;
+        width: 100%;
+        border-bottom: 1px solid var(--c-border);
+    }
+
+    .site-name {
+        font-size: 24px;
+        color: var(--c-text);
+        & > span.brand-name {
+            color: var(--c-brand);
+        }
+    }
+}
+</style>

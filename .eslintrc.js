@@ -18,6 +18,7 @@ module.exports = {
         'plugin:vue/base',
     ],
     rules: {
+        'max-len': ['error', 120],
         'import/prefer-default-export': 'off',
         'no-useless-constructor': 'off',
         '@typescript-eslint/no-useless-constructor': 'error',
