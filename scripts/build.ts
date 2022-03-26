@@ -8,7 +8,8 @@ import { sync } from 'fast-glob';
 import { Recipe } from './parser';
 
 sync('./recipes/**/*.cook').map((file) => {
-    const source = readFileSync(file, 'utf8');
+    const [, course] = file.match(/recipes\/(.+)\/(.+)\.cook$/)!;
+    const source = `>> course: ${course}\n${readFileSync(file, 'utf8')}`;
     const name = file.split('/').pop()?.replace('.cook', '') ?? '';
     try {
         return new Recipe(name, source);
