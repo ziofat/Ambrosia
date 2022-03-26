@@ -4,6 +4,7 @@
 
         <main class="main-content">
             <Home v-if="isHome" />
+            <Recipe v-if="isRecipe" />
             <Page v-else />
         </main>
     </div>
@@ -13,6 +14,7 @@ import { computed, defineComponent } from 'vue';
 import { usePageFrontmatter } from '@vuepress/client';
 import Home from '../views/home.vue';
 import Page from '../views/page.vue';
+import Recipe from '../views/recipe.vue';
 import Navbar from '../components/navbar.vue';
 
 export default defineComponent({
@@ -20,13 +22,16 @@ export default defineComponent({
         Home,
         Page,
         Navbar,
+        Recipe,
     },
 
     setup() {
         const frontMatter = usePageFrontmatter();
         const isHome = computed(() => frontMatter.value.home);
+        const isRecipe = computed(() => frontMatter.value.recipe);
         return {
             isHome,
+            isRecipe,
         };
     },
 });

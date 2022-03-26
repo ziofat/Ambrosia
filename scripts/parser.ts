@@ -24,6 +24,7 @@ interface IRecipe {
     dependencies: string[];
     course: string;
     time: number;
+    yield: string;
     storage?: string;
 }
 
@@ -42,6 +43,8 @@ export class Recipe implements IRecipe {
 
     public storage?: string;
 
+    public yield = '';
+
     #ast: ParseResult;
 
     #ingredients: Map<string, Ingredient> = new Map();
@@ -55,6 +58,7 @@ export class Recipe implements IRecipe {
     private parse() {
         this.course = this.#ast.metadata.course;
         this.storage = this.#ast.metadata.storage;
+        this.yield = this.#ast.metadata.yield;
 
         this.normalizeTime(this.#ast.metadata.time);
 
@@ -148,35 +152,18 @@ export class Recipe implements IRecipe {
     }
 
     public toMarkdown() {
-        return `
+        return `---
+recipe: true
+course: ${this.course}
+time: ${this.time}
+storage: ${this.storage}
+ingredients: ${this.ingredients.length}
+yield: ${this.yield}
+---
+
 # ${this.name}
 
-类型：${this.course.split('/').map((course, i, courses) => {
-        const link = courses.reduce((acc, cur, j) => (j <= i ? `${acc}/${cur}` : acc), '/recipes');
-        return `[${course}](${link})`;
-    }).join('/')}
-
-准备时长：${this.time} min
-
-储存方式：${this.storage}
-
-## Ingredients
-
-${this.ingredients.map((ingredient) => {
-        let name = ingredient.detailName ?? ingredient.name;
-        if (this.mainIngredients.includes(ingredient.name)) {
-            name = `**${name}**`;
-        }
-        const amount = `, ${ingredient.metric.amount} ${ingredient.metric.unit}`;
-        const imperal = ingredient.imperal?.map((i) => `${i.amount} ${i.unit}`).join(', ');
-        return `- ${name}${amount}${imperal ? ` (${imperal})` : ''}`;
-    }).join('\n')}
-
-## Special Cookwares
-
-${this.specialCookwares.map((cookware) => `- ${cookware}`).join('\n')}
-
-## Steps
+### Instruction
 
 ${this.#ast.steps.map((step) => `
   ${step.map((part) => {
