@@ -1,0 +1,155 @@
+$headingFontWeight: normal !default;
+
+$MQNarrow: 1024px;
+$MQMobile: 768px;
+$MQMobileNarrow: 320px;
+
+$containerMaxWidth: sass-rem(1024);
+$containerGutter: 2rem;
+$sidebarWidth: 20rem;
+// $contentWidth: 740px;
+
+$breakpoints: ('small': 320px, 'medium': 768px, 'medium+1': 769px, 'large': 1024px);
+
+@mixin responsive-settings($property, $map, $breakpoints: $breakpoints) {
+    @each $breakpoint, $value in $map {
+        @if $breakpoint == null {
+            #{$property}: $value;
+        }
+
+        @else {
+            @if map-has-key($breakpoints, $breakpoint) {
+                $breakpoint: map-get($breakpoints, $breakpoint);
+            }
+
+            @media screen and (min-width: $breakpoint) {
+                #{$property}: $value;
+            }
+        }
+    }
+}
+
+$h1FontSizes: (null: 30px, medium: 35px, large: 40px);
+$h1LineHeights: (null: 1);
+
+$h2FontSizes: (null: 25px, medium: 28px, large: 30px);
+$h2LineHeights: (null: 1);
+
+$h3FontSizes: (null: 18px, medium: 18px, large: 20px);
+$h3LineHeights: (null: 1);
+
+$h4FontSizes: (null: 18px);
+$h4LineHeights: (null: 1);
+
+$h5FontSizes: (null: 12px, medium: 18px, large: 24px);
+$h5LineHeights: (null: 1);
+
+$h6FontSizes: (null: 14px);
+$h6LineHeights: (null: 1);
+
+%heading-common {
+  font-weight: $headingFontWeight;
+}
+
+.heading,
+.subheading {
+  @extend %heading-common;
+}
+
+.heading--centered {
+  text-align: center;
+}
+
+.heading,
+.heading--style {
+  color: inherit;
+  line-height: 1;
+  font-weight: 100;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  border: 0;
+
+  b,
+  strong {
+    font-weight: bold;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  &:hover .header-anchor {
+    opacity: 1;
+  }
+}
+
+%heading-common {
+  font-weight: $headingFontWeight;
+}
+
+.heading,
+.subheading {
+  @extend %heading-common;
+}
+
+.heading--centered {
+  text-align: center;
+}
+
+.heading,
+.heading--style {
+  color: inherit;
+  line-height: 1;
+  font-weight: 100;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+
+  b,
+  strong {
+    font-weight: bold;
+  }
+}
+
+h1,
+.is-1 {
+  @include responsive-settings('font-size', $h1FontSizes);
+  @include responsive-settings('line-height', $h1LineHeights);
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+h2,
+.is-2 {
+  @include responsive-settings('font-size', $h2FontSizes);
+  @include responsive-settings('line-height', $h2LineHeights);
+  text-transform: uppercase;
+  margin-bottom: 25px;
+}
+
+h3,
+.is-3 {
+  @include responsive-settings('font-size', $h3FontSizes);
+  @include responsive-settings('line-height', $h3LineHeights);
+
+  margin-bottom: 20px;
+}
+
+h4,
+.is-4 {
+  @include responsive-settings('font-size', $h4FontSizes);
+  @include responsive-settings('line-height', $h4LineHeights);
+  margin-bottom: 20px;
+}
+
+h5,
+.is-5 {
+  @include responsive-settings('font-size', $h5FontSizes);
+  @include responsive-settings('line-height', $h5LineHeights);
+
+  margin-bottom: 20px;
+}
+
+h6,
+.is-6 {
+  @include responsive-settings('font-size', $h6FontSizes);
+  @include responsive-settings('line-height', $h6LineHeights);
+  margin-bottom: 20px;
+}

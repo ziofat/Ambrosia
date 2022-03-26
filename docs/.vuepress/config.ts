@@ -15,6 +15,9 @@ export default defineUserConfig<DefaultThemeOptions>({
                     {
                         text: 'Basic',
                         link: '/recipes/basic/',
+                        children: [
+                            { text: 'Stock', link: '/recipes/basic/stock' },
+                        ],
                     },
                     {
                         text: 'Soup',

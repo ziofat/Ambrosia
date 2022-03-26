@@ -57,6 +57,8 @@ header.navbar {
     .site-name {
         font-size: 24px;
         font-weight: 600;
+        height: 40px;
+        line-height: 40px;
         color: var(--c-text);
         & > span.brand-name {
             color: var(--c-brand);
