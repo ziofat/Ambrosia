@@ -4,21 +4,20 @@
     --c-brand-light: #e39e75;
 
     // background colors
-    --c-bg: #ECEFF4;
-    --c-bg-light: #E5E9F0;
-    --c-bg-lighter: #D8DEE9;
-    --c-bg-arrow: #cccccc;
+    --c-bg: #2E3440;
+    --c-bg-light: #3B4252;
+    --c-bg-lighter: #434C5E;
+    --c-bg-arrow: #4C566A;
 
     // text colors
-    --c-text: #2E3440;
-    --c-text-light: #3B4252;
-    --c-text-lighter: #434C5E;
-    --c-text-lightest: #4C566A;
+    --c-text: #ECEFF4;
+    --c-text-light: #E5E9F0;
+    --c-text-lighter: #D8DEE9;
     --c-text-quote: #999999;
 
     // border colors
-    --c-border: #ccd4e1;
-    --c-border-dark: #abb9cf;
+    --c-border: #4C566A;
+    --c-border-dark: #434C5E;
 
     // custom container colors
     --c-tip: #A3BE8C;
@@ -38,3 +37,4 @@
     --c-danger-text-accent: var(--c-text);
     --c-details-bg: #eeeeee;
 }
+

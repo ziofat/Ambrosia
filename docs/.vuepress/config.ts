@@ -1,34 +1,38 @@
 import { defineUserConfig } from 'vuepress';
 import type { DefaultThemeOptions } from 'vuepress';
+import path from 'path';
 
 export default defineUserConfig<DefaultThemeOptions>({
-  lang: 'zh-CN',
-  title: 'Ambrosia.Kitchen',
-  description: 'Well structured modernist recipes',
-  theme: '@vuepress/theme-default',
-  themeConfig: {
-    navbar: [
-      {
-        text: 'Recipes',
-        children: [
-          {
-            text: 'Basic',
-            link: '/recipes/basic/',
-          },
-          {
-            text: 'Soup',
-            link: '/recipes/soup/',
-          },
+    lang: 'zh-CN',
+    title: 'Ambrosia.Kitchen',
+    description: '结构化的开源食谱',
+    theme: path.resolve(__dirname, '../../theme/index.ts'),
+    themeConfig: {
+        navbar: [
+            {
+                text: '食谱',
+                children: [
+                    {
+                        text: '基底',
+                        link: '/recipes/basic/',
+                        children: [
+                            { text: '高汤', link: '/recipes/basic/stock/' },
+                        ],
+                    },
+                    {
+                        text: '汤品',
+                        link: '/recipes/soup/',
+                    },
+                ],
+            },
+            {
+                text: '技术指南',
+                link: '/how-to/',
+            },
+            {
+                text: '速查手册',
+                link: '/handbook/',
+            },
         ],
-      },
-      {
-        text: 'How to',
-        link: '/how-to/',
-      },
-      {
-        text: 'Handbook',
-        link: '/handbook/',
-      }
-    ],
-  },
+    },
 });
