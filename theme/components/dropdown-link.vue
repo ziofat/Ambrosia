@@ -101,6 +101,7 @@ export default {
         text-align: left;
         white-space: nowrap;
         margin: 0;
+        z-index: 999;
 
         .dropdown-item {
             color: inherit;

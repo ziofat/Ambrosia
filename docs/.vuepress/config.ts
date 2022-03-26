@@ -5,32 +5,32 @@ import path from 'path';
 export default defineUserConfig<DefaultThemeOptions>({
     lang: 'zh-CN',
     title: 'Ambrosia.Kitchen',
-    description: 'Well structured modernist recipes',
+    description: '结构化的开源食谱',
     theme: path.resolve(__dirname, '../../theme/index.ts'),
     themeConfig: {
         navbar: [
             {
-                text: 'Recipes',
+                text: '食谱',
                 children: [
                     {
-                        text: 'Basic',
+                        text: '基底',
                         link: '/recipes/basic/',
                         children: [
-                            { text: 'Stock', link: '/recipes/basic/stock' },
+                            { text: '高汤', link: '/recipes/basic/stock/' },
                         ],
                     },
                     {
-                        text: 'Soup',
+                        text: '汤品',
                         link: '/recipes/soup/',
                     },
                 ],
             },
             {
-                text: 'How to',
+                text: '技术指南',
                 link: '/how-to/',
             },
             {
-                text: 'Handbook',
+                text: '速查手册',
                 link: '/handbook/',
             },
         ],

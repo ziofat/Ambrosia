@@ -3,23 +3,32 @@
         <Navbar />
 
         <main class="main-content">
-            <!-- <Home v-if="isHome"/>
-            <Page v-else /> -->
+            <Home v-if="isHome" />
+            <!-- <Page v-else /> -->
             <Content />
         </main>
     </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue';
-// import Home from '../views/home.vue';
+import { computed, defineComponent } from 'vue';
+import { usePageFrontmatter } from '@vuepress/client';
+import Home from '../views/home.vue';
 // import Page from '../views/page.vue';
 import Navbar from '../components/navbar.vue';
 
 export default defineComponent({
     components: {
-        // Home,
+        Home,
         // Page,
         Navbar,
+    },
+
+    setup() {
+        const frontMatter = usePageFrontmatter();
+        const isHome = computed(() => frontMatter.value.home);
+        return {
+            isHome,
+        };
     },
 });
 
@@ -34,6 +43,7 @@ body, #app {
 }
 .theme-container {
     height: 100%;
+    position: relative;
     background-color: var(--c-bg);
 }
 </style>

@@ -39,8 +39,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
-  color: var(--text-color);
-  background-color: var(--bg-color);
+  color: var(--c-text);
+  background-color: var(--c-bg);
 }
 
 /**
@@ -440,7 +440,7 @@ figure {
 
   figcaption {
     margin-top: 1em;
-    color: var(--text-secondary-color);
+    color: var(--c-text-quote);
   }
 }
 
@@ -453,7 +453,7 @@ code {
 }
 
 blockquote {
-  color: var(--text-secondary-color);
+  color: var(--c-text-quote);
   border-left: 0.25rem solid var(--border-color);
   margin-top: 1.6em;
   margin-bottom: 1.6em;

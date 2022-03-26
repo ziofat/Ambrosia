@@ -44,6 +44,8 @@ export default defineComponent({
 <style lang="scss">
 header.navbar {
     height: 100px;
+    z-index: 20;
+    position: relative;
 
     .container {
         padding: 20px 80px;
