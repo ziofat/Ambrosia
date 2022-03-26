@@ -6,6 +6,7 @@ import {
 import { resolve, join } from 'path';
 import { sync } from 'fast-glob';
 import { Recipe } from './parser';
+import { CATEGORIES } from './categories';
 
 sync('./recipes/**/*.cook').map((file) => {
     const [, course] = file.match(/recipes\/(.+)\/(.+)\.cook$/)!;
@@ -34,10 +35,11 @@ sync('./recipes/**/*.cook').map((file) => {
     categories[course].push(name);
     return acc;
 }, [{}])
-    .map((categories) => Object.entries<string[]>(categories)
+    .map((acc) => Object.entries<string[]>(acc)
         .forEach(([category, recipes]) => {
             const md = recipes.map((name) => `- [${name}](${name}.md)`).join('\n');
-            writeFileSync(resolve(__dirname, `../docs/recipes/${category}/README.md`), md, 'utf-8');
+            const title = CATEGORIES.find((c) => c.id === category)?.text ?? '';
+            writeFileSync(resolve(__dirname, `../docs/recipes/${category}/README.md`), `# ${title}\n\n${md}`, 'utf-8');
         }));
 
 sync('./recipes/**/*.md').forEach((file) => {

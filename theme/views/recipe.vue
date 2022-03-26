@@ -11,7 +11,7 @@
                             :key="category.link"
                             :to="category.link"
                         >
-                            {{category.name}}
+                            <span class="tag">{{category.name}}</span>
                         </RouterLink>
                     </div>
                     <div class="recipe-info">
@@ -100,11 +100,22 @@ export default defineComponent({
                 a.category-link:hover {
                     color: var(--c-brand);
                 }
+                .tag {
+                    display: inline-block;
+                    padding: 0 16px;
+                    height: 28px;
+                    line-height: 26px;
+                    border: 1px solid var(--c-border);
+                    border-radius: 14px;
+                    font-size: 14px;
+                    font-weight: 500;
+                    margin-right: 5px;
+                }
             }
 
             .recipe-info {
                 display: flex;
-                padding: 40px 16px;
+                padding: 40px 0;
                 .recipe-info-card {
                     display: block;
                     width: 120px;
