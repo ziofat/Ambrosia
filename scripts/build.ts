@@ -25,13 +25,20 @@ sync('./recipes/**/*.cook').map((file) => {
     }
     writeFileSync(join(path, `${recipe.name}.md`), md, 'utf-8');
     return recipe;
-});
+}).reduce((acc, recipe) => {
+    if (!recipe) return acc;
+    const { name, course } = recipe;
+    const [categories] = acc;
+    categories[course] = categories[course] ?? [];
+    categories[course].push(name);
+    return acc;
+}, [{}])
+    .map((categories) => Object.entries<string[]>(categories)
+        .forEach(([category, recipes]) => {
+            const md = recipes.map((name) => `- [${name}](${name}.md)`).join('\n');
+            writeFileSync(resolve(__dirname, `../docs/recipes/${category}/README.md`), md, 'utf-8');
+        }));
 
 sync('./recipes/**/*.md').forEach((file) => {
     copyFileSync(file, file.replace('./', 'docs/'));
 });
-
-if (!existsSync('./docs/.vuepress')) {
-    mkdirSync('./docs/.vuepress', { recursive: true });
-}
-copyFileSync('./scripts/config.ts', 'docs/.vuepress/config.ts');

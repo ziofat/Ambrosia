@@ -4,8 +4,7 @@
 
         <main class="main-content">
             <Home v-if="isHome" />
-            <!-- <Page v-else /> -->
-            <Content />
+            <Page v-else />
         </main>
     </div>
 </template>
@@ -13,13 +12,13 @@
 import { computed, defineComponent } from 'vue';
 import { usePageFrontmatter } from '@vuepress/client';
 import Home from '../views/home.vue';
-// import Page from '../views/page.vue';
+import Page from '../views/page.vue';
 import Navbar from '../components/navbar.vue';
 
 export default defineComponent({
     components: {
         Home,
-        // Page,
+        Page,
         Navbar,
     },
 
