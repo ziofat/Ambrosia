@@ -87,7 +87,7 @@ export default defineComponent({
 
     .page-content {
         display: flex;
-        padding-right: 300px;
+        padding-right: 40%;
 
         .recipe-header {
             position: relative;
