@@ -1,0 +1,1 @@
+import{f as e,c as t,o,a as s}from"./app.cbfa74d6.js";import{_ as a}from"./plugin-vue_export-helper.21dcd24c.js";const n=e({data(){},mounted(){},computed:{}}),c={class:"theme-container"},r=s("main",{class:"main-content"}," 404 ",-1),_=[r];function d(i,m,p,f,l,u){return o(),t("div",c,_)}var x=a(n,[["render",d]]);export{x as default};
