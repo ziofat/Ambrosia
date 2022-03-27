@@ -14,36 +14,44 @@ interface Ingredient {
         amount: number | string;
         unit: string;
     }[];
+    scale?: number;
+}
+
+interface IStep {
+    ingredients: Ingredient[];
+    instructs: string[];
 }
 
 interface IRecipe {
     name: string;
-    mainIngredients: string[];
+    description: string;
     specialCookwares: string[];
-    ingredients: Ingredient[];
-    dependencies: string[];
     course: string;
     time: number;
     yield: string;
+    servings?: number;
     storage?: string;
+    steps: IStep[];
 }
 
 export class Recipe implements IRecipe {
-    public mainIngredients: string[] = [];
+    private mainIngredients: string[] = [];
+
+    public description = '';
 
     public specialCookwares: string[] = [];
-
-    public ingredients: Ingredient[] = [];
-
-    public dependencies: string[] = [];
 
     public course = '';
 
     public time = 0;
 
+    public yield = '';
+
+    public servings?: number;
+
     public storage?: string;
 
-    public yield = '';
+    public steps: IStep[] = [];
 
     #ast: ParseResult;
 
@@ -51,7 +59,6 @@ export class Recipe implements IRecipe {
 
     constructor(public name: string, source: string) {
         this.#ast = new Parser().parse(source);
-
         this.parse();
     }
 
@@ -65,7 +72,6 @@ export class Recipe implements IRecipe {
         this.#ast.steps.forEach(this.parseStep.bind(this));
 
         this.mainIngredients = Array.from(new Set(this.mainIngredients));
-        this.ingredients = [...this.#ingredients.values()];
         this.specialCookwares = Array.from(new Set(this.specialCookwares));
     }
 
@@ -157,7 +163,7 @@ recipe: true
 course: ${this.course}
 time: ${this.time}
 storage: ${this.storage}
-ingredients: ${this.ingredients.length}
+ingredients: ${this.#ingredients.size}
 yield: ${this.yield}
 ---
 
