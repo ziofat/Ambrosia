@@ -26,6 +26,12 @@ export default defineUserConfig<DefaultThemeOptions>({
                             { text: '清汤', link: '/recipes/soup/broth/' },
                         ],
                     },
+                    {
+                        text: '小吃',
+                        children: [
+                            { text: '蛋类料理', link: '/recipes/snack/egg/' },
+                        ],
+                    },
                 ],
             },
             {
