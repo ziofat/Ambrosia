@@ -1,1 +1,0 @@
-const e={key:"v-4464a00e",path:"/recipes/soup/broth/%E9%A6%99%E9%83%81%E6%B8%85%E9%B8%A1%E6%B1%A4.html",title:"\u9999\u90C1\u6E05\u9E21\u6C64",lang:"zh-CN",frontmatter:{recipe:!0,course:"soup/broth",time:10,storage:"\u7ACB\u523B\u4E0A\u83DC",ingredients:10,yield:"1 kg"},excerpt:"",headers:[{level:3,title:"Instruction",slug:"instruction",children:[]}]};export{e as data};
