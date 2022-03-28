@@ -14,20 +14,23 @@
                             <span class="tag">{{category.name}}</span>
                         </RouterLink>
                     </div>
+                    <div class="recipe-desc">
+                        {{description}}
+                    </div>
                     <div class="recipe-info">
-                        <div class="recipe-info-card" v-if="time">
+                        <div class="recipe-info-card" v-if="time !== 'undefined'">
                             <div class="value">{{time}}</div>
                             <div class="label">分钟</div>
                         </div>
-                        <div class="recipe-info-card" v-if="yields">
+                        <div class="recipe-info-card" v-if="yields !== 'undefined'">
                             <div class="value">{{yields}}</div>
                             <div class="label">产出</div>
                         </div>
-                        <div class="recipe-info-card" v-if="ingredients">
+                        <div class="recipe-info-card" v-if="ingredients !== 'undefined'">
                             <div class="value">{{ingredients}}</div>
                             <div class="label">原料</div>
                         </div>
-                        <div class="recipe-info-card" v-if="servings">
+                        <div class="recipe-info-card" v-if="servings !== 'undefined'">
                             <div class="value">{{servings}}</div>
                             <div class="label">人份</div>
                         </div>
@@ -61,6 +64,7 @@ export default defineComponent({
         const yields = computed(() => meta.value.yield);
         const ingredients = computed(() => meta.value.ingredients);
         const servings = computed(() => meta.value.servings);
+        const description = computed(() => meta.value.description);
 
         const categories = computed(() => meta.value.course.split('/').map((course, i, courses) => {
             const link = courses.reduce((acc, cur, j) => (j <= i ? `${acc}/${cur}` : acc), '/recipes');
@@ -70,7 +74,7 @@ export default defineComponent({
 
         return {
             title,
-            description: '',
+            description,
             categories,
             time,
             yields,
@@ -111,11 +115,19 @@ export default defineComponent({
                     font-weight: 500;
                     margin-right: 5px;
                 }
+                padding: 16px 0;
+            }
+
+            .recipe-desc {
+                padding: 24px 0;
+                width: 80%;
+                color: var(--c-light);
+                line-height: 2;
             }
 
             .recipe-info {
                 display: flex;
-                padding: 40px 0;
+                padding: 16px 0;
                 .recipe-info-card {
                     display: block;
                     width: 120px;

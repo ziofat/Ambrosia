@@ -1,0 +1,26 @@
+<template>
+    <div class="recipe-steps">
+        <div class="step-header">
+           材料
+        </div>
+        <div class="step-header">
+           重量
+        </div>
+        <div class="step-header">
+           做法
+        </div>
+        <slot></slot>
+    </div>
+</template>
+<style lang="scss">
+.recipe-steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    .step-header {
+        font-size: 20px;
+        padding: 8px 16px;
+        height: 50px;
+        border-bottom: 2px solid var(--c-brand);
+    }
+}
+</style>

@@ -17,6 +17,10 @@ export const ambrosiaTheme = (
             Layout: path.resolve(__dirname, 'layouts/layout.vue'),
             404: path.resolve(__dirname, 'layouts/404.vue'),
         },
+        clientAppEnhanceFiles: path.resolve(
+            __dirname,
+            'install.ts',
+        ),
         plugins: [
             ['@vuepress/theme-data', { themeData: localeOptions }],
         ],

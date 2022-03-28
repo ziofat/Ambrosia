@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import {
     Parser, ParseResult, Step,
     StepIngredient,
@@ -15,6 +16,7 @@ interface Ingredient {
         unit: string;
     }[];
     scale?: number;
+    optional?: boolean;
 }
 
 interface IStep {
@@ -57,12 +59,22 @@ export class Recipe implements IRecipe {
 
     #ingredients: Map<string, Ingredient> = new Map();
 
+    #isDescriptionOver = false;
+
+    #stepIndex = -1;
+
     constructor(public name: string, source: string) {
         this.#ast = new Parser().parse(source);
         this.parse();
     }
 
     private parse() {
+        this.description = '';
+        this.#stepIndex = -1;
+        this.mainIngredients = [];
+        this.specialCookwares = [];
+        this.#ingredients.clear();
+
         this.course = this.#ast.metadata.course;
         this.storage = this.#ast.metadata.storage;
         this.yield = this.#ast.metadata.yield;
@@ -88,22 +100,54 @@ export class Recipe implements IRecipe {
     }
 
     private parseStep(step: Step) {
-        step.forEach((part) => {
+        let instruction = '';
+        step.forEach((part, i) => {
             switch (part.type) {
                 case 'ingredient':
-                    this.handleIngredient(part);
+                    if (this.#stepIndex >= 0) {
+                        const ingredient = this.handleIngredient(part);
+                        this.steps[this.#stepIndex].ingredients.push({
+                            ...ingredient,
+                            optional: part.name.startsWith('?'),
+                        });
+                        instruction += ingredient.name;
+                    }
                     break;
                 case 'cookware':
                     this.specialCookwares.push(part.name);
+                    instruction += part.name;
+                    break;
+                case 'timer':
+                    instruction += ` ${part.quantity ?? '几'} ${part.units ?? '分钟'}`;
+                    break;
+                case 'text':
+                    if (!this.#isDescriptionOver) {
+                        if (part.value.startsWith('====') && part.value.endsWith('====')) {
+                            this.#isDescriptionOver = true;
+                        } else {
+                            this.description += part.value;
+                        }
+                    } else if (i === 0 && part.value.startsWith('- ')) {
+                        this.#stepIndex = this.steps.push({
+                            ingredients: [],
+                            instructs: [],
+                        }) - 1;
+                    }
+                    if (this.#stepIndex >= 0) {
+                        instruction += part.value;
+                    }
                     break;
                 default:
                     break;
             }
         });
+        if (this.#stepIndex >= 0) {
+            this.steps[this.#stepIndex].instructs.push(instruction.slice(2));
+        }
     }
 
     private normalizeName(rawName: string, withProcessors = false) {
-        const matches = rawName.matchAll(/`(.*?[^\\])`/g);
+        const matches = rawName.matchAll(/\((.*?[^\\])\)/g);
 
         const { name, preprocessors } = [...matches].reduce((acc, [match, group]) => {
             acc.name = acc.name.replace(match, '');
@@ -113,7 +157,7 @@ export class Recipe implements IRecipe {
 
         const affixes = withProcessors && preprocessors.length > 0 ? `, ${preprocessors.join(' ')}` : '';
 
-        if (name.startsWith('*') || name.startsWith('?')) {
+        if (name.startsWith('!') || name.startsWith('?')) {
             return name.slice(1) + affixes;
         }
         return name + affixes;
@@ -134,7 +178,7 @@ export class Recipe implements IRecipe {
 
     private handleIngredient(part: StepIngredient) {
         const name = this.normalizeName(part.name);
-        if (part.name.startsWith('*')) {
+        if (part.name.startsWith('!')) {
             this.mainIngredients.push(name);
         }
 
@@ -155,6 +199,7 @@ export class Recipe implements IRecipe {
                 imperal: amounts.slice(1),
             });
         }
+        return this.#ingredients.get(name)!;
     }
 
     public toMarkdown() {
@@ -164,27 +209,26 @@ course: ${this.course}
 time: ${this.time}
 storage: ${this.storage}
 ingredients: ${this.#ingredients.size}
+description: ${this.description}
 yield: ${this.yield}
+servings: ${this.#ast.metadata.servings}
 ---
 
 # ${this.name}
 
 ### Instruction
 
-${this.#ast.steps.map((step) => `
-  ${step.map((part) => {
-        switch (part.type) {
-            case 'ingredient':
-                return `${part.quantity} ${part.units}\`${this.normalizeName(part.name)}\``;
-            case 'cookware':
-                return `\`${part.name}\``;
-            case 'timer':
-                return `\`${part.quantity} ${part.units}\``;
-            default:
-                return part.value;
-        }
-    }).join(' ')}
-`).join('\n\n')}
+<Steps>
+
+${this.steps.map((step) => `<Step ingredients="${step.ingredients.map((i) => i.detailName).join('|')}" amount="${step.ingredients.map(({ metric }) => `${metric.amount}, ${metric.unit}`).join('|')}">
+
+${step.instructs.join('\n\n')}
+
+</Step>`).join('\n\n')}
+
+</Steps>
+
+${this.storage ? `### Storage\n\n${this.storage}` : ''}
 `;
     }
 }
