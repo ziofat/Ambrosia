@@ -1,6 +1,7 @@
 import { defineUserConfig } from 'vuepress';
 import type { DefaultThemeOptions } from 'vuepress';
 import path from 'path';
+import { CATEGORIES } from '../../scripts/categories';
 
 export default defineUserConfig<DefaultThemeOptions>({
     lang: 'zh-CN',
@@ -11,29 +12,19 @@ export default defineUserConfig<DefaultThemeOptions>({
         navbar: [
             {
                 text: '食谱',
-                children: [
-                    {
-                        text: '基底',
-                        link: '/recipes/basic/',
-                        children: [
-                            { text: '高汤', link: '/recipes/basic/stock/' },
-                            { text: '酱汁', link: '/recipes/basic/sauce/' },
-                        ],
-                    },
-                    {
-                        text: '汤品',
-                        link: '/recipes/soup/',
-                        children: [
-                            { text: '清汤', link: '/recipes/soup/broth/' },
-                        ],
-                    },
-                    {
-                        text: '小吃',
-                        children: [
-                            { text: '蛋类料理', link: '/recipes/snack/egg/' },
-                        ],
-                    },
-                ],
+                children: Object.values(CATEGORIES.reduce((acc, { id, text }) => {
+                    const [main, sub] = id.split('/');
+                    if (!sub) {
+                        const original = acc[main] ?? { children: [] };
+                        acc[main] = { ...original, text, link: `/recipes/${main}/` };
+                    } else if (acc[main]) {
+                        acc[main].children.push({ text, link: `/recipes/${main}/${sub}/` });
+                    } else {
+                        acc[main] = { text, link: `/recipes/${main}/`, children: [] };
+                        acc[main].children.push({ text, link: `/recipes/${main}/${sub}/` });
+                    }
+                    return acc;
+                }, {})),
             },
             {
                 text: '技术指南',
