@@ -17,6 +17,7 @@ export default defineUserConfig<DefaultThemeOptions>({
                         link: '/recipes/basic/',
                         children: [
                             { text: '高汤', link: '/recipes/basic/stock/' },
+                            { text: '酱汁', link: '/recipes/basic/sauce/' },
                         ],
                     },
                     {
