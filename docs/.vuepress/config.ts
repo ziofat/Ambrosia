@@ -1,9 +1,9 @@
 import { defineUserConfig } from 'vuepress';
-import type { DefaultThemeOptions } from 'vuepress';
 import path from 'path';
+import { AmborsiaKitchenTheme } from '../../theme';
 import { CATEGORIES } from '../../scripts/categories';
 
-export default defineUserConfig<DefaultThemeOptions>({
+export default defineUserConfig<AmborsiaKitchenTheme>({
     lang: 'zh-CN',
     title: 'Ambrosia.Kitchen',
     description: '结构化的开源食谱',
@@ -35,5 +35,8 @@ export default defineUserConfig<DefaultThemeOptions>({
                 link: '/handbook/',
             },
         ],
+        mainCategories: Object.values(CATEGORIES)
+            .filter(({ id }) => !id.includes('/'))
+            .map(({ id, text }) => ({ id, name: text })),
     },
 });

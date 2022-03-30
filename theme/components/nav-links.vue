@@ -13,7 +13,7 @@
 
 <script>
 import { computed, defineComponent } from 'vue';
-import { useThemeData } from '../composables/useThemeData';
+import { useThemeData } from '../composables/use-theme-data';
 import NavLink from './nav-link.vue';
 import { resolveNavLinkItem } from '../utils/url';
 import DropdownLink from './dropdown-link.vue';

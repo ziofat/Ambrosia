@@ -14,29 +14,21 @@
             </ul>
         </HeroBanner>
 
-        <!-- <article>
-            <div class="container--grey-lighter" v-if="data.testimonial">
-                <div class="container">
-                    <Testimonial :title="data.testimonial.title" :details="data.testimonial.details"></Testimonial>
-                </div>
-            </div>
-
-            <div class="container container--padded" v-if="data.features && data.features.length">
-                <Features :items="data.features"></Features>
-            </div>
-
-        </article> -->
+        <RecipeFinder />
     </div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { usePageFrontmatter } from '@vuepress/client';
 import HeroBanner from '../components/hero.vue';
+import RecipeFinder from '../components/recipe-finder.vue';
+import NavLink from '../components/nav-link.vue';
 
 export default defineComponent({
     name: 'Home',
     components: {
         HeroBanner,
+        RecipeFinder,
+        NavLink,
     },
     setup() {
         return {

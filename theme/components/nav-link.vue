@@ -7,7 +7,7 @@
         <slot></slot>
     </RouterLink>
 
-    <a v-else
+    <!-- <a v-else
         :href="link"
         :title="title"
         class="nav-link external"
@@ -15,7 +15,7 @@
         rel="noopener noreferrer">
         <slot></slot>
         <OutboundLink />
-    </a>
+    </a> -->
 
 </template>
 

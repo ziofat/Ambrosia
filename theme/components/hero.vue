@@ -2,9 +2,7 @@
     <section class="hero-banner" :style="{ backgroundImage: `url(${image})`, backgroundColor: bgColor }">
         <div class="hero-banner__content">
             <div class="hero-banner__text">
-                <h1>{{ title }}
-                    <small v-show="version">{{version}}</small>
-                </h1>
+                <h1>{{ title }}</h1>
 
                 <p class="hero-banner__description">
                     {{ description }}

@@ -1,5 +1,7 @@
 import { path } from '@vuepress/utils';
 
+export { AmborsiaKitchenTheme } from './composables/theme-config';
+
 export const ambrosiaTheme = (
     { themePlugins = {}, ...localeOptions },
     app,

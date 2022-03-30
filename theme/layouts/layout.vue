@@ -4,7 +4,7 @@
 
         <main class="main-content">
             <Home v-if="isHome" />
-            <Recipe v-if="isRecipe" />
+            <Recipe v-else-if="isRecipe" />
             <Page v-else />
         </main>
     </div>

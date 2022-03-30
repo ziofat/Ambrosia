@@ -25,6 +25,30 @@ html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
 }
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(115, 115, 115, 0.24);
+    border-radius: 5px;
+    border: 1px solid transparent;
+    height: 140px;
+    background-clip: content-box; // 通过裁切来控制滚动条宽度
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(115, 115, 115, 0.32);
+    border-radius: 5px;
+    border: 1px solid transparent;
+    height: 140px;
+    background-clip: content-box; // 通过裁切来控制滚动条宽度
+}
+::-webkit-scrollbar-thumb:active {
+    background: rgba(115, 115, 115, 0.40);
+}
+::-webkit-scrollbar-corner {
+    background-color: inherit;
+}
 
 /* Sections
    ========================================================================== */
