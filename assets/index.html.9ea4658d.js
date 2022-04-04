@@ -1,1 +1,0 @@
-const e={key:"v-8daa1a0e",path:"/",title:"",lang:"zh-CN",frontmatter:{home:!0,heroImage:"/assets/hero.avif",heroColor:"#0b0300",actions:[{text:"\u7ACB\u523B\u5F00\u59CB",link:"/recipes/basic/",type:"primary"}]},excerpt:"",headers:[]};export{e as data};
