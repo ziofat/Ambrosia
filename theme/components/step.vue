@@ -44,7 +44,8 @@ export default defineComponent({
     padding: 8px 16px;
     p {
         margin: 0;
-        line-height: 1.8;
+        line-height: 1.5;
+            margin: 0.75rem 0;
     }
     border-bottom: 1px solid var(--c-brand);
 }

@@ -92,6 +92,10 @@ export default defineComponent({
     .page-content {
         display: flex;
         padding-right: 40%;
+        @media (max-width: 720px) {
+             padding-right: 1rem;
+             padding-left: 1rem;
+        }
 
         .recipe-header {
             position: relative;
@@ -123,6 +127,9 @@ export default defineComponent({
                 width: 80%;
                 color: var(--c-light);
                 line-height: 2;
+                @media (max-width: 720px) {
+                    width: 100%;
+                }
             }
 
             .recipe-info {
