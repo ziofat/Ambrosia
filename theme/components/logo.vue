@@ -41,6 +41,16 @@
     grid-row-gap: 16%;
 }
 
+#pan > svg {
+    bottom: unset;
+    transform: scale(1.45);
+}
+
+#pan {
+    display: flex;
+    align-items: center;
+}
+
 .component {
     overflow: visible;
     color: var(--c-text);
@@ -69,7 +79,7 @@
             fill: var(--c-text);
         }
         .fa-primary {
-            opacity: 0.5;
+            fill: var(--c-brand);
         }
     }
 

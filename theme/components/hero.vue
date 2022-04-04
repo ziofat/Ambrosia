@@ -8,7 +8,7 @@
                 </div>
 
                 <p class="hero-banner__description">
-                    {{ description }}
+                    <RouterLink :to="link">{{ description }}</RouterLink>
                 </p>
 
                 <p class="hero-banner__actions">
@@ -34,14 +34,12 @@ export default defineComponent({
 
         const title = computed(() => site.value.title.replace('.', ' '));
         const description = computed(() => site.value.description);
-        const image = computed(() => frontMatter.value.heroImage);
-        const bgColor = computed(() => frontMatter.value.heroColor);
+        const link = computed(() => frontMatter.value.link);
 
         return {
             title,
             description,
-            image,
-            bgColor,
+            link,
         };
     },
 });
@@ -82,6 +80,9 @@ export default defineComponent({
             flex-direction: column;
             align-items: center;
             padding-bottom: 1rem;
+            height: 70vh;
+            justify-content: space-between;
+
             .logo, h1 {
                 margin: 0;
                 text-align: center;
@@ -92,6 +93,7 @@ export default defineComponent({
     h1 {
         &:first-line {
             font-weight: 300;
+            color: var(--c-brand);
         }
         color: inherit;
         font-weight: 300;
