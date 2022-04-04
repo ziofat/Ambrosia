@@ -18,7 +18,13 @@ module.exports = {
         'plugin:vue/base',
     ],
     rules: {
-        'max-len': ['error', 120],
+        'max-len': 'off',
+        'vue/max-len': ['error', {
+            code: 120,
+            ignoreStrings: true,
+            ignoreTemplateLiterals: true,
+            ignoreHTMLAttributeValues: true,
+        }],
         'import/prefer-default-export': 'off',
         'no-useless-constructor': 'off',
         '@typescript-eslint/no-useless-constructor': 'error',

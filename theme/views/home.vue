@@ -13,8 +13,6 @@
                 </li>
             </ul>
         </HeroBanner>
-
-        <RecipeFinder />
     </div>
 </template>
 <script lang="ts">

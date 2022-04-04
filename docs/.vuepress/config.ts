@@ -8,6 +8,12 @@ export default defineUserConfig<AmborsiaKitchenTheme>({
     title: 'Ambrosia.Kitchen',
     description: '结构化的开源食谱',
     theme: path.resolve(__dirname, '../../theme/index.ts'),
+    head: [
+        ['script', {
+            src: 'https://kit.fontawesome.com/f22e60e35c.js',
+            crossorigin: 'anonymous',
+        }],
+    ],
     themeConfig: {
         navbar: [
             {

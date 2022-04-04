@@ -1,6 +1,6 @@
 <template>
     <div class="theme-container">
-        <Navbar />
+        <Navbar v-if="!isHome" />
 
         <main class="main-content">
             <Home v-if="isHome" />
