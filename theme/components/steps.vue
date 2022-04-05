@@ -22,5 +22,16 @@
         height: 50px;
         border-bottom: 2px solid var(--c-brand);
     }
+
+    @media (max-width: 720px) {
+        display: flex;
+        flex-wrap: wrap;
+        .step-header {
+            font-size: 0;
+            flex-basis: 33%;
+            height: auto;
+            padding: 0;
+        }
+    }
 }
 </style>

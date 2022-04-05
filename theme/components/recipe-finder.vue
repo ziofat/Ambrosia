@@ -60,50 +60,86 @@ export default defineComponent({
 </script>
 <style lang="scss">
 .recipe-finder {
-    width: 1200px;
-    margin: 0 auto;
-    height: 30vh;
+    width: 100%;
     display: flex;
     position: relative;
+    @media (max-width: 720px) {
+        display: block;
+    }
 
     .categories {
         width: 25%;
+        min-width: 260px;
         padding: 0 40px;
         flex-shrink: 0;
+        @media (max-width: 720px) {
+            display: flex;
+            padding: 0;
+            width: 100%;
+            overflow-x: auto;
+            border-bottom: 1px solid var(--c-border);
+        }
     }
     .category-item {
         border-radius: 30px;
-        margin: 32px 0;
+        margin: 2rem 0;
         border: 1px solid var(--c-border);
-        padding: 16px 32px;
-        font-size: 18px;
+        padding: 1rem 2rem;
+        font-size: 1.125rem;
         cursor: pointer;
         background-color: var(--c-bg);
+        @media (max-width: 720px) {
+            font-size: 1rem;
+            padding: 1rem 0.5rem;
+            border-radius: 0;
+            border: none;
+            margin: 0;
+            flex-shrink: 0;
+        }
     }
     .category-item.active {
         background-color: var(--c-brand);
         color: var(--c-bg);
         border-color: transparent;
         box-shadow: 4px 4px 70px 0px rgba(220,134,83,0.5);
+        @media (max-width: 720px) {
+            background-color: transparent;
+            color: var(--c-brand);
+            border-bottom: 1px solid var(--c-brand);
+            box-shadow: none;
+        }
     }
 
     .recipes {
-        padding: 0 32px;
+        padding: 0 2rem;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        @media (max-width: 720px) {
+            padding: 1rem;
+            width: 100%;
+        }
     }
 
     .recipe-item {
         border-radius: 30px;
         border: 1px solid var(--c-border);
-        padding: 16px 32px;
+        padding: 1rem 2rem;
         height: max-content;
         cursor: pointer;
         background-color: var(--c-bg-light);
-        margin: 16px;
+        margin: 1rem;
+
+        @media (max-width: 720px) {
+           border-radius: 1rem;
+           margin: 0.5rem 0;
+           padding: 1rem;
+        }
 
         &__title {
             margin: 16px 0 32px;
+            @media (max-width: 720px) {
+                margin: 0.5rem 0;
+            }
             h3 {
                 width: 50%;
                 margin: 0;

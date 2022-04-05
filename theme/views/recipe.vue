@@ -93,8 +93,11 @@ export default defineComponent({
         display: flex;
         padding-right: 40%;
         @media (max-width: 720px) {
-             padding-right: 1rem;
-             padding-left: 1rem;
+            padding-right: 1rem;
+            padding-left: 1rem;
+            article {
+                width: 100%;
+            }
         }
 
         .recipe-header {
@@ -120,25 +123,35 @@ export default defineComponent({
                     margin-right: 5px;
                 }
                 padding: 16px 0;
+                @media (max-width: 720px) {
+                    padding: 0.5rem 0;
+                }
             }
 
             .recipe-desc {
-                padding: 24px 0;
+                padding: 1.5rem 0;
                 width: 80%;
                 color: var(--c-light);
                 line-height: 2;
                 @media (max-width: 720px) {
                     width: 100%;
+                    padding: 0.5rem 0;
                 }
             }
 
             .recipe-info {
                 display: flex;
-                padding: 16px 0;
+                padding: 1rem 0;
+                @media (max-width: 720px) {
+                    padding: 0.5rem 0;
+                }
                 .recipe-info-card {
                     display: block;
                     width: 120px;
-                    padding: 0 24px;
+                    padding: 0 1.5rem;
+                    @media (max-width: 720px) {
+                        padding: 0 0.75rem ;
+                    }
 
                     >.value {
                         font-size: 18px;

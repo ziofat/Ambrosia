@@ -9,7 +9,7 @@
             <p class="amount-name">{{ingredient.amount.digit}} {{ingredient.amount.unit}}</p>
         </div>
     </div>
-    <div class="list">
+    <div class="list step-content">
         <slot></slot>
     </div>
 </template>
@@ -42,11 +42,21 @@ export default defineComponent({
 <style lang="scss">
 .list {
     padding: 8px 16px;
+    border-bottom: 1px solid var(--c-brand);
+    flex-basis: 50%;
+    @media (max-width: 720px) {
+        border-bottom: 1px solid var(--c-border);
+    }
+
     p {
         margin: 0;
         line-height: 1.5;
-            margin: 0.75rem 0;
+        margin: 0.75rem 0;
     }
+}
+
+.step-content {
+    flex-basis: 100%;
     border-bottom: 1px solid var(--c-brand);
 }
 

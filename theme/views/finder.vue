@@ -17,5 +17,8 @@ export default defineComponent({
 <style lang="scss">
 .recipe-list {
     padding: 2rem 0;
+    @media (max-width: 720px) {
+        padding: 0;
+    }
 }
 </style>
