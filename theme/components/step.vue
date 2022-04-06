@@ -11,7 +11,7 @@
     </div>
     <div class="list">
         <div class="amount-item" v-for="ingredient in ingredients" :key="ingredient.name">
-            <p class="amount-name" :title="getCount(ingredient)">{{ingredient.metric.amount}} {{ingredient.metric.unit}}</p>
+            <p class="amount-name" :title="getCount(ingredient)">{{ingredient.metric.amount ?? '适量'}} {{ingredient.metric.unit}}</p>
         </div>
     </div>
     <div class="list step-content">

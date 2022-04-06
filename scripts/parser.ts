@@ -160,7 +160,7 @@ export class Recipe implements IRecipe {
         }, { name: rawName, preparation: [] as string[], link: '' });
 
         const { name, link } = this.handleLink(ingredient.name);
-        ingredient.name = name.replace(/(!|\?)/g, '').trim();
+        ingredient.name = name.replace(/(,|!|\?)/g, '').trim();
         ingredient.link = link.replace(/(!|\?)/g, '').trim();
 
         return ingredient;
@@ -177,7 +177,7 @@ export class Recipe implements IRecipe {
         stepIngredients.set(ingredient.name, {
             name: ingredient.name,
             preparation: ingredient.preparation,
-            metric: { amount: part.quantity as number, unit: part.units ?? '' },
+            metric: { amount: parseFloat(`${part.quantity}`), unit: part.units ?? '' },
             converter: (this.#ast.shoppingList.Ingredients ?? [])
                 .find((i) => i.name === ingredient.name)?.synonym,
             link: ingredient.link,
