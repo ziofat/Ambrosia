@@ -96,7 +96,6 @@ export default defineComponent({
             color: var(--c-brand);
         }
         color: inherit;
-        font-weight: 300;
         margin: 0 0 0 40px;
         position: relative;
         text-align: left;

@@ -60,7 +60,7 @@ html {
 
 body {
   margin: 0;
-  font-family: var(--font-family);
+  font-family: 'Source Sans Pro', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 1rem;
@@ -100,7 +100,6 @@ h1 {
 
 h2 {
   font-size: 24px;
-  border-bottom: 1px solid var(--border-color);
 }
 
 h3 {
@@ -137,7 +136,7 @@ hr {
   height: 0; /* 1 */
   overflow: visible; /* 2 */
   border: 0;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--c-border);
   margin: 1.5em 0;
 }
 
@@ -147,8 +146,8 @@ hr {
  */
 
 pre {
-  font-family: var(--code-font-family); /* 1 */
-  font-size: 1em; /* 2 */
+  font-family: "Sarasa Mono SC", "source-code-pro", Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 1em;
 }
 
 /* Text-level semantics
@@ -164,7 +163,7 @@ a {
   text-decoration: none;
 
   &:hover {
-    color: var(--theme-color);
+    color: var(--c-brand);
   }
 }
 
@@ -196,7 +195,7 @@ strong {
 code,
 kbd,
 samp {
-  font-family: var(--code-font-family); /* 1 */
+  font-family: "Sarasa Mono SC", "source-code-pro", Menlo, Monaco, Consolas, "Courier New", monospace;
   font-size: 1em; /* 2 */
 }
 
@@ -479,7 +478,7 @@ code {
 
 blockquote {
   color: var(--c-text-quote);
-  border-left: 0.25rem solid var(--border-color);
+  border-left: 0.125rem solid var(--c-warning);
   margin-top: 1.6em;
   margin-bottom: 1.6em;
   padding-left: 1em;

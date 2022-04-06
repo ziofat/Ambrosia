@@ -1,7 +1,12 @@
 <template>
     <div class="list">
         <div class="ingredient" v-for="ingredient in ingredients" :key="ingredient.name">
-            <p class="ingredient-name">{{ingredient.detailName}}<sub v-if="ingredient.optional">(可选)</sub></p>
+            <p class="ingredient-name">
+                <RouterLink v-if="ingredient.link" :to="ingredient.link">{{ingredient.name}}</RouterLink>
+                <span v-else>{{ingredient.name}}</span>
+                <span v-if="ingredient.preparation.length > 0">, {{ingredient.preparation.join(', ')}}</span>
+                <sub v-if="ingredient.optional">(可选)</sub>
+            </p>
         </div>
     </div>
     <div class="list">

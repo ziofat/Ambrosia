@@ -6,7 +6,8 @@ import {
 
 interface Ingredient {
     name: string;
-    detailName?: string;
+    preparation?: string[];
+    link?: string;
     metric: {
         amount: number;
         unit: string;
@@ -140,39 +141,48 @@ export class Recipe implements IRecipe {
         }
     }
 
-    private normalizeName(rawName: string, withProcessors = false) {
+    private handleLink(path: string) {
+        if (!path.includes('./')) {
+            return { name: path, link: '' };
+        }
+        const name = path.split('/').pop()!.replace('.cook', '');
+        const link = path.replace('.cook', '.html');
+        return { name, link };
+    }
+
+    private normalizeingredient(rawName: string) {
         const matches = rawName.matchAll(/\((.*?[^\\])\)/g);
 
-        const { name, preprocessors } = [...matches].reduce((acc, [match, group]) => {
+        const ingredient = [...matches].reduce((acc, [match, group]) => {
             acc.name = acc.name.replace(match, '');
-            acc.preprocessors.push(group);
+            acc.preparation.push(group);
             return acc;
-        }, { name: rawName, preprocessors: [] as string[] });
+        }, { name: rawName, preparation: [] as string[], link: '' });
 
-        const affixes = withProcessors && preprocessors.length > 0 ? `, ${preprocessors.join(' ')}` : '';
+        const { name, link } = this.handleLink(ingredient.name);
+        ingredient.name = name.replace(/(!|\?)/g, '').trim();
+        ingredient.link = link.replace(/(!|\?)/g, '').trim();
 
-        if (name.startsWith('!') || name.startsWith('?')) {
-            return name.slice(1) + affixes;
-        }
-        return name + affixes;
+        return ingredient;
     }
 
     private handleIngredient(part: StepIngredient) {
-        const name = this.normalizeName(part.name);
+        const ingredient = this.normalizeingredient(part.name);
         if (part.name.startsWith('!')) {
-            this.mainIngredients.push(name);
+            this.mainIngredients.push(ingredient.name);
         }
 
         const stepIngredients = this.steps[this.#stepIndex].ingredients;
 
-        stepIngredients.set(name, {
-            name,
-            detailName: this.normalizeName(part.name, true),
+        stepIngredients.set(ingredient.name, {
+            name: ingredient.name,
+            preparation: ingredient.preparation,
             metric: { amount: part.quantity as number, unit: part.units ?? '' },
             converter: (this.#ast.shoppingList.Ingredients ?? [])
-                .find((ingredient) => ingredient.name === name)?.synonym,
+                .find((i) => i.name === ingredient.name)?.synonym,
+            link: ingredient.link,
         });
-        return stepIngredients.get(name)!;
+        return stepIngredients.get(ingredient.name)!;
     }
 
     private stepIngredients(step: IStep) {

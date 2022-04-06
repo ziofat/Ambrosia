@@ -62,12 +62,13 @@ header.navbar {
 
     .site-name {
         font-size: 1.5rem;
-        font-weight: 600;
+        font-weight: 700;
         height: 2.5rem;
         line-height: 2.5rem;
         color: var(--c-text);
         & > span.brand-name {
             color: var(--c-brand);
+            font-weight: 300;
         }
         @media (max-width: 720px) {
             height: 2rem;
