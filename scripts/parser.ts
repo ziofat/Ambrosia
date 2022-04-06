@@ -20,7 +20,7 @@ interface Ingredient {
 }
 
 interface IStep {
-    ingredients: Ingredient[];
+    ingredients: Map<string, Ingredient>;
     instructs: string[];
 }
 
@@ -57,8 +57,6 @@ export class Recipe implements IRecipe {
 
     #ast: ParseResult;
 
-    #ingredients: Map<string, Ingredient> = new Map();
-
     #isDescriptionOver = false;
 
     #stepIndex = -1;
@@ -73,7 +71,6 @@ export class Recipe implements IRecipe {
         this.#stepIndex = -1;
         this.mainIngredients = [];
         this.specialCookwares = [];
-        this.#ingredients.clear();
 
         this.course = this.#ast.metadata.course;
         this.storage = this.#ast.metadata.storage;
@@ -82,6 +79,9 @@ export class Recipe implements IRecipe {
         this.normalizeTime(this.#ast.metadata.time);
 
         this.#ast.steps.forEach(this.parseStep.bind(this));
+        if (this.name === '微波葱姜黑鳕鱼') {
+            console.log(this.#ast.steps);
+        }
 
         this.mainIngredients = Array.from(new Set(this.mainIngredients));
         this.specialCookwares = Array.from(new Set(this.specialCookwares));
@@ -106,7 +106,7 @@ export class Recipe implements IRecipe {
                 case 'ingredient':
                     if (this.#stepIndex >= 0) {
                         const ingredient = this.handleIngredient(part);
-                        this.steps[this.#stepIndex].ingredients.push({
+                        this.steps[this.#stepIndex].ingredients.set(ingredient.name, {
                             ...ingredient,
                             optional: part.name.startsWith('?'),
                         });
@@ -129,7 +129,7 @@ export class Recipe implements IRecipe {
                         }
                     } else if (i === 0 && part.value.startsWith('- ')) {
                         this.#stepIndex = this.steps.push({
-                            ingredients: [],
+                            ingredients: new Map(),
                             instructs: [],
                         }) - 1;
                     }
@@ -183,23 +183,30 @@ export class Recipe implements IRecipe {
         }
 
         const amounts = this.normalizeUnits(part.quantity as number, part.units);
+        const stepIngredients = this.steps[this.#stepIndex].ingredients;
 
-        if (this.#ingredients.has(name)) {
-            const ingredient = this.#ingredients.get(name)!;
+        if (stepIngredients.has(name)) {
+            const ingredient = stepIngredients.get(name)!;
             const [metric, ...imperal] = amounts;
             if (metric.unit === ingredient?.metric.unit) {
                 ingredient.metric.amount += metric.amount as number;
             }
             ingredient.imperal = imperal;
         } else {
-            this.#ingredients.set(name, {
+            stepIngredients.set(name, {
                 name,
                 detailName: this.normalizeName(part.name, true),
                 metric: { amount: amounts[0].amount as number, unit: amounts[0].unit },
                 imperal: amounts.slice(1),
             });
         }
-        return this.#ingredients.get(name)!;
+        return stepIngredients.get(name)!;
+    }
+
+    private stepIngredients(step: IStep) {
+        const jsonString = encodeURIComponent(JSON.stringify(Array.from(step.ingredients.values())));
+        console.log(jsonString);
+        return Buffer.from(jsonString, 'binary').toString('base64');
     }
 
     public toMarkdown() {
@@ -208,7 +215,10 @@ recipe: true
 course: ${this.course}
 time: ${this.time}
 storage: ${this.storage}
-ingredients: ${this.#ingredients.size}
+ingredients: ${this.steps.reduce((acc, map) => {
+        map.ingredients.forEach((ingredient) => acc.add(ingredient.name));
+        return acc;
+    }, new Set()).size}
 description: ${this.description}
 yield: ${this.yield}
 servings: ${this.#ast.metadata.servings}
@@ -220,7 +230,7 @@ servings: ${this.#ast.metadata.servings}
 
 <Steps>
 
-${this.steps.map((step) => `<Step ingredients="${step.ingredients.map((i) => i.detailName).join('|')}" amount="${step.ingredients.map(({ metric }) => `${metric.amount}, ${metric.unit}`).join('|')}">
+${this.steps.map((step) => `<Step ingredients="${this.stepIngredients(step)}">
 
 ${step.instructs.join('\n\n')}
 

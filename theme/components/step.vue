@@ -1,12 +1,12 @@
 <template>
     <div class="list">
         <div class="ingredient" v-for="ingredient in ingredients" :key="ingredient.name">
-            <p class="ingredient-name">{{ingredient.name}}<sub v-if="ingredient.optional">(可选)</sub></p>
+            <p class="ingredient-name">{{ingredient.detailName}}<sub v-if="ingredient.optional">(可选)</sub></p>
         </div>
     </div>
     <div class="list">
         <div class="amount-item" v-for="ingredient in ingredients" :key="ingredient.name">
-            <p class="amount-name">{{ingredient.amount.digit}} {{ingredient.amount.unit}}</p>
+            <p class="amount-name">{{ingredient.metric.amount}} {{ingredient.metric.unit}}</p>
         </div>
     </div>
     <div class="list step-content">
@@ -20,18 +20,13 @@ export default defineComponent({
     name: 'Step',
     props: {
         ingredients: { type: String, default: '' },
-        amount: { type: String, default: '' },
     },
     setup(props) {
-        const names = props.ingredients.split('|');
-        const amounts = props.amount.split('|').map((amount) => {
-            const [digit, unit] = amount.split(',');
-            return { digit: digit.trim(), unit: unit.trim() };
+        const ingredients = computed(() => {
+            const raw = atob(props.ingredients);
+            const ingredientsJson = decodeURIComponent(raw);
+            return JSON.parse(ingredientsJson);
         });
-        const ingredients = computed(() => names.map((name, i) => ({
-            name,
-            amount: amounts[i],
-        })));
 
         return {
             ingredients,
