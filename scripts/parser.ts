@@ -11,10 +11,7 @@ interface Ingredient {
         amount: number;
         unit: string;
     };
-    imperal?: {
-        amount: number | string;
-        unit: string;
-    }[];
+    converter?: string;
     scale?: number;
     optional?: boolean;
 }
@@ -79,9 +76,6 @@ export class Recipe implements IRecipe {
         this.normalizeTime(this.#ast.metadata.time);
 
         this.#ast.steps.forEach(this.parseStep.bind(this));
-        if (this.name === '微波葱姜黑鳕鱼') {
-            console.log(this.#ast.steps);
-        }
 
         this.mainIngredients = Array.from(new Set(this.mainIngredients));
         this.specialCookwares = Array.from(new Set(this.specialCookwares));
@@ -163,49 +157,26 @@ export class Recipe implements IRecipe {
         return name + affixes;
     }
 
-    private normalizeUnits(metricQuantity: number, rawUnits = '') {
-        const units = [] as { amount: number | string; unit: string }[];
-        rawUnits.split(',').forEach((unit, index) => {
-            if (index === 0) {
-                units.push({ amount: metricQuantity, unit });
-            } else {
-                const [quantity, u] = unit.trim().split('%');
-                units.push({ amount: quantity, unit: u });
-            }
-        });
-        return units;
-    }
-
     private handleIngredient(part: StepIngredient) {
         const name = this.normalizeName(part.name);
         if (part.name.startsWith('!')) {
             this.mainIngredients.push(name);
         }
 
-        const amounts = this.normalizeUnits(part.quantity as number, part.units);
         const stepIngredients = this.steps[this.#stepIndex].ingredients;
 
-        if (stepIngredients.has(name)) {
-            const ingredient = stepIngredients.get(name)!;
-            const [metric, ...imperal] = amounts;
-            if (metric.unit === ingredient?.metric.unit) {
-                ingredient.metric.amount += metric.amount as number;
-            }
-            ingredient.imperal = imperal;
-        } else {
-            stepIngredients.set(name, {
-                name,
-                detailName: this.normalizeName(part.name, true),
-                metric: { amount: amounts[0].amount as number, unit: amounts[0].unit },
-                imperal: amounts.slice(1),
-            });
-        }
+        stepIngredients.set(name, {
+            name,
+            detailName: this.normalizeName(part.name, true),
+            metric: { amount: part.quantity as number, unit: part.units ?? '' },
+            converter: (this.#ast.shoppingList.Ingredients ?? [])
+                .find((ingredient) => ingredient.name === name)?.synonym,
+        });
         return stepIngredients.get(name)!;
     }
 
     private stepIngredients(step: IStep) {
         const jsonString = encodeURIComponent(JSON.stringify(Array.from(step.ingredients.values())));
-        console.log(jsonString);
         return Buffer.from(jsonString, 'binary').toString('base64');
     }
 

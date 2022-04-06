@@ -6,7 +6,7 @@
     </div>
     <div class="list">
         <div class="amount-item" v-for="ingredient in ingredients" :key="ingredient.name">
-            <p class="amount-name">{{ingredient.metric.amount}} {{ingredient.metric.unit}}</p>
+            <p class="amount-name" :title="getCount(ingredient)">{{ingredient.metric.amount}} {{ingredient.metric.unit}}</p>
         </div>
     </div>
     <div class="list step-content">
@@ -20,6 +20,22 @@ export default defineComponent({
     name: 'Step',
     props: {
         ingredients: { type: String, default: '' },
+    },
+    methods: {
+        getCount(ingredient) {
+            const regexp = new RegExp(`(\\d+)\\s*${ingredient.metric.unit}\\/([^\\(\n]+)(\\(±(\\d)\\))?`);
+            const match = regexp.exec(ingredient.converter ?? 'not match');
+            if (match) {
+                const [, amount, unit, , fuzzy] = match;
+                const count = Math.round(ingredient.metric.amount / parseInt(amount, 10));
+                if (fuzzy) {
+                    const fuzzyCount = parseInt(fuzzy, 10);
+                    return `${count - fuzzyCount}~${count + fuzzyCount} ${unit}`;
+                }
+                return `${count} ${unit}`;
+            }
+            return '';
+        },
     },
     setup(props) {
         const ingredients = computed(() => {

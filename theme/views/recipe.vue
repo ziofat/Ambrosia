@@ -91,7 +91,7 @@ export default defineComponent({
 
     .page-content {
         display: flex;
-        padding-right: 40%;
+        padding-right: 30%;
         @media (max-width: 720px) {
             padding-right: 1rem;
             padding-left: 1rem;
@@ -173,6 +173,10 @@ export default defineComponent({
         }
         .recipe-content {
             h1 { display: none;}
+            min-width: 625px;
+            @media (max-width: 720px) {
+                min-width: 100%;
+            }
         }
     }
 }
