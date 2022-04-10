@@ -11,7 +11,10 @@
     </div>
     <div class="list">
         <div class="amount-item" v-for="ingredient in ingredients" :key="ingredient.name">
-            <p class="amount-name" :title="getCount(ingredient)">{{ingredient.metric.amount ?? '适量'}} {{ingredient.metric.unit}}</p>
+            <p class="amount-name">
+                <span v-if="showCount">{{getCount(ingredient) || `${ingredient.metric.amount ?? '适量'} ${ingredient.metric.unit}`}}</span>
+                <span v-else>{{ingredient.metric.amount ?? '适量'}} {{ingredient.metric.unit}} </span>
+            </p>
         </div>
     </div>
     <div class="list step-content">
@@ -19,7 +22,7 @@
     </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, inject } from 'vue';
 
 export default defineComponent({
     name: 'Step',
@@ -43,14 +46,20 @@ export default defineComponent({
         },
     },
     setup(props) {
+        const variant = inject<any>('activeVariant');
+        const showCount = inject('showCount');
+
         const ingredients = computed(() => {
             const raw = atob(props.ingredients);
             const ingredientsJson = decodeURIComponent(raw);
-            return JSON.parse(ingredientsJson);
+            return JSON.parse(ingredientsJson)
+                .filter((i) => i.variants.length === 0 || i.variants.includes(variant.value));
         });
 
         return {
             ingredients,
+            showCount,
+            variant,
         };
     },
 });

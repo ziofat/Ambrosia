@@ -12,14 +12,20 @@ interface Ingredient {
         amount: number;
         unit: string;
     };
+    variants?: string[];
     converter?: string;
     scale?: number;
     optional?: boolean;
 }
 
+interface Instruction {
+    content: string;
+    variants?: string[];
+}
+
 interface IStep {
-    ingredients: Map<string, Ingredient>;
-    instructs: string[];
+    ingredients: Ingredient[];
+    instructions: Instruction[];
 }
 
 interface IRecipe {
@@ -53,6 +59,8 @@ export class Recipe implements IRecipe {
 
     public steps: IStep[] = [];
 
+    public variants: string[] = [];
+
     #ast: ParseResult;
 
     #isDescriptionOver = false;
@@ -69,6 +77,10 @@ export class Recipe implements IRecipe {
         this.#stepIndex = -1;
         this.mainIngredients = [];
         this.specialCookwares = [];
+        this.variants = [];
+        if (this.#ast.metadata.default) {
+            this.variants.push(this.#ast.metadata.default);
+        }
 
         this.course = this.#ast.metadata.course;
         this.storage = this.#ast.metadata.storage;
@@ -80,6 +92,7 @@ export class Recipe implements IRecipe {
 
         this.mainIngredients = Array.from(new Set(this.mainIngredients));
         this.specialCookwares = Array.from(new Set(this.specialCookwares));
+        this.variants = Array.from(new Set(this.variants));
     }
 
     private normalizeTime(time: string) {
@@ -96,14 +109,16 @@ export class Recipe implements IRecipe {
 
     private parseStep(step: Step) {
         let instruction = '';
+        const variants: string[] = [];
         step.forEach((part, i) => {
             switch (part.type) {
                 case 'ingredient':
                     if (this.#stepIndex >= 0) {
                         const ingredient = this.handleIngredient(part);
-                        this.steps[this.#stepIndex].ingredients.set(ingredient.name, {
+                        this.steps[this.#stepIndex].ingredients.push({
                             ...ingredient,
                             optional: part.name.startsWith('?'),
+                            variants,
                         });
                         instruction += ingredient.name;
                     }
@@ -116,6 +131,9 @@ export class Recipe implements IRecipe {
                     instruction += ` ${part.quantity ?? '几'} ${part.units ?? '分钟'}`;
                     break;
                 case 'text':
+                    // eslint-disable-next-line no-case-declarations
+                    let content = part.value.trim();
+
                     if (!this.#isDescriptionOver) {
                         if (part.value.startsWith('====') && part.value.endsWith('====')) {
                             this.#isDescriptionOver = true;
@@ -124,12 +142,20 @@ export class Recipe implements IRecipe {
                         }
                     } else if (i === 0 && part.value.startsWith('- ')) {
                         this.#stepIndex = this.steps.push({
-                            ingredients: new Map(),
-                            instructs: [],
+                            ingredients: [],
+                            instructions: [],
                         }) - 1;
+                        content = content.slice(2);
                     }
                     if (this.#stepIndex >= 0) {
-                        instruction += part.value;
+                        const variantMatch = /^\(-(.+)-\)/.exec(content);
+                        if (variantMatch && i === 0) {
+                            variantMatch[1].split(',').forEach((variant) => {
+                                variants.push(variant.trim());
+                            });
+                        }
+
+                        instruction += content.replace(/^\(-(.+)-\)/, '');
                     }
                     break;
                 default:
@@ -137,7 +163,11 @@ export class Recipe implements IRecipe {
             }
         });
         if (this.#stepIndex >= 0) {
-            this.steps[this.#stepIndex].instructs.push(instruction.slice(2));
+            this.steps[this.#stepIndex].instructions.push({
+                content: instruction,
+                variants,
+            });
+            this.variants = this.variants.concat(variants);
         }
     }
 
@@ -172,17 +202,14 @@ export class Recipe implements IRecipe {
             this.mainIngredients.push(ingredient.name);
         }
 
-        const stepIngredients = this.steps[this.#stepIndex].ingredients;
-
-        stepIngredients.set(ingredient.name, {
+        return {
             name: ingredient.name,
             preparation: ingredient.preparation,
             metric: { amount: parseFloat(`${part.quantity}`), unit: part.units ?? '' },
             converter: (this.#ast.shoppingList.Ingredients ?? [])
                 .find((i) => i.name === ingredient.name)?.synonym,
             link: ingredient.link,
-        });
-        return stepIngredients.get(ingredient.name)!;
+        };
     }
 
     private stepIngredients(step: IStep) {
@@ -202,7 +229,8 @@ ingredients: ${this.steps.reduce((acc, map) => {
     }, new Set()).size}
 description: ${this.description}
 yield: ${this.yield}
-servings: ${this.#ast.metadata.servings}
+servings: ${this.#ast.metadata.servings ?? ''}
+variants: ${this.variants.map((v) => `\n  - ${v}`).join('')}
 ---
 
 # ${this.name}
@@ -213,7 +241,11 @@ servings: ${this.#ast.metadata.servings}
 
 ${this.steps.map((step) => `<Step ingredients="${this.stepIngredients(step)}">
 
-${step.instructs.join('\n\n')}
+${step.instructions.map((instruction) => `<Instruction variant="${instruction.variants?.join(',')}">
+
+${instruction.content}
+
+</Instruction>`).join('\n\n')}
 
 </Step>`).join('\n\n')}
 
