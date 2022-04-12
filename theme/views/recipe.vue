@@ -23,7 +23,7 @@
                             <div class="label">分钟</div>
                         </div>
                         <div class="recipe-info-card" v-if="yields !== 'undefined'">
-                            <div class="value">{{yields}}</div>
+                            <div class="value">{{yields.digit * scale}} {{yields.unit}}</div>
                             <div class="label">产出</div>
                         </div>
                         <div class="recipe-info-card" v-if="ingredients !== 'undefined'">
@@ -31,7 +31,7 @@
                             <div class="label">原料</div>
                         </div>
                         <div class="recipe-info-card" v-if="servings && servings !== 'undefined'">
-                            <div class="value">{{servings}}</div>
+                            <div class="value">{{servings * scale}}</div>
                             <div class="label">人份</div>
                         </div>
                     </div>
@@ -51,6 +51,20 @@
                                 显示参考单位
                                 <RouterLink to="/guides/basic/scale.html"><i class="fa-regular fa-circle-question"></i></RouterLink>
                             </label>
+                            <div class="scale">
+                                <label>分量缩放</label>
+                                <div class="scale-items">
+                                    <div
+                                        class="scale-item"
+                                        v-for="item in [0.5, 1, 2, 4]"
+                                        :key="`scale-${item}`"
+                                        @click="setScale(item)"
+                                        :class="{active: scale === item}"
+                                    >
+                                        {{item}}
+                                    </div>
+                                </div>
+                            </div>
                             <div class="variants" v-if="variants.length>1">
                                 <label>菜谱变体</label>
                                 <ul>
@@ -89,7 +103,16 @@ export default defineComponent({
         const title = computed(() => page.value.title);
 
         const time = computed(() => meta.value.time);
-        const yields = computed(() => meta.value.yield);
+        const yields = computed(() => {
+            const match = meta.value.yield.match(/\d+\s*(\w+)/);
+            if (match) {
+                return {
+                    digit: parseFloat(match.input),
+                    unit: match[1],
+                };
+            }
+            return { digit: parseFloat(meta.value.yield), unit: '' };
+        });
         const ingredients = computed(() => meta.value.ingredients);
         const servings = computed(() => meta.value.servings);
         const description = computed(() => meta.value.description);
@@ -103,9 +126,11 @@ export default defineComponent({
 
         const showCount = ref(false);
         const activeVariant = ref(variants.value[0]);
+        const scale = ref(1);
 
         provide('showCount', showCount);
         provide('activeVariant', activeVariant);
+        provide('scale', scale);
 
         function changeCount(e) {
             showCount.value = e.target.checked;
@@ -113,6 +138,10 @@ export default defineComponent({
 
         function changeVariant(name) {
             activeVariant.value = name;
+        }
+
+        function setScale(s) {
+            scale.value = s;
         }
 
         return {
@@ -128,6 +157,8 @@ export default defineComponent({
             variants,
             activeVariant,
             changeVariant,
+            scale,
+            setScale,
         };
     },
 });
@@ -297,6 +328,32 @@ export default defineComponent({
                         top: 0;
                         transition: background .2s, border .2s, box-shadow .2s, color .2s, left .2s;
                         width: 0.7rem;
+                    }
+                }
+            }
+
+            .scale {
+                margin-top: 2rem;
+
+                .scale-items {
+                    display: flex;
+                    margin-top: 0.5rem;
+                    .scale-item {
+                        display: inline-block;
+                        width: 2.5rem;
+                        height: 2.5rem;
+                        line-height: calc(2.5rem - 2px);
+                        text-align: center;
+                        cursor: pointer;
+                        font-size: 1rem;
+                        border: 1px solid var(--c-brand);
+                        transition: background .2s, border .2s, box-shadow .2s, color .2s;
+                        &:hover {
+                            background: var(--c-brand);
+                        }
+                        &.active {
+                            background: var(--c-brand);
+                        }
                     }
                 }
             }

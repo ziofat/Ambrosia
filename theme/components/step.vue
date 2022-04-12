@@ -12,8 +12,8 @@
     <div class="list">
         <div class="amount-item" v-for="ingredient in ingredients" :key="ingredient.name">
             <p class="amount-name">
-                <span v-if="showCount">{{getCount(ingredient) || `${ingredient.metric.amount ?? '适量'} ${ingredient.metric.unit}`}}</span>
-                <span v-else>{{ingredient.metric.amount ?? '适量'}} {{ingredient.metric.unit}} </span>
+                <span v-if="showCount">{{getCount(ingredient) || `${ingredient.metric.amount * scale || '适量'} ${ingredient.metric.unit}`}}</span>
+                <span v-else>{{ingredient.metric.amount * scale || '适量'}} {{ingredient.metric.unit}} </span>
             </p>
         </div>
     </div>
@@ -29,25 +29,10 @@ export default defineComponent({
     props: {
         ingredients: { type: String, default: '' },
     },
-    methods: {
-        getCount(ingredient) {
-            const regexp = new RegExp(`(\\d+)\\s*${ingredient.metric.unit}\\/([^\\(\n]+)(\\(±(\\d)\\))?`);
-            const match = regexp.exec(ingredient.converter ?? 'not match');
-            if (match) {
-                const [, amount, unit, , fuzzy] = match;
-                const count = Math.round(ingredient.metric.amount / parseInt(amount, 10));
-                if (fuzzy) {
-                    const fuzzyCount = parseInt(fuzzy, 10);
-                    return `${count - fuzzyCount}~${count + fuzzyCount} ${unit}`;
-                }
-                return `${count} ${unit}`;
-            }
-            return '';
-        },
-    },
     setup(props) {
         const variant = inject<any>('activeVariant');
         const showCount = inject('showCount');
+        const scale = inject<any>('scale');
 
         const ingredients = computed(() => {
             const raw = atob(props.ingredients);
@@ -56,10 +41,27 @@ export default defineComponent({
                 .filter((i) => i.variants.length === 0 || i.variants.includes(variant.value));
         });
 
+        function getCount(ingredient) {
+            const regexp = new RegExp(`(\\d+)\\s*${ingredient.metric.unit}\\/([^\\(\n]+)(\\(±(\\d)\\))?`);
+            const match = regexp.exec(ingredient.converter ?? 'not match');
+            if (match) {
+                const [, amount, unit, , fuzzy] = match;
+                const count = Math.round(ingredient.metric.amount / parseInt(amount, 10)) * scale.value;
+                if (fuzzy) {
+                    const fuzzyCount = parseInt(fuzzy, 10);
+                    return `${count - fuzzyCount}~${count + fuzzyCount} ${unit}`;
+                }
+                return `${count} ${unit}`;
+            }
+            return '';
+        }
+
         return {
             ingredients,
             showCount,
             variant,
+            scale,
+            getCount,
         };
     },
 });
