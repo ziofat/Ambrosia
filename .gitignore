@@ -111,4 +111,3 @@ dist
 docs/recipes/**/*.md
 !docs/recipes/README.md
 docs/handbook/
-docs/howto/

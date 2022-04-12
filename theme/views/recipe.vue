@@ -48,7 +48,8 @@
                             <label class="form-switch">
                                 <input type="checkbox" @change="changeCount" :checked="showCount">
                                 <i class="form-icon"></i>
-                                使用体积/个数单位
+                                显示参考单位
+                                <RouterLink to="/guides/basic/scale.html"><i class="fa-regular fa-circle-question"></i></RouterLink>
                             </label>
                             <div class="variants" v-if="variants.length>1">
                                 <label>菜谱变体</label>

@@ -45,3 +45,7 @@ sync('./recipes/**/*.cook').map((file) => {
 sync('./recipes/**/*.md').forEach((file) => {
     copyFileSync(file, file.replace('./', 'docs/'));
 });
+
+sync('./guides/**/*.md').forEach((file) => {
+    copyFileSync(file, file.replace('./', 'docs/'));
+});

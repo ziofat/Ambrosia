@@ -2,7 +2,7 @@
 
 结构化的开源食谱
 
-## What is this about?
+## 这是什么？
 
 本项目受到了[程序员做饭指南](https://github.com/Anduin2017/HowToCook)的启发, 致力于构建一个以程序员角度来看待菜谱的仓库.
 
