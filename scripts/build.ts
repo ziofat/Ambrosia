@@ -20,6 +20,9 @@ sync('./recipes/**/*.cook').map((file) => {
     }
 }).map((recipe) => {
     if (!recipe) return null;
+    if (recipe.name === '牛褐高汤') {
+        console.log(recipe);
+    }
     const md = recipe.toMarkdown();
     const path = resolve(__dirname, '../docs/recipes', recipe.course);
     if (!existsSync(path)) {

@@ -99,6 +99,10 @@ export default defineComponent({
         line-height: 1.5;
         margin: 0.75rem 0;
     }
+
+    &:empty {
+        display: none;
+    }
 }
 
 .step-content {
