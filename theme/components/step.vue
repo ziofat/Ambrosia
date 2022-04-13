@@ -42,14 +42,33 @@ export default defineComponent({
         });
 
         function getCount(ingredient) {
-            const regexp = new RegExp(`(\\d+)\\s*${ingredient.metric.unit}\\/([^\\(\n]+)(\\(±(\\d)\\))?`);
+            const regexp = new RegExp(`([0-9]{1,}\\.?[0-9]*)\\s*${ingredient.metric.unit}\\/([^\\(\n]+)(\\((±|\\+|-)(\\d)\\))?`);
             const match = regexp.exec(ingredient.converter ?? 'not match');
             if (match) {
-                const [, amount, unit, , fuzzy] = match;
-                const count = Math.round(ingredient.metric.amount / parseInt(amount, 10)) * scale.value;
+                const [, amount, unit, fuzzy, fuzzyType, fuzzyCountString] = match;
+                const count = Math.ceil((ingredient.metric.amount / parseFloat(amount)) * scale.value);
                 if (fuzzy) {
-                    const fuzzyCount = parseInt(fuzzy, 10);
-                    return `${count - fuzzyCount}~${count + fuzzyCount} ${unit}`;
+                    const fuzzyCount = Math.round(parseInt(fuzzyCountString, 10) * scale.value);
+                    let min = count - fuzzyCount;
+                    if (min < 1) {
+                        min = 1;
+                    }
+                    const max = count + fuzzyCount;
+                    switch (fuzzyType) {
+                        case '+':
+                            return `${count}~${max} ${unit}`;
+                        case '-':
+                            if (min === count) {
+                                return `${count} ${unit}`;
+                            }
+                            return `${min}~${count} ${unit}`;
+                        case '±':
+                        default:
+                            if (min === max) {
+                                return `${min} ${unit}`;
+                            }
+                            return `${min}~${max} ${unit}`;
+                    }
                 }
                 return `${count} ${unit}`;
             }
