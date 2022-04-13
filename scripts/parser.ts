@@ -222,15 +222,14 @@ export class Recipe implements IRecipe {
 recipe: true
 course: ${this.course}
 time: ${this.time}
-storage: ${this.storage}
 ingredients: ${this.steps.reduce((acc, map) => {
         map.ingredients.forEach((ingredient) => acc.add(ingredient.name));
         return acc;
     }, new Set()).size}
 description: ${this.description}
-yield: ${this.yield}
-servings: ${this.#ast.metadata.servings ?? ''}
-variants: ${this.variants.map((v) => `\n  - ${v}`).join('')}
+yield: ${this.yield ?? 'null'}
+servings: ${this.#ast.metadata.servings ?? 'null'}
+variants: ${this.variants.map((v) => `\n  - ${v}`).join('') || 'null'}
 ---
 
 # ${this.name}

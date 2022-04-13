@@ -22,7 +22,7 @@
                             <div class="value">{{time}}</div>
                             <div class="label">分钟</div>
                         </div>
-                        <div class="recipe-info-card" v-if="yields !== 'undefined'">
+                        <div class="recipe-info-card" v-if="yields.digit > 0">
                             <div class="value">{{yields.digit * scale}} {{yields.unit}}</div>
                             <div class="label">产出</div>
                         </div>
@@ -104,14 +104,15 @@ export default defineComponent({
 
         const time = computed(() => meta.value.time);
         const yields = computed(() => {
-            const match = meta.value.yield.match(/\d+\s*(\w+)/);
+            const value = meta.value.yield || '';
+            const match = value.match(/\d+\s*(\w+)/);
             if (match) {
                 return {
                     digit: parseFloat(match.input),
                     unit: match[1],
                 };
             }
-            return { digit: parseFloat(meta.value.yield), unit: '' };
+            return { digit: parseFloat(value) || 0, unit: '' };
         });
         const ingredients = computed(() => meta.value.ingredients);
         const servings = computed(() => meta.value.servings);
