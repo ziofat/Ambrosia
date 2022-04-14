@@ -217,7 +217,7 @@ export class Recipe implements IRecipe {
         return Buffer.from(jsonString, 'binary').toString('base64');
     }
 
-    public toMarkdown() {
+    public toMarkdown(extraMeta: { [key: string]: any } = {}) {
         return `---
 recipe: true
 course: ${this.course}
@@ -230,6 +230,7 @@ description: ${this.description}
 yield: ${this.yield ?? 'null'}
 servings: ${this.#ast.metadata.servings ?? 'null'}
 variants: ${this.variants.map((v) => `\n  - ${v}`).join('') || 'null'}
+${Object.entries(extraMeta).map(([key, value]) => `${key}: ${value}`).join('\n')}
 ---
 
 # ${this.name}

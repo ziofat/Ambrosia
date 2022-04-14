@@ -58,7 +58,7 @@ export default defineComponent({
             if (!meta || !meta.recipe) return false;
             const [mainCategory] = meta.course.split('/');
             return mainCategory === active.value;
-        }).slice(0, 4));
+        }).slice(0, 8).sort((a, b) => b.frontmatter.createdTime - a.frontmatter.createdTime));
 
         return {
             active,
