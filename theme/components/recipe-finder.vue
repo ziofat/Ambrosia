@@ -9,6 +9,9 @@
             >
                 {{category.name}}
             </div>
+            <div class="meta">
+                <span class="count">共 {{count + variants}} 份食谱(含 {{variants}} 变体)</span>
+            </div>
         </div>
         <div class="recipes">
             <RouterLink class="recipe-item"
@@ -34,7 +37,17 @@ import { useThemeData } from '../composables/use-theme-data';
 
 export default defineComponent({
     name: 'RecipeFinder',
-    setup() {
+    props: {
+        count: {
+            type: Number,
+            default: 0,
+        },
+        variants: {
+            type: Number,
+            default: 0,
+        },
+    },
+    setup(props) {
         const themeConfig = useThemeData();
         const pages = usePages();
 
@@ -51,6 +64,8 @@ export default defineComponent({
             active,
             categories,
             recipes,
+            count: props.count,
+            variants: props.variants,
             onClick(category) {
                 active.value = category.id;
             },
@@ -78,6 +93,16 @@ export default defineComponent({
             width: 100%;
             overflow-x: auto;
             border-bottom: 1px solid var(--c-border);
+        }
+
+        .meta {
+            margin-top: 1rem;
+            color: var(--c-text-quote);
+            text-align: center;
+
+            @media (max-width: 720px) {
+                display: none;
+            }
         }
     }
     .category-item {

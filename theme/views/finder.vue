@@ -1,16 +1,27 @@
 <template>
     <div class="recipe-list">
-        <RecipeFinder />
+        <RecipeFinder :count="count" :variants="variants" />
     </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { usePageFrontmatter } from '@vuepress/client';
+import { computed, defineComponent } from 'vue';
 import RecipeFinder from '../components/recipe-finder.vue';
 
 export default defineComponent({
     name: 'RecipeList',
     components: {
         RecipeFinder,
+    },
+    setup() {
+        const meta = usePageFrontmatter();
+        const count = computed(() => meta.value.count);
+        const variants = computed(() => meta.value.variants);
+
+        return {
+            count,
+            variants,
+        };
     },
 });
 </script>
