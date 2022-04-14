@@ -55,8 +55,8 @@ finder: all
 count: ${recipeCount}
 variants: ${variantsCount}
 ---`, 'utf-8');
-});
 
-sync('./recipes/**/*.md').forEach((file) => {
-    copyFileSync(file, file.replace('./', 'docs/'));
+    sync('./recipes/**/*.md').forEach((file) => {
+        copyFileSync(file, file.replace('./', 'docs/'));
+    });
 });
