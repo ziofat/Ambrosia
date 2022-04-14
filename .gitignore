@@ -108,5 +108,4 @@ dist
 .temp
 
 # Build
-docs/recipes/**/*.md
-!docs/recipes/README.md
+docs/recipes/

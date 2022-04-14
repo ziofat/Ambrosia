@@ -8,6 +8,9 @@ import { sync } from 'fast-glob';
 import { Recipe } from './parser';
 import { CATEGORIES } from './categories';
 
+let recipeCount = 0;
+let variantsCount = 0;
+
 sync('./recipes/**/*.cook').map((file) => {
     const [, course] = file.match(/recipes\/(.+)\/(.+)\.cook$/)!;
     const source = `>> course: ${course}\n${readFileSync(file, 'utf8')}`;
@@ -20,15 +23,14 @@ sync('./recipes/**/*.cook').map((file) => {
     }
 }).map((recipe) => {
     if (!recipe) return null;
-    if (recipe.name === '牛褐高汤') {
-        console.log(recipe);
-    }
     const md = recipe.toMarkdown();
     const path = resolve(__dirname, '../docs/recipes', recipe.course);
     if (!existsSync(path)) {
         mkdirSync(path, { recursive: true });
     }
     writeFileSync(join(path, `${recipe.name}.md`), md, 'utf-8');
+    recipeCount += 1;
+    variantsCount += recipe.variants.length ? recipe.variants.length - 1 : 0;
     return recipe;
 }).reduce((acc, recipe) => {
     if (!recipe) return acc;
@@ -49,6 +51,8 @@ sync('./recipes/**/*.md').forEach((file) => {
     copyFileSync(file, file.replace('./', 'docs/'));
 });
 
-sync('./guides/**/*.md').forEach((file) => {
-    copyFileSync(file, file.replace('./', 'docs/'));
-});
+writeFileSync(resolve(__dirname, '../docs/recipes/README.md'), `---
+finder: all
+count: ${recipeCount}
+variants: ${variantsCount}
+---`, 'utf-8');
