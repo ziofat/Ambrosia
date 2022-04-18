@@ -3,6 +3,8 @@ export const CATEGORIES = [
     { id: 'basic/stock', text: '高汤' },
     { id: 'basic/sauce', text: '酱汁' },
     { id: 'basic/syrup', text: '糖浆' },
+    { id: 'meat', text: '肉类' },
+    { id: 'meat/tender', text: '嫩肉' },
     { id: 'soup', text: '汤品' },
     { id: 'soup/broth', text: '清汤' },
     { id: 'soup/cold-soup', text: '冷汤' },
