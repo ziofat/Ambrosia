@@ -1,0 +1,1 @@
+const t={key:"v-2ef801bc",path:"/handbook/meat-cooking-temperature.html",title:"\u5404\u79CD\u8089\u7C7B\u719F\u5EA6\u4E0E\u4E2D\u5FC3\u6E29\u5EA6",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[]};export{t as data};
