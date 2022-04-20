@@ -24,6 +24,7 @@ module.exports = {
             ignoreStrings: true,
             ignoreTemplateLiterals: true,
             ignoreHTMLAttributeValues: true,
+            ignoreRegExpLiterals: true,
         }],
         'import/prefer-default-export': 'off',
         'no-useless-constructor': 'off',

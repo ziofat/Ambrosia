@@ -6,8 +6,9 @@ import {
 import { resolve, join } from 'path';
 import { sync } from 'fast-glob';
 import { getCreatedTime } from '@vuepress/plugin-git';
-import { Recipe } from './parser';
+import { Recipe } from './recipe';
 import { CATEGORIES } from './categories';
+import { cookToMarkdown } from './cook-to-md';
 
 let recipeCount = 0;
 let variantsCount = 0;
@@ -19,17 +20,19 @@ Promise.all(sync('./recipes/**/*.cook').map((file) => {
     try {
         return new Recipe(name, source);
     } catch (e) {
+        // eslint-disable-next-line no-console
         console.error(`Failed to parse ${file}`, e);
         return null;
     }
 }).map(async (recipe) => {
     if (!recipe) return null;
-    const path = resolve(__dirname, '../docs/recipes', recipe.course);
-    const createdTime = await getCreatedTime(resolve(__dirname, '../recipes', recipe.course, `${recipe.name}.cook`), process.cwd());
+    const { course = 'other' } = recipe.metadata;
+    const path = resolve(__dirname, '../docs/recipes', course);
+    const createdTime = await getCreatedTime(resolve(__dirname, '../recipes', course, `${recipe.name}.cook`), process.cwd());
     if (!existsSync(path)) {
         mkdirSync(path, { recursive: true });
     }
-    const md = recipe.toMarkdown({ createdTime });
+    const md = cookToMarkdown(recipe, { createdTime });
     writeFileSync(join(path, `${recipe.name}.md`), md, 'utf-8');
     recipeCount += 1;
     variantsCount += recipe.variants.length ? recipe.variants.length - 1 : 0;
@@ -37,7 +40,8 @@ Promise.all(sync('./recipes/**/*.cook').map((file) => {
 })).then((recipes) => {
     recipes.reduce((acc, recipe) => {
         if (!recipe) return acc;
-        const { name, course } = recipe;
+        const { name } = recipe;
+        const { course = 'other' } = recipe.metadata;
         const [categories] = acc;
         categories[course] = categories[course] ?? [];
         categories[course].push(name);
