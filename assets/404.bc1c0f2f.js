@@ -1,0 +1,1 @@
+import{_ as e,f as t,a as o,o as s,b as a}from"./app.81823d03.js";const n=t({data(){},mounted(){},computed:{}}),c={class:"theme-container"},_=a("main",{class:"main-content"}," 404 ",-1),r=[_];function d(i,m,p,f,l,u){return s(),o("div",c,r)}var $=e(n,[["render",d]]);export{$ as default};
