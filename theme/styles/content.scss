@@ -2,6 +2,11 @@
     padding-left: 80px;
     padding-right: 80px;
 
+    @media (max-width: 720px) {
+        padding-right: 1rem;
+        padding-left: 1rem;
+    }
+
     ul, ol {
         margin-left: 16px;
         margin-top: 16px;
@@ -14,6 +19,11 @@
     }
     ol {
         list-style: decimal;
+    }
+
+    a {
+        color: var(--c-brand);
+        text-decoration: underline;
     }
 }
 

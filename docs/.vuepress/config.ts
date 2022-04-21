@@ -34,7 +34,7 @@ export default defineUserConfig<AmborsiaKitchenTheme>({
             },
             {
                 text: '技术指南',
-                link: '/guides/',
+                link: '/guides/basic/getting-started.html',
             },
             {
                 text: '速查手册',

@@ -172,10 +172,6 @@ export default defineComponent({
 
     .page-content {
         display: flex;
-        @media (max-width: 720px) {
-            padding-right: 1rem;
-            padding-left: 1rem;
-        }
 
         .recipe-header {
             position: relative;
@@ -189,6 +185,9 @@ export default defineComponent({
             .recipe-categories {
                 span {
                     margin-right: 10px;
+                }
+                a {
+                    color: var(--c-text);
                 }
                 a.category-link:hover {
                     color: var(--c-brand);
@@ -229,7 +228,8 @@ export default defineComponent({
                 }
                 .recipe-info-card {
                     display: block;
-                    width: 120px;
+                    max-width: 120px;
+                    flex: 1;
                     padding: 0 1.5rem;
                     @media (max-width: 720px) {
                         padding: 0 0.75rem ;
