@@ -36,10 +36,27 @@ export default defineUserConfig<AmborsiaKitchenTheme>({
                 text: '技术指南',
                 link: '/guides/basic/getting-started.html',
             },
+            // {
+            //     text: '速查手册',
+            //     link: '/handbook/',
+            // },
+        ],
+        sidebar: [
             {
-                text: '速查手册',
-                link: '/handbook/',
+                text: '基本',
+                children: [
+                    {
+                        text: '介绍',
+                        link: '/guides/basic/getting-started.html',
+                    },
+                    {
+                        text: '使用电子秤',
+                        link: '/guides/basic/scale.html',
+                    },
+                ],
+                collapsible: false,
             },
+
         ],
         mainCategories: Object.values(CATEGORIES)
             .filter(({ id }) => !id.includes('/'))

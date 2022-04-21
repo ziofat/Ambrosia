@@ -4,6 +4,12 @@ export function resolveNavLinkItem(linkItem) {
     });
 }
 
+export function resolveSidebarItem(linkItem) {
+    return Object.assign(linkItem, {
+        type: linkItem.children && linkItem.children.length ? 'group' : 'link',
+    });
+}
+
 export const hashRE = /#.*$/;
 export const extRE = /\.(md|html)$/;
 export const endingSlashRE = /\/$/;
@@ -31,3 +37,24 @@ export function ensureExt(path) {
     }
     return `${normalized}.html${hash}`;
 }
+
+export const isActiveLink = (link: string, route): boolean => {
+    if (route.hash === link) {
+        return true;
+    }
+    const currentPath = normalize(route.path);
+    const targetPath = normalize(link);
+    return currentPath === targetPath;
+};
+
+export const isActiveSidebarItem = (item, route): boolean => {
+    if (item.link && isActiveLink(item.link, route)) {
+        return true;
+    }
+
+    if (item.children) {
+        return item.children.some((child) => isActiveSidebarItem(child, route));
+    }
+
+    return false;
+};
