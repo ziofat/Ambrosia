@@ -1,7 +1,7 @@
 <template>
     <header class="navbar" ref="navbar">
         <div class="container">
-            <RouterLink to="/" class="home-link">
+            <RouterLink to="/recipes/" class="home-link">
                 <div ref="siteName"
                     class="site-name"
                     v-if="title"

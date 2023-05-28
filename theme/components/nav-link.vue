@@ -7,26 +7,23 @@
         <slot></slot>
     </RouterLink>
 
-    <!-- <a v-else
+    <a v-else
         :href="link"
         :title="title"
         class="nav-link external"
         target="_blank"
         rel="noopener noreferrer">
         <slot></slot>
-        <OutboundLink />
-    </a> -->
+    </a>
 
 </template>
 
 <script lang="ts">
-// import { ensureExt, isExternal } from '@vuepress/theme-default/util';
 import { computed, defineComponent } from 'vue';
 import { isExternal, ensureExt } from '../utils/url';
 
 export default defineComponent({
     name: 'NavLink',
-
     methods: {
         isExternal(path: string) {
             return isExternal(path);

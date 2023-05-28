@@ -6,6 +6,7 @@
             :key="item.link">
 
             <DropdownLink v-if="item.type === 'links'" :item="item" />
+            <IconLink v-else-if="item.icon !== undefined" :href="item.link" :title="item.text" :icon="item.icon" />
             <NavLink v-else :href="item.link" v-html="item.text" :title="item.title"></NavLink>
         </div>
     </nav>
@@ -17,11 +18,13 @@ import { useThemeData } from '../composables/use-theme-data';
 import NavLink from './nav-link.vue';
 import { resolveNavLinkItem } from '../utils/url';
 import DropdownLink from './dropdown-link.vue';
+import IconLink from './icon-link.vue';
 
 export default defineComponent({
     name: 'NavLinks',
     components: {
         NavLink,
+        IconLink,
         DropdownLink,
     },
     setup() {

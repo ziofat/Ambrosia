@@ -40,6 +40,11 @@ export default defineUserConfig<AmborsiaKitchenTheme>({
             //     text: '速查手册',
             //     link: '/handbook/',
             // },
+            {
+                text: 'GitHub',
+                link: 'https://github.com/ziofat/Ambrosia',
+                icon: 'github',
+            }
         ],
         sidebar: [
             {
