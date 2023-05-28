@@ -273,6 +273,7 @@ export default defineComponent({
             padding-left: 2rem;
             margin-left: 2rem;
             border-left: 1px solid var(--c-border);
+            flex-shrink: 0;
             @media (max-width: 1080px) {
                 display: none;
             }
