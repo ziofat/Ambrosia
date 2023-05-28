@@ -52,6 +52,15 @@ export class Recipe implements IRecipe {
         this.#source = source;
         this.#parse();
         this.variants = Array.from(new Set(this.variants));
+        if (this.metadata.default) {
+            const idx = this.variants.indexOf(this.metadata.default);
+            if (idx > 0) {
+                this.variants.splice(idx, 1);
+            }
+            if (idx !== 0) {
+                this.variants.unshift(this.metadata.default);
+            }
+        }
     }
 
     #parse() {
