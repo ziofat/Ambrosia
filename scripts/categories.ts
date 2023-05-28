@@ -12,7 +12,6 @@ export const CATEGORIES = [
     { id: 'soup/cold-soup', text: '冷汤' },
     { id: 'aquatic', text: '水产' },
     { id: 'aquatic/fish', text: '鱼类' },
-    { id: 'basic/sauce', text: '酱汁' },
     { id: 'snack', text: '小吃' },
     { id: 'snack/egg', text: '蛋类料理' },
 ];
