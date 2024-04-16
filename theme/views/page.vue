@@ -24,14 +24,20 @@ export default defineComponent({
         const pageData = usePageData();
         const themeData = useThemeData();
 
-        const shouldShowSidebar = computed(() => pageData.value.path.startsWith('/guides/'));
+        const pageType = computed(() => {
+            const [, type] = pageData.value.path.split('/');
+            return type;
+        });
+
+        const shouldShowSidebar = computed(() => ['guides', 'handbook'].includes(pageType.value));
         const sidebarItems = computed(() => {
             if (!shouldShowSidebar.value) {
                 return [];
             }
-            return (themeData.value.sidebar || []).map((link: any) => Object.assign(resolveSidebarItem(link), {
-                children: (link.children || []).map(resolveSidebarItem),
-            }));
+            return ((themeData.value.sidebar ?? {})[pageType.value] ?? [])
+                .map((link: any) => Object.assign(resolveSidebarItem(link), {
+                    children: (link.children || []).map(resolveSidebarItem),
+                }));
         });
 
         return {

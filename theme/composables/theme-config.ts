@@ -38,6 +38,6 @@ export type SidebarConfig = (SidebarItem | SidebarGroupCollapsible | string)[];
 
 export interface AmborsiaKitchenTheme {
     navbar?: false | NavbarConfig;
-    sidebar?: false | SidebarConfig;
+    sidebar?: false | { [key in string]: SidebarConfig };
     mainCategories: { id: string; name: string; }[];
 }

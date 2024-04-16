@@ -45,3 +45,11 @@ h1, h2, h3, h4, h5, h6 {
         opacity: 1;
     }
 }
+
+mark {
+    background-color: transparent;
+    // text-decoration: underline;
+    // text-decoration-color: var(--c-warning);
+    // text-decoration-thickness: 2px;
+    color: var(--c-warning);
+}

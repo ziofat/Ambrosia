@@ -36,35 +36,45 @@ export default defineUserConfig<AmborsiaKitchenTheme>({
                 text: '技术指南',
                 link: '/guides/basic/getting-started.html',
             },
-            // {
-            //     text: '速查手册',
-            //     link: '/handbook/',
-            // },
+            {
+                text: '速查手册',
+                link: '/handbook/meat-cooking-temperature.html',
+            },
             {
                 text: 'GitHub',
                 link: 'https://github.com/ziofat/Ambrosia',
                 icon: 'github',
-            }
-        ],
-        sidebar: [
-            {
-                text: '基本',
-                children: [
-                    {
-                        text: '介绍',
-                        link: '/guides/basic/getting-started.html',
-                    },
-                    {
-                        text: '使用电子秤',
-                        link: '/guides/basic/scale.html',
-                    },
-                ],
-                collapsible: false,
             },
-
         ],
+        sidebar: {
+            guides: [
+                {
+                    text: '基本',
+                    children: [
+                        {
+                            text: '介绍',
+                            link: '/guides/basic/getting-started.html',
+                        },
+                        {
+                            text: '使用电子秤',
+                            link: '/guides/basic/scale.html',
+                        },
+                    ],
+                    collapsible: false,
+                },
+            ],
+            handbook: [
+                {
+                    text: '肉类熟度与中心温度',
+                    link: '/handbook/meat-cooking-temperature.html',
+                },
+            ],
+        },
         mainCategories: Object.values(CATEGORIES)
             .filter(({ id }) => !id.includes('/'))
             .map(({ id, text }) => ({ id, name: text })),
     },
+    plugins: [
+        ['md-enhance', { mark: true }],
+    ],
 });
