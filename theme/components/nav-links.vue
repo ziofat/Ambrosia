@@ -32,7 +32,7 @@ export default defineComponent({
 
         const userLinks = computed(() => {
             const { navbar } = themeConfig.value;
-            return (navbar || []).map((link) => Object.assign(resolveNavLinkItem(link), {
+            return (navbar || []).map((link) => Object.assign({}, resolveNavLinkItem(link), {
                 children: (link.children || []).map(resolveNavLinkItem),
             }));
         });

@@ -2,7 +2,7 @@
     <aside class="sidebar">
         <slot name="top"/>
         <ul class="sidebar-links" v-if="items.length">
-            <li v-for="(item, i) in items" :key="item.text">
+            <li v-for="(item, i) in items" :key="i">
                 <SidebarGroup
                     v-if="item.type === 'group'"
                     :item="item"
