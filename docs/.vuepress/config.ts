@@ -56,6 +56,10 @@ export default defineUserConfig<AmborsiaKitchenTheme>({
                             link: '/guides/basic/getting-started.html',
                         },
                         {
+                            text: 'Cooklang 语法扩展',
+                            link: '/guides/basic/cooklang.html',
+                        },
+                        {
                             text: '使用电子秤',
                             link: '/guides/basic/scale.html',
                         },
@@ -73,6 +77,11 @@ export default defineUserConfig<AmborsiaKitchenTheme>({
         mainCategories: Object.values(CATEGORIES)
             .filter(({ id }) => !id.includes('/'))
             .map(({ id, text }) => ({ id, name: text })),
+    },
+    markdown: {
+        code: {
+            lineNumbers: false,
+        },
     },
     plugins: [
         ['md-enhance', { mark: true }],
