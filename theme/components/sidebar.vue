@@ -2,7 +2,7 @@
     <aside class="sidebar">
         <slot name="top"/>
         <ul class="sidebar-links" v-if="items.length">
-            <li v-for="(item, i) in items" :key="i">
+            <li v-for="(item, i) in items" :key="item.text">
                 <SidebarGroup
                     v-if="item.type === 'group'"
                     :item="item"
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, watch } from 'vue';
+import { defineComponent, ref, watch, onBeforeUpdate, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 import SidebarGroup from './sidebar-group.vue';
 import SidebarLink from './sidebar-link.vue';
@@ -47,6 +47,7 @@ export default defineComponent({
 
     setup(props) {
         const route = useRoute();
+        const items = ref([]);
 
         const openGroupIndex = ref(0);
 
@@ -65,12 +66,16 @@ export default defineComponent({
         }
 
         watch(() => route.path, refreshIndex);
+        watchEffect(() => {
+            items.value = props.items;
+        });
 
         return {
-            items: props.items,
+            items: items,
             toggleGroup,
         };
     },
+
 });
 </script>
 

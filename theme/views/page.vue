@@ -9,7 +9,7 @@
     </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, watchEffect, ref } from 'vue';
 import { usePageData } from '@vuepress/client';
 import { useThemeData } from '../composables/use-theme-data';
 import Sidebar from '../components/sidebar.vue';
@@ -23,6 +23,7 @@ export default defineComponent({
     setup() {
         const pageData = usePageData();
         const themeData = useThemeData();
+        const sidebarItems = ref([]);
 
         const pageType = computed(() => {
             const [, type] = pageData.value.path.split('/');
@@ -30,14 +31,16 @@ export default defineComponent({
         });
 
         const shouldShowSidebar = computed(() => ['guides', 'handbook'].includes(pageType.value));
-        const sidebarItems = computed(() => {
+
+        watchEffect(() => {
             if (!shouldShowSidebar.value) {
-                return [];
+                sidebarItems.value = [];
+            } else {
+                sidebarItems.value = ((themeData.value.sidebar ?? {})[pageType.value] ?? [])
+                    .map((link: any) => Object.assign(resolveSidebarItem(link), {
+                        children: (link.children || []).map(resolveSidebarItem),
+                    }));
             }
-            return ((themeData.value.sidebar ?? {})[pageType.value] ?? [])
-                .map((link: any) => Object.assign(resolveSidebarItem(link), {
-                    children: (link.children || []).map(resolveSidebarItem),
-                }));
         });
 
         return {
