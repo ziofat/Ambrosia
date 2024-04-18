@@ -1,0 +1,1 @@
+const e={key:"v-de901ada",path:"/guides/concept/security.html",title:"",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[{level:2,title:"\u98DF\u54C1\u5B89\u5168",slug:"\u98DF\u54C1\u5B89\u5168",children:[]}]};export{e as data};
