@@ -7,7 +7,7 @@
 
             <DropdownLink v-if="item.type === 'links'" :item="item" />
             <IconLink v-else-if="item.icon !== undefined" :href="item.link" :title="item.text" :icon="item.icon" />
-            <NavLink v-else :href="item.link" v-html="item.text" :title="item.title"></NavLink>
+            <NavLink v-else :href="item.link" :title="item.title">{{ item.text }}</NavLink>
         </div>
     </nav>
 </template>
@@ -32,7 +32,8 @@ export default defineComponent({
 
         const userLinks = computed(() => {
             const { navbar } = themeConfig.value;
-            return (navbar || []).map((link) => Object.assign({}, resolveNavLinkItem(link), {
+            return (navbar || []).map((link) => ({
+                ...resolveNavLinkItem(link),
                 children: (link.children || []).map(resolveNavLinkItem),
             }));
         });
