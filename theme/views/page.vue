@@ -9,7 +9,9 @@
     </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent, watchEffect, ref } from 'vue';
+import {
+    computed, defineComponent, watchEffect, ref,
+} from 'vue';
 import { usePageData } from '@vuepress/client';
 import { useThemeData } from '../composables/use-theme-data';
 import Sidebar from '../components/sidebar.vue';
@@ -52,12 +54,16 @@ export default defineComponent({
 </script>
 <style lang="scss">
 .page {
-    padding-bottom: 30px;
     word-break: break-word;
     &.with-sidebar {
         padding-left: 16.25rem;
+        height: calc(100vh - 100px);
+        overflow: auto;
         @media (max-width: 720px) {
             padding-left: 0;
+        }
+        &>.page-content {
+            max-width: 1280px;
         }
     }
 }

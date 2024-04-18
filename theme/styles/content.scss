@@ -1,6 +1,8 @@
 .page-content {
     padding-left: 80px;
     padding-right: 80px;
+    max-width: 1600px;
+    margin: auto;
 
     @media (max-width: 720px) {
         padding-right: 1rem;
