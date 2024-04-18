@@ -1,0 +1,1 @@
+const e={key:"v-5ed06da4",path:"/recipes/basic/",title:"\u57FA\u5E95\u98DF\u6750",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[{level:2,title:"\u9AD8\u6C64 Stock",slug:"\u9AD8\u6C64-stock",children:[]},{level:2,title:"\u9171\u6C41 Sauce",slug:"\u9171\u6C41-sauce",children:[]}]};export{e as data};
