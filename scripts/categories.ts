@@ -14,4 +14,6 @@ export const CATEGORIES = [
     { id: 'aquatic/fish', text: '鱼类' },
     { id: 'snack', text: '小吃' },
     { id: 'snack/egg', text: '蛋类料理' },
+    { id: 'vegetable', text: '蔬食' },
+    { id: 'vegetable/salad', text: '沙拉' },
 ];
