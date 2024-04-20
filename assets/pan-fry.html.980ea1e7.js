@@ -1,1 +1,0 @@
-import{_ as e,o as a,a as r,d as t,b as c}from"./app.deb616f8.js";const o={},s={id:"\u714E",tabindex:"-1"},n=c("a",{class:"header-anchor",href:"#\u714E","aria-hidden":"true"},"#",-1);function _(d,h){return a(),r("h2",s,[n,t(" \u714E")])}var f=e(o,[["render",_],["__file","pan-fry.html.vue"]]);export{f as default};

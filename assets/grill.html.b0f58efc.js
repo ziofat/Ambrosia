@@ -1,1 +1,0 @@
-import{_ as e,o as a,a as r,d as t,b as c}from"./app.deb616f8.js";const o={},s={id:"\u70E7\u70E4",tabindex:"-1"},_=c("a",{class:"header-anchor",href:"#\u70E7\u70E4","aria-hidden":"true"},"#",-1);function n(d,i){return a(),r("h2",s,[_,t(" \u70E7\u70E4")])}var h=e(o,[["render",n],["__file","grill.html.vue"]]);export{h as default};
