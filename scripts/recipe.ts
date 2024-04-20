@@ -18,6 +18,7 @@ interface Metadata {
     servings?: string;
     storage?: string;
     time?: string;
+    background?: string;
 }
 
 interface IRecipe {

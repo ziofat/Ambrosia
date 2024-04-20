@@ -1,9 +1,13 @@
 <template>
+    <div class="background" v-if="imageUrl">
+        <img :src="imageUrl" />
+        <div class="mask"></div>
+    </div>
     <div class="recipe">
         <div class="page-content">
             <article class="container">
                 <div class="recipe-header">
-                    <h1>{{ title }}</h1>
+                    <h1>{{ activeVariant }}</h1>
                     <div class="recipe-categories" v-if="categories">
                         <RouterLink
                             class="category-link"
@@ -118,6 +122,7 @@ export default defineComponent({
         const servings = computed(() => meta.value.servings);
         const description = computed(() => meta.value.description);
         const variants = computed(() => meta.value.variants ?? [title]);
+        const imageUrl = computed(() => meta.value.background);
 
         const categories = computed(() => meta.value.course.split('/').map((course, i, courses) => {
             const link = courses.reduce((acc, cur, j) => (j <= i ? `${acc}/${cur}` : acc), '/recipes');
@@ -160,6 +165,7 @@ export default defineComponent({
             changeVariant,
             scale,
             setScale,
+            imageUrl,
         };
     },
 });
@@ -390,6 +396,50 @@ export default defineComponent({
                     color: var(--c-brand);
                 }
             }
+        }
+    }
+
+}
+.background {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 45%;
+    max-width: 65vh;
+    min-width: 40vh;
+
+    .mask {
+        background: linear-gradient(90deg, #2E3440 2%, #2E3440D9 30%, #2E344088 100%);
+        backdrop-filter: blur(6px);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    @media (max-width: 1024px) {
+        max-width: unset;
+        min-width: unset;
+        width: 60%;
+    }
+
+    @media (max-width: 720px) {
+        max-width: unset;
+        min-width: unset;
+        left: 0;
+        padding-left: 0;
+        width: 100%;
+    }
+
+    &>img {
+        height: 100%;
+        object-fit: cover;
+        object-position: left;
+
+        @media (max-width: 720px) {
+            object-position: center;
         }
     }
 }
