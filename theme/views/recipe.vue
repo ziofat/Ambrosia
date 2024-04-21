@@ -408,6 +408,7 @@ export default defineComponent({
     width: 45%;
     max-width: 65vh;
     min-width: 40vh;
+    padding-left: 6px;
 
     .mask {
         background: linear-gradient(90deg, #2E3440 2%, #2E3440D9 30%, #2E344088 100%);
