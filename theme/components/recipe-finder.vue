@@ -7,7 +7,8 @@
                 :key="category.id"
                 :class="{ 'active': active === category.id }"
             >
-                {{category.name}}
+                <i :class="`fa-duotone fa-${category.icon}`"></i>
+                <span>{{category.name}}</span>
             </div>
             <div class="meta">
                 <span class="count">共 {{count + variants}} 份食谱(含 {{variants}} 变体)</span>
@@ -121,6 +122,7 @@ export default defineComponent({
             margin: 0;
             flex-shrink: 0;
         }
+        display: flex;
     }
     .category-item.active {
         background-color: var(--c-brand);
@@ -133,6 +135,9 @@ export default defineComponent({
             border-bottom: 1px solid var(--c-brand);
             box-shadow: none;
         }
+    }
+    .category-item > span {
+        margin-left: 16px;
     }
 
     .recipes {

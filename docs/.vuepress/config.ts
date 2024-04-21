@@ -76,7 +76,7 @@ export default defineUserConfig<AmborsiaKitchenTheme>({
         },
         mainCategories: Object.values(CATEGORIES)
             .filter(({ id }) => !id.includes('/'))
-            .map(({ id, text }) => ({ id, name: text })),
+            .map(({ id, text, icon }) => ({ id, name: text, icon })),
     },
     markdown: {
         code: {
