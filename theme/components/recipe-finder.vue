@@ -7,7 +7,9 @@
                 :key="category.id"
                 :class="{ 'active': active === category.id }"
             >
-                <i :class="`fa-duotone fa-${category.icon}`"></i>
+                <div class="icon-container">
+                    <i :class="`fa-regular fa-${category.icon}`"></i>
+                </div>
                 <span>{{category.name}}</span>
             </div>
             <div class="meta">
@@ -138,6 +140,11 @@ export default defineComponent({
     }
     .category-item > span {
         margin-left: 16px;
+    }
+    .category-item > .icon-container {
+        width: 24px;
+        display: flex;
+        justify-content: center;
     }
 
     .recipes {
