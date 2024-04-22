@@ -18,6 +18,7 @@ export interface RecipeRecord {
     time: number;
     url: string;
     objectID: string;
+    image?: string;
 }
 
 function getCategories(course: string): string[] {
@@ -52,9 +53,10 @@ export function cookToJson(recipe: Recipe, idMap: Record<string, string>) {
                 }, [] as RecordIngredient[]),
                 instructions: recipe.steps.flatMap((step) => step.instructions
                     .filter((instruction) => instruction.variants?.includes(variant) || instruction.variants?.length === 0)
-                    .map((instruction) => instruction.content)
-                ),
+                    .map((instruction) => instruction.content)),
                 courseType: getCategories(recipe.metadata.course ?? 'other'),
+                image: recipe.metadata.background,
+                variantFrom: recipe.name,
             });
         });
     } else {
@@ -73,9 +75,10 @@ export function cookToJson(recipe: Recipe, idMap: Record<string, string>) {
                     });
                 });
                 return list;
-                }, [] as RecordIngredient[]),
+            }, [] as RecordIngredient[]),
             instructions: recipe.steps.flatMap((step) => step.instructions.map((instruction) => instruction.content)),
             courseType: getCategories(recipe.metadata.course ?? 'other'),
+            image: recipe.metadata.background,
         });
     }
     return recipes;

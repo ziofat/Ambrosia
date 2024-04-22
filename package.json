@@ -4,6 +4,7 @@
   "description": "Well structured modernist recipes",
   "scripts": {
     "build": "ts-node scripts/build.ts",
+    "index": "ts-node scripts/algolia.ts",
     "site:dev": "vuepress dev docs",
     "site:build": "vuepress build docs"
   },
