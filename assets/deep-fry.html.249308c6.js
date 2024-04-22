@@ -1,1 +1,0 @@
-import{_ as e,o as a,a as r,d as t,b as c}from"./app.120cf5b6.js";const o={},s={id:"\u6CB9\u70B8",tabindex:"-1"},_=c("a",{class:"header-anchor",href:"#\u6CB9\u70B8","aria-hidden":"true"},"#",-1);function d(n,h){return a(),r("h2",s,[_,t(" \u6CB9\u70B8")])}var f=e(o,[["render",d],["__file","deep-fry.html.vue"]]);export{f as default};

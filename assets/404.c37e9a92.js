@@ -1,0 +1,1 @@
+import{_ as e,f as t,o,a as s,b as a}from"./app.0bb34b04.js";const n=t({data(){},mounted(){},computed:{}}),c={class:"theme-container"},_=a("main",{class:"main-content"}," 404 ",-1),r=[_];function d(i,m,p,f,l,u){return o(),s("div",c,r)}var $=e(n,[["render",d],["__file","404.vue"]]);export{$ as default};
