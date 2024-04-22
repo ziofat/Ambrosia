@@ -80,11 +80,7 @@ function generateRecipes() {
                     writeFileSync(resolve(__dirname, `../docs/recipes/${category}/README.md`), `# ${title}\n\n${md}`, 'utf-8');
                 }));
 
-        writeFileSync(resolve(__dirname, '../docs/recipes/README.md'), `---
-    finder: all
-    count: ${recipeCount}
-    variants: ${variantsCount}
-    ---`, 'utf-8');
+        writeFileSync(resolve(__dirname, '../docs/recipes/README.md'), `---\nfinder: all\ncount: ${recipeCount}\nvariants: ${variantsCount}\n---`, 'utf-8');
 
         sync('./recipes/**/*.md').forEach((file) => {
             copyFileSync(file, file.replace('./', 'docs/'));
