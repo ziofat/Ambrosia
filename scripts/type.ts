@@ -54,7 +54,7 @@ interface Ingredient {
         amount: number;
         unit: string;
     };
-    variants?: string[];
+    variants: string[];
     converter?: string;
     scale?: number;
     optional?: boolean;
