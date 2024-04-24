@@ -66,6 +66,16 @@ export default defineUserConfig<AmborsiaKitchenTheme>({
                     ],
                     collapsible: false,
                 },
+                {
+                    text: '传统技法',
+                    children: [
+                        {
+                            text: '烧',
+                            link: '/guides/technique/covered-saute.html',
+                        },
+                    ],
+                    collapsible: false,
+                },
             ],
             handbook: [
                 {
