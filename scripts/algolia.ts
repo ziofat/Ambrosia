@@ -1,10 +1,8 @@
 import algoliasearch from 'algoliasearch';
 import { sync } from 'fast-glob';
-import {
-    readFileSync, writeFileSync,
-    existsSync, mkdirSync,
-    copyFileSync,
-} from 'fs';
+import { getCreatedTime } from '@vuepress/plugin-git';
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
 import { cookToJson, RecipeRecord } from './cook-to-json';
 import { Recipe } from './recipe';
 
@@ -22,7 +20,7 @@ function updateIndex() {
         return acc;
     }, {} as Record<string, string>);
 
-    sync('./recipes/**/*.cook').map((file) => {
+    Promise.all(sync('./recipes/**/*.cook').map((file) => {
         const [, course] = file.match(/recipes\/(.+)\/(.+)\.cook$/)!;
         const source = `>> course: ${course}\n${readFileSync(file, 'utf8')}`;
         const name = file.split('/').pop()?.replace('.cook', '') ?? '';
@@ -33,15 +31,20 @@ function updateIndex() {
             console.error(`Failed to parse ${file}`, e);
             return null;
         }
-    }).forEach((recipe) => {
-        if (!recipe) return;
-        records.push(...cookToJson(recipe, idMap));
-    });
-
-    index.saveObjects(records).then(() => {
-        console.log('Successfully indexed recipes.');
-    }).catch((err) => {
-        console.error('Failed to index recipes');
+    }).map(async (recipe) => {
+        if (!recipe) return [];
+        const { course = 'other' } = recipe.metadata;
+        const createdTime = await getCreatedTime(resolve(__dirname, '../recipes', course, `${recipe.name}.cook`), process.cwd());
+        return cookToJson(recipe, idMap, createdTime);
+    })).then((recipes) => {
+        recipes.forEach((recipe) => {
+            records.push(...recipe);
+        });
+        index.saveObjects(records).then(() => {
+            console.log('Successfully indexed recipes.');
+        }).catch((err) => {
+            console.error('Failed to index recipes');
+        });
     });
 }
 

@@ -13,29 +13,23 @@ export interface RecipeRecord {
     description: string;
     ingredients: RecordIngredient[];
     instructions: string[];
-    variantFrom?: string;
+    variantFrom: string;
     courseType: string[];
     time: number;
     url: string;
     objectID: string;
     image?: string;
+    createdTime: number;
 }
 
-function getCategories(course: string): string[] {
-    const categories = [
-        CATEGORIES.find((c) => c.id === course)?.text ?? undefined,
-        CATEGORIES.find((c) => c.id === course.split('/')[0])?.text ?? undefined,
-    ].filter((c) => c);
-    return categories as string[];
-}
-
-export function cookToJson(recipe: Recipe, idMap: Record<string, string>) {
+export function cookToJson(recipe: Recipe, idMap: Record<string, string>, createdTime) {
     const recipes: RecipeRecord[] = [];
     if (recipe.variants.length) {
         recipe.variants.forEach((variant) => {
             const url = `/recipes/${recipe.metadata.course}/${recipe.name}.html?variant=${variant}`;
             recipes.push({
                 objectID: idMap[url] ?? nanoid(8),
+                createdTime,
                 name: variant,
                 description: recipe.description,
                 url,
@@ -54,7 +48,7 @@ export function cookToJson(recipe: Recipe, idMap: Record<string, string>) {
                 instructions: recipe.steps.flatMap((step) => step.instructions
                     .filter((instruction) => instruction.variants?.includes(variant) || instruction.variants?.length === 0)
                     .map((instruction) => instruction.content)),
-                courseType: getCategories(recipe.metadata.course ?? 'other'),
+                courseType: (recipe.metadata.course ?? 'other').split('/'),
                 image: recipe.metadata.background,
                 variantFrom: recipe.name,
             });
@@ -63,6 +57,7 @@ export function cookToJson(recipe: Recipe, idMap: Record<string, string>) {
         const url = `/recipes/${recipe.metadata.course}/${recipe.name}.html`;
         recipes.push({
             objectID: idMap[url] ?? nanoid(8),
+            createdTime,
             name: recipe.name,
             description: recipe.description,
             url,
@@ -77,8 +72,9 @@ export function cookToJson(recipe: Recipe, idMap: Record<string, string>) {
                 return list;
             }, [] as RecordIngredient[]),
             instructions: recipe.steps.flatMap((step) => step.instructions.map((instruction) => instruction.content)),
-            courseType: getCategories(recipe.metadata.course ?? 'other'),
+            courseType: (recipe.metadata.course ?? 'other').split('/'),
             image: recipe.metadata.background,
+            variantFrom: recipe.name,
         });
     }
     return recipes;
