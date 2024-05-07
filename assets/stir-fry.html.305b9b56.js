@@ -1,0 +1,1 @@
+import{_ as e,o as r,a as t,d as a,b as s}from"./app.4cf1096c.js";const c={},o={id:"\u7FFB\u7092",tabindex:"-1"},_=s("a",{class:"header-anchor",href:"#\u7FFB\u7092","aria-hidden":"true"},"#",-1);function n(d,i){return r(),t("h2",o,[_,a(" \u7FFB\u7092")])}var f=e(c,[["render",n],["__file","stir-fry.html.vue"]]);export{f as default};

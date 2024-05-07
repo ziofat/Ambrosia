@@ -1,1 +1,0 @@
-import{_ as e,o as a,a as t,d as r,b as c}from"./app.d2ce238c.js";const o={},s={id:"\u6C34\u7684\u7279\u6027",tabindex:"-1"},_=c("a",{class:"header-anchor",href:"#\u6C34\u7684\u7279\u6027","aria-hidden":"true"},"#",-1);function n(d,h){return a(),t("h2",s,[_,r(" \u6C34\u7684\u7279\u6027")])}var f=e(o,[["render",n],["__file","water.html.vue"]]);export{f as default};
