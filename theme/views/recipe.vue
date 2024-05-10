@@ -1,5 +1,5 @@
 <template>
-    <div class="background" v-if="imageUrl">
+    <div class="background">
         <img :src="imageUrl" />
         <div class="mask"></div>
     </div>
@@ -105,6 +105,8 @@ export default defineComponent({
         const page = usePageData();
         const meta = usePageFrontmatter();
         const title = computed(() => page.value.title);
+        const searchParams = new URLSearchParams(window.location.search);
+        const defaultVariant = searchParams.get('variant');
 
         const time = computed(() => meta.value.time);
         const yields = computed(() => {
@@ -122,7 +124,6 @@ export default defineComponent({
         const servings = computed(() => meta.value.servings);
         const description = computed(() => meta.value.description);
         const variants = computed(() => meta.value.variants ?? [title]);
-        const imageUrl = computed(() => meta.value.background);
 
         const categories = computed(() => meta.value.course.split('/').map((course, i, courses) => {
             const link = courses.reduce((acc, cur, j) => (j <= i ? `${acc}/${cur}` : acc), '/recipes');
@@ -131,8 +132,9 @@ export default defineComponent({
         }));
 
         const showCount = ref(false);
-        const activeVariant = ref(variants.value[0]);
+        const activeVariant = ref(defaultVariant ?? variants.value[0]);
         const scale = ref(1);
+        const imageUrl = computed(() => `/recipe-static/${activeVariant.value}.jpg`);
 
         provide('showCount', showCount);
         provide('activeVariant', activeVariant);
@@ -144,6 +146,13 @@ export default defineComponent({
 
         function changeVariant(name) {
             activeVariant.value = name;
+            if (name === variants.value[0]) {
+                searchParams.delete('variant');
+            } else {
+                searchParams.set('variant', name);
+            }
+            const newRelativePathQuery = `${window.location.pathname}?${searchParams.toString()}`;
+            window.history.pushState(null, '', newRelativePathQuery);
         }
 
         function setScale(s) {

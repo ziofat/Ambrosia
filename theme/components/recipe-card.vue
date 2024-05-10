@@ -1,5 +1,5 @@
 <template>
-    <div class="recipe-card" :style="`background-image: url('${recipe.image}')`">
+    <div class="recipe-card" :style="`background-image: url('/${recipe.image}')`">
         <div class="title">
             <h5>{{recipe.name}}</h5>
             <!-- <div class="sub-type"># {{ courseType }}</div> -->

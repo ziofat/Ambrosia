@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid';
-import { CATEGORIES } from './categories';
+import { existsSync } from 'fs';
+import { resolve } from 'path';
 import { Recipe } from './recipe';
 import { normalizeTime } from './utils';
 
@@ -27,6 +28,7 @@ export function cookToJson(recipe: Recipe, idMap: Record<string, string>, create
     if (recipe.variants.length) {
         recipe.variants.forEach((variant) => {
             const url = `/recipes/${recipe.metadata.course}/${recipe.name}.html?variant=${variant}`;
+            const path = resolve(__dirname, '../docs/.vuepress/public/recipe-static/', `${variant}.jpg`);
             recipes.push({
                 objectID: idMap[url] ?? nanoid(8),
                 createdTime,
@@ -35,7 +37,7 @@ export function cookToJson(recipe: Recipe, idMap: Record<string, string>, create
                 url,
                 time: normalizeTime(recipe.metadata.time ?? '0'),
                 ingredients: recipe.steps.reduce((list, step) => {
-                    step.ingredients.filter((ingredient) => {
+                    step.ingredients.forEach((ingredient) => {
                         if (ingredient.variants?.includes(variant) || ingredient.variants?.length === 0) {
                             list.push({
                                 name: ingredient.name,
@@ -46,15 +48,16 @@ export function cookToJson(recipe: Recipe, idMap: Record<string, string>, create
                     return list;
                 }, [] as RecordIngredient[]),
                 instructions: recipe.steps.flatMap((step) => step.instructions
-                    .filter((instruction) => instruction.variants?.includes(variant) || instruction.variants?.length === 0)
+                    .filter(({ variants }) => variants?.includes(variant) || variants?.length === 0)
                     .map((instruction) => instruction.content)),
                 courseType: (recipe.metadata.course ?? 'other').split('/'),
-                image: recipe.metadata.background,
+                image: existsSync(path) ? `recipe-static/${variant}.jpg` : undefined,
                 variantFrom: recipe.name,
             });
         });
     } else {
         const url = `/recipes/${recipe.metadata.course}/${recipe.name}.html`;
+        const path = resolve(__dirname, '../docs/.vuepress/public/recipe-static/', `${recipe.name}.jpg`);
         recipes.push({
             objectID: idMap[url] ?? nanoid(8),
             createdTime,
@@ -71,9 +74,9 @@ export function cookToJson(recipe: Recipe, idMap: Record<string, string>, create
                 });
                 return list;
             }, [] as RecordIngredient[]),
-            instructions: recipe.steps.flatMap((step) => step.instructions.map((instruction) => instruction.content)),
+            instructions: recipe.steps.flatMap(({ instructions }) => instructions.map(({ content }) => content)),
             courseType: (recipe.metadata.course ?? 'other').split('/'),
-            image: recipe.metadata.background,
+            image: existsSync(path) ? `recipe-static/${recipe.name}.jpg` : undefined,
             variantFrom: recipe.name,
         });
     }

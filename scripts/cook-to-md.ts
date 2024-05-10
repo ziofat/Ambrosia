@@ -21,7 +21,6 @@ yield: ${recipe.metadata.yield ?? 'null'}
 servings: ${recipe.metadata.servings ?? 'null'}
 variants: ${recipe.variants.map((v) => `\n  - ${v}`).join('') || 'null'}
 ${Object.entries(extraMeta).map(([key, value]) => `${key}: ${value}`).join('\n')}
-${recipe.metadata.background ? `background: "${recipe.metadata.background}"` : ''}
 ---
 
 # ${recipe.name}

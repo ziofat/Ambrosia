@@ -39,7 +39,6 @@ export default defineComponent({
             const query = event?.target?.value ?? '';
             index.search(query, {
                 facets: ['courseType'],
-                distinct: true,
             }).then((results) => {
                 context.emit('search', results);
             });

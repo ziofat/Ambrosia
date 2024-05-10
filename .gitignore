@@ -109,3 +109,6 @@ dist
 
 # Build
 docs/recipes/
+
+# Secret
+secrets.json

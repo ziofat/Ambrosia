@@ -1,12 +1,19 @@
 import algoliasearch from 'algoliasearch';
 import { sync } from 'fast-glob';
 import { getCreatedTime } from '@vuepress/plugin-git';
-import { readFileSync } from 'fs';
+import { readFileSync, existsSync, writeFileSync } from 'fs';
 import { resolve } from 'path';
 import { cookToJson, RecipeRecord } from './cook-to-json';
 import { Recipe } from './recipe';
 
-const { ALGOLIA_API_KEY = '' } = process.env;
+const secretPath = resolve(__dirname, '../secrets.json');
+let ALGOLIA_API_KEY = '';
+if (existsSync(secretPath)) {
+    const secrets = JSON.parse(readFileSync(secretPath, 'utf-8'));
+    ({ ALGOLIA_API_KEY } = secrets);
+} else {
+    ({ ALGOLIA_API_KEY = '' } = process.env);
+}
 
 const client = algoliasearch('52DE6Z0WUS', ALGOLIA_API_KEY);
 const index = client.initIndex('ambrosia_recipes');
