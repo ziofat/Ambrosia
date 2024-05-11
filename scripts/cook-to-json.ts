@@ -27,7 +27,9 @@ export function cookToJson(recipe: Recipe, idMap: Record<string, string>, create
     const recipes: RecipeRecord[] = [];
     if (recipe.variants.length) {
         recipe.variants.forEach((variant) => {
-            const url = `/recipes/${recipe.metadata.course}/${recipe.name}.html?variant=${variant}`;
+            const url = variant === recipe.name
+                ? `/recipes/${recipe.metadata.course}/${recipe.name}.html`
+                : `/recipes/${recipe.metadata.course}/${recipe.name}.html?variant=${variant}`;
             const path = resolve(__dirname, '../docs/.vuepress/public/recipe-static/', `${variant}.jpg`);
             recipes.push({
                 objectID: idMap[url] ?? nanoid(8),

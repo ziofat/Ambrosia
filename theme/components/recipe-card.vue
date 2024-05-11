@@ -45,6 +45,13 @@ export default defineComponent({
     aspect-ratio: 1 / 1;
     position: relative;
     max-height: 400px;
+    border: 1px solid var(--c-bg-light);
+    overflow: hidden;
+
+    &:hover {
+        border: 1px solid var(--c-brand);
+        box-shadow: 0px 0px 10px 1px var(--c-brand);
+    }
 
     @media (max-width: 720px) {
         margin: 0.5rem 0;

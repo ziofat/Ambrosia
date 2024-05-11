@@ -19,7 +19,9 @@
 </template>
 
 <script>
-import { defineComponent, ref, watch, onBeforeUpdate, watchEffect } from 'vue';
+import {
+    defineComponent, ref, watch, watchEffect,
+} from 'vue';
 import { useRoute } from 'vue-router';
 import SidebarGroup from './sidebar-group.vue';
 import SidebarLink from './sidebar-link.vue';
@@ -71,7 +73,7 @@ export default defineComponent({
         });
 
         return {
-            items: items,
+            items,
             toggleGroup,
         };
     },
