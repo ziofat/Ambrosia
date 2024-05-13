@@ -12,8 +12,7 @@ export const CATEGORIES = [
     { id: 'soup/cold-soup', text: '冷汤' },
     { id: 'aquatic', text: '水产', icon: 'fish-fins' },
     { id: 'aquatic/fish', text: '鱼类' },
-    { id: 'snack', text: '小吃', icon: 'french-fries' },
-    { id: 'snack/egg', text: '蛋类料理' },
-    { id: 'vegetable', text: '蔬食', icon: 'carrot' },
-    { id: 'vegetable/salad', text: '沙拉' },
+    { id: 'side', text: '小吃', icon: 'french-fries' },
+    { id: 'side/egg', text: '蛋类料理' },
+    { id: 'side/vegetable', text: '蔬食' },
 ];
