@@ -1,1 +1,0 @@
-const e={key:"v-5471ae91",path:"/recipes/vegetable/",title:"\u852C\u98DF",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[{level:2,title:"\u6C99\u62C9",slug:"\u6C99\u62C9",children:[]}]};export{e as data};
