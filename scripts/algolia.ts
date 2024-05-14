@@ -52,6 +52,13 @@ function updateIndex() {
         }).catch((err) => {
             console.error('Failed to index recipes');
         });
+        const deleted = existingRecipes.filter((recipe) => {
+            const exist = records.some((r) => r.objectID === recipe.objectID);
+            return !exist;
+        }).map((r) => r.objectID);
+        if (deleted.length > 0) {
+            index.deleteObjects(deleted);
+        }
     });
 }
 
