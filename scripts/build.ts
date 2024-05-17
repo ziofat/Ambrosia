@@ -5,6 +5,7 @@ import {
 } from 'fs';
 import { resolve, join } from 'path';
 import { sync } from 'fast-glob';
+import * as sharp from 'sharp';
 import { getCreatedTime } from '@vuepress/plugin-git';
 import { Recipe, IRecipeDependency } from './recipe';
 import { CATEGORIES } from './categories';
@@ -77,6 +78,14 @@ Promise.all(sync('./recipes/**/*.cook').map((file) => {
     sync('./recipes/**/*.md').forEach((file) => {
         copyFileSync(file, file.replace('./', 'docs/'));
     });
+});
 
-    // writeFileSync('./map.json', JSON.stringify(Object.fromEntries(dependencyMap), null, 2), 'utf-8');
+Promise.all(sync('./docs/.vuepress/public/recipe-static/*.jpg').map((file) => new Promise((r) => {
+    const path = resolve(__dirname, `.${file}`);
+    sharp(path)
+        .resize(320)
+        .toFile(path.replace('recipe-static', 'thumbnail'))
+        .then(r);
+}))).then(() => {
+    console.log('files generated');
 });

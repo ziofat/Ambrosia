@@ -30,7 +30,7 @@ export function cookToJson(recipe: Recipe, idMap: Record<string, string>, create
             const url = variant === recipe.name
                 ? `/recipes/${recipe.metadata.course}/${recipe.name}.html`
                 : `/recipes/${recipe.metadata.course}/${recipe.name}.html?variant=${variant}`;
-            const path = resolve(__dirname, '../docs/.vuepress/public/recipe-static/', `${variant}.jpg`);
+            const path = resolve(__dirname, '../docs/.vuepress/public/thumbnail/', `${variant}.jpg`);
             recipes.push({
                 objectID: idMap[url] ?? nanoid(8),
                 createdTime,
@@ -53,13 +53,13 @@ export function cookToJson(recipe: Recipe, idMap: Record<string, string>, create
                     .filter(({ variants }) => variants?.includes(variant) || variants?.length === 0)
                     .map((instruction) => instruction.content)),
                 courseType: (recipe.metadata.course ?? 'other').split('/'),
-                image: existsSync(path) ? `recipe-static/${variant}.jpg` : undefined,
+                image: existsSync(path) ? `thumbnail/${variant}.jpg` : undefined,
                 variantFrom: recipe.name,
             });
         });
     } else {
         const url = `/recipes/${recipe.metadata.course}/${recipe.name}.html`;
-        const path = resolve(__dirname, '../docs/.vuepress/public/recipe-static/', `${recipe.name}.jpg`);
+        const path = resolve(__dirname, '../docs/.vuepress/public/thumbnail/', `${recipe.name}.jpg`);
         recipes.push({
             objectID: idMap[url] ?? nanoid(8),
             createdTime,
@@ -78,7 +78,7 @@ export function cookToJson(recipe: Recipe, idMap: Record<string, string>, create
             }, [] as RecordIngredient[]),
             instructions: recipe.steps.flatMap(({ instructions }) => instructions.map(({ content }) => content)),
             courseType: (recipe.metadata.course ?? 'other').split('/'),
-            image: existsSync(path) ? `recipe-static/${recipe.name}.jpg` : undefined,
+            image: existsSync(path) ? `thumbnail/${recipe.name}.jpg` : undefined,
             variantFrom: recipe.name,
         });
     }
