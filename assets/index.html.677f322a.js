@@ -1,0 +1,1 @@
+const e={key:"v-4e548975",path:"/recipes/side/",title:"\u914D\u83DC",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[{level:2,title:"\u86CB\u7C7B\u6599\u7406",slug:"\u86CB\u7C7B\u6599\u7406",children:[]},{level:2,title:"\u6C99\u62C9",slug:"\u6C99\u62C9",children:[]},{level:2,title:"\u78B3\u6C34",slug:"\u78B3\u6C34",children:[]}]};export{e as data};
