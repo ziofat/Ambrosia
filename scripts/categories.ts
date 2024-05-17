@@ -15,4 +15,5 @@ export const CATEGORIES = [
     { id: 'side', text: '小吃', icon: 'french-fries' },
     { id: 'side/egg', text: '蛋类料理' },
     { id: 'side/vegetable', text: '蔬食' },
+    { id: 'side/carb', text: '碳水' },
 ];
