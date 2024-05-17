@@ -94,6 +94,20 @@ export default defineUserConfig<AmborsiaKitchenTheme>({
         },
     },
     plugins: [
-        ['md-enhance', { mark: true }],
+        ['md-enhance', {
+            mark: true,
+            mermaid: {
+                securityLevel: 'loose',
+                theme: 'base',
+                themeVariables: {
+                    primaryColor: 'transparent',
+                    primaryTextColor: '#ECEFF4',
+                    primaryBorderColor: '#D8DEE9',
+                    lineColor: '#D08770',
+                    secondaryColor: '#EBCB8B',
+                    tertiaryColor: '#A3BE8C',
+                },
+            },
+        }],
     ],
 });

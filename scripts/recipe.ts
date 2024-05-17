@@ -20,12 +20,18 @@ interface Metadata {
     time?: string;
 }
 
+export interface IRecipeDependency {
+    name: string;
+    recipe: string;
+}
+
 interface IRecipe {
     name: string;
     description: string;
     steps: IStep[];
     metadata: Metadata;
     variants: string[];
+    dependencies: IRecipeDependency[];
 }
 
 export class Recipe implements IRecipe {
@@ -47,6 +53,8 @@ export class Recipe implements IRecipe {
     public metadata: Metadata = {};
 
     public variants: string[] = [];
+
+    public dependencies: IRecipeDependency[] = [];
 
     constructor(public name, source: string) {
         this.#source = source;
@@ -288,8 +296,16 @@ export class Recipe implements IRecipe {
         const variantName = (variant ?? '').replace(/[<>]/g, '');
         if (variant) {
             link = path.replace(/<(.+)>\.cook/g, '.html?variant=$1');
+            this.dependencies.push({
+                name: variantName,
+                recipe: link,
+            });
             return { name: variantName, link };
         }
+        this.dependencies.push({
+            name,
+            recipe: link,
+        });
         return { name, link };
     }
 

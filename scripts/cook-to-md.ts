@@ -7,7 +7,37 @@ function stepIngredients(step: IStep) {
     return Buffer.from(jsonString, 'binary').toString('base64');
 }
 
-export function cookToMarkdown(recipe: Recipe, extraMeta: Record<string, unknown> = {}) {
+export interface IDependency {
+    name: string;
+    deps: IDependency[] | null;
+    link: string;
+}
+
+function drawDeps(name: string, dependencies: IDependency[] | null) {
+    const defs: string[] = [];
+    const lines: string[] = [];
+    const links: string[] = [];
+    const toString = (root: string, deps?: IDependency[] | null, link?: string) => {
+        defs.push(`  ${root}(${root})`);
+        if (deps) {
+            deps.forEach((d) => {
+                lines.push(`  ${d.name} --> ${root}`);
+                toString(d.name, d.deps, d.link);
+            });
+        }
+        if (link) {
+            links.push(`  click ${root} "${link}"`);
+        }
+    };
+    toString(name, dependencies);
+    return `\`\`\`mermaid\ngraph LR\n${defs.concat(lines, links).join('\n')}\n\`\`\``;
+}
+
+export function cookToMarkdown(
+    recipe: Recipe,
+    extraMeta: Record<string, unknown> = {},
+    dependencies: IDependency[] | null = [],
+) {
     return `---
 recipe: true
 course: ${recipe.metadata.course}
@@ -25,7 +55,7 @@ ${Object.entries(extraMeta).map(([key, value]) => `${key}: ${value}`).join('\n')
 
 # ${recipe.name}
 
-### Instruction
+### <i class="fa-light fa-kitchen-set"></i> Instruction
 
 <Steps>
 
@@ -41,6 +71,9 @@ ${instruction.content}
 
 </Steps>
 
-${recipe.metadata.storage ? `### Storage\n\n${recipe.metadata.storage}` : ''}
+${recipe.metadata.storage ? `### <i class="fa-light fa-refrigerator"></i> Storage\n\n${recipe.metadata.storage}` : ''}
+
+
+${(dependencies ?? []).length > 0 ? `### <i class="fa-light fa-jug-bottle"></i> Dependencies\n\n${drawDeps(recipe.name, dependencies)}` : ''}
 `;
 }
