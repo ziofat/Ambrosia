@@ -1,0 +1,1 @@
+const e={key:"v-7ca37e26",path:"/recipes/flavor_enhancer/",title:"\u98CE\u5473\u589E\u5F3A\u5242",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[{level:2,title:"\u6CB9\u8102 Fat",slug:"\u6CB9\u8102-fat",children:[]}]};export{e as data};
