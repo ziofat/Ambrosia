@@ -124,7 +124,7 @@ export default defineComponent({
         const ingredients = computed(() => meta.value.ingredients);
         const servings = computed(() => meta.value.servings);
         const description = computed(() => meta.value.description);
-        const variants = computed(() => meta.value.variants ?? [title]);
+        const variants = computed(() => meta.value.variants ?? [title.value]);
         const activeVariant = computed(() => route.query.variant ?? variants.value[0]);
 
         const categories = computed(() => meta.value.course.split('/').map((course, i, courses) => {
