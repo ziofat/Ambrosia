@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@cooklang/cooklang-ts':
-    specifier: ^1.0.0
-    version: 1.0.0
   '@vuepress/client':
     specifier: 2.0.0-beta.35
     version: 2.0.0-beta.35(typescript@4.9.5)
@@ -401,10 +398,6 @@ packages:
 
   /@braintree/sanitize-url@6.0.4:
     resolution: {integrity: sha512-s3jaWicZd0pkP0jf5ysyHUI/RE7MHos6qlToFcGWXVp+ykHOy77OUMrfbgJ9it2C5bow7OIQwYYaHjk9XlBQ2A==}
-    dev: false
-
-  /@cooklang/cooklang-ts@1.0.0:
-    resolution: {integrity: sha512-uO9bPJEoZmiBxrIcK8zZqgA9aOFjgaMxYoezsUX0iAX+hvAAJNT6KdMhJca34yJPDLNn32ACOk2YtNLjs7AoJg==}
     dev: false
 
   /@cspotcode/source-map-consumer@0.8.0:

@@ -1,0 +1,298 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "ambrosia",
+  "scopeName": "source.ambrosia",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#variants" },
+    { "include": "#metadata" },
+    { "include": "#ingredient" },
+    { "include": "#equipment" },
+    { "include": "#timer" },
+    { "include": "#markdown" }
+  ],
+  "repository": {
+    "metadata": {
+      "patterns": [
+        {
+          "match": "(^>>)$",
+          "name": "keyword.operator.mapping.begin.ambrosia"
+        },
+        {
+          "match": "(^>>)([^:]+?)$",
+          "captures": {
+            "1": { "name": "keyword.operator.mapping.begin.ambrosia" },
+            "2": { "name": "invalid.illegal.expected-mapping-key.ambrosia" }
+          }
+        },
+        {
+          "match": "(^>>)([^:]+?)(:\\s*?)$",
+          "captures": {
+            "1": { "name": "keyword.operator.mapping.begin.ambrosia" },
+            "2": { "name": "entity.name.tag.metadata.ambrosia string.unquoted.plain.ambrosia" },
+            "3": { "name": "invalid.illegal.expected-mapping-key.ambrosia" }
+          }
+        },
+        {
+          "match": "(^>>)([^:]+?)(:)(.*?)$",
+          "captures": {
+            "1": { "name": "keyword.operator.mapping.begin.ambrosia" },
+            "2": { "name": "entity.name.tag.metadata.ambrosia string.unquoted.plain.ambrosia" },
+            "3": { "name": "punctuation.separator.mapping.key-value.ambrosia" },
+            "4": { "name": "value.metadata.ambrosia string.unquoted.plain.ambrosia" }
+          }
+        }
+      ]
+    },
+    "ingredient": {
+      "patterns": [
+        {
+          "comment": "括号括起名称, 忽略修饰符和数量",
+          "match": "(@)(\\()([^)]*?)(\\))",
+          "captures": {
+            "1": { "name": "storage.type.ingredient.ambrosia" },
+            "2": { "name": "keyword.punctuation.definition.ingredient.name.begin.ambrosia" },
+            "3": { "name": "entity.name.tag.ingredient.multi-word.ambrosia" },
+            "4": { "name": "keyword.punctuation.definition.ingredient.name.end.ambrosia" }
+          }
+        },
+        {
+          "comment": "识别处理步骤修饰符和数量",
+          "match": "(@)([!?]?)(\\w*?|[^@#~]+?)(\\[)([^]]*?)(\\])({)([^}]*?)(})",
+          "captures": {
+            "1": { "name": "storage.type.ingredient.ambrosia" },
+            "2": { "patterns": [ { "include": "#ingredient_type" } ] },
+            "3": { "patterns": [ { "include": "#ingredient_word" } ] },
+            "4": { "name": "keyword.punctuation.definition.ingredient.modifier.begin.ambrosia" },
+            "5": { "name": "entity.name.function.ingredient.modifier.ambrosia" },
+            "6": { "name": "keyword.punctuation.definition.ingredient.modifier.end.ambrosia" },
+            "7": { "name": "keyword.punctuation.definition.ingredient.amount.begin.ambrosia" },
+            "8": { "patterns": [ { "include": "#ingredient_amount" } ] },
+            "9": { "name": "keyword.punctuation.definition.ingredient.amount.end.ambrosia" }
+          }
+        },
+        {
+          "comment": "识别处理步骤修饰符",
+          "match": "(@)([!?]?)(\\w*?|[^@#~]+?)(\\[)([^]]*?)(\\])",
+          "captures": {
+            "1": { "name": "storage.type.ingredient.ambrosia" },
+            "2": { "patterns": [ { "include": "#ingredient_type" } ] },
+            "3": { "patterns": [ { "include": "#ingredient_word" } ] },
+            "4": { "name": "keyword.punctuation.definition.ingredient.modifier.begin.ambrosia" },
+            "5": { "name": "entity.name.function.ingredient.modifier.ambrosia" },
+            "6": { "name": "keyword.punctuation.definition.ingredient.modifier.end.ambrosia" }
+          }
+        },
+        {
+          "comment": "识别数量",
+          "match": "(@)([!?]?)(\\w*?|[^@#~]+?)({)([^}]*?)(})",
+          "captures": {
+            "1": { "name": "storage.type.ingredient.ambrosia" },
+            "2": { "patterns": [ { "include": "#ingredient_type" } ] },
+            "3": { "patterns": [ { "include": "#ingredient_word" } ] },
+            "4": { "name": "keyword.punctuation.definition.ingredient.amount.begin.ambrosia" },
+            "5": { "patterns": [ { "include": "#ingredient_amount" } ] },
+            "6": { "name": "keyword.punctuation.definition.ingredient.amount.end.ambrosia" }
+          }
+        },
+        {
+          "comment": "结束定义",
+          "match": "(@)(.+?)\\b",
+          "captures": {
+            "1": { "name": "storage.type.ingredient.ambrosia" },
+            "2": { "name": "entity.name.tag.ingredient.one-word.ambrosia" }
+          }
+        }
+      ]
+    },
+    "ingredient_word": {
+      "patterns": [
+        {
+          "match": "(\\w*?)$",
+          "name": "entity.name.tag.ingredient.one-word.ambrosia"
+        },
+        {
+          "match": "([^@#~]+?)$",
+          "name": "entity.name.tag.ingredient.multi-word.ambrosia"
+        }
+      ]
+    },
+    "ingredient_amount": {
+      "patterns": [
+        {
+          "match": "((?:\\d+?\\.)?\\d+)(\\s+|%)?(\\w+?(?=}|$))",
+          "captures": {
+            "1": { "name": "constant.numeric.ingredient.amount.ambrosia" },
+            "2": { "name": "punctuation.separator.ingredient.amount.ambrosia" },
+            "3": { "name": "constant.character.ingredient.amount.unit.ambrosia" }
+          }
+        }
+      ]
+    },
+    "ingredient_type": {
+      "patterns": [
+        {
+          "match": "(\\?)",
+          "name": "storage.modifier.optional.ingredient.ambrosia"
+        },
+        {
+          "match": "(\\!)",
+          "name": "storage.modifier.main.ingredient.ambrosia"
+        }
+      ]
+    },
+    "equipment": {
+      "patterns": [
+        {
+          "comment": "括号括起名称, 忽略修饰符和数量",
+          "match": "(#)(\\()([^)]*?)(\\))",
+          "captures": {
+            "1": { "name": "storage.type.equipment.ambrosia" },
+            "2": { "name": "keyword.punctuation.definition.equipment.name.begin.ambrosia" },
+            "3": { "name": "entity.name.tag.equipment.multi-word.ambrosia" },
+            "4": { "name": "keyword.punctuation.definition.equipment.name.end.ambrosia" }
+          }
+        },
+        {
+          "match": "(#)(\\w*?)({)[^}]*?(})",
+          "captures": {
+            "1": { "name": "storage.type.equipment.ambrosia" },
+            "2": { "name": "entity.name.tag.equipment.one-word.ambrosia" },
+            "3": { "name": "keyword.punctuation.definition.equipment.name.begin.ambrosia" },
+            "4": { "name": "keyword.punctuation.definition.equipment.name.end.ambrosia" }
+          }
+        },
+        {
+          "match": "(#)([^@#~]+?)({)[^{]*?(})",
+          "captures": {
+            "1": { "name": "storage.type.equipment.ambrosia" },
+            "2": { "name": "entity.name.tag.equipment.multi-word.ambrosia" },
+            "3": { "name": "keyword.punctuation.definition.equipment.name.begin.ambrosia" },
+            "4": { "name": "keyword.punctuation.definition.equipment.name.end.ambrosia" }
+          }
+        },
+        {
+          "match": "(#)(.+?)\\b",
+          "captures": {
+            "1": { "name": "storage.type.equipment.ambrosia" },
+            "2": { "name": "entity.name.tag.equipment.one-word.ambrosia" }
+          }
+        }
+      ]
+    },
+    "timer": {
+      "patterns": [
+        {
+          "match": "(~)(\\w*?|[^@#~]+?)({)([^}]*?)(})",
+          "captures": {
+            "1": { "name": "storage.type.timer.ambrosia" },
+            "2": { "patterns": [ { "include": "#timer_word" } ] },
+            "3": { "name": "keyword.punctuation.definition.timer.duration.begin.ambrosia" },
+            "4": { "patterns": [ { "include": "#timer_duration" } ] },
+            "5": { "name": "keyword.punctuation.definition.timer.duration.end.ambrosia" }
+          }
+        }
+      ]
+    },
+    "timer_word": {
+      "patterns": [
+        {
+          "match": "(\\w+?)$",
+          "name": "entity.name.tag.timer.one-word.ambrosia"
+        },
+        {
+          "match": "([^@#~]+?)$",
+          "name": "entity.name.tag.timer.multi-word.cook"
+        }
+      ]
+    },
+    "timer_duration": {
+      "patterns": [
+        {
+          "match": "((?:\\d+?\\.)?\\d+)(-)((?:\\d+?\\.)?\\d+)(\\s+|%)?(\\w+?(?=}|$))",
+          "captures": {
+            "1": { "name": "constant.numeric.timer.duration.min.ambrosia" },
+            "2": { "name": "punctuation.range.timer.duration.ambrosia" },
+            "3": { "name": "constant.numeric.timer.duration.max.ambrosia" },
+            "4": { "name": "punctuation.separator.timer.duration.ambrosia" },
+            "5": { "name": "constant.character.timer.duration.unit.ambrosia" }
+          }
+        },
+        {
+          "match": "((?:\\d+?\\.)?\\d+)(\\s+|%)?(\\w+?(?=}|$))",
+          "captures": {
+            "1": { "name": "constant.numeric.timer.duration.ambrosia" },
+            "2": { "name": "punctuation.separator.timer.duration.ambrosia" },
+            "3": { "name": "constant.character.timer.duration.unit.ambrosia" }
+          }
+        }
+      ]
+    },
+    "markdown": {
+      "patterns": [
+        {
+          "match": "(\\*\\*)([\\w\\s]+)(\\*\\*)",
+          "captures": {
+            "1": { "name": "markup.bold.punctuation.markdown.bold.begin.ambrosia" },
+            "2": { "name": "markup.bold.plain.markdown.bold.ambrosia" },
+            "3": { "name": "markup.bold.punctuation.markdown.bold.end.ambrosia" }
+          }
+        },
+        {
+          "match": "(\\*)([\\w\\s]+)(\\*)",
+          "captures": {
+            "1": { "name": "markup.italic.punctuation.markdown.italic.begin.ambrosia" },
+            "2": { "name": "markup.italic.plain.markdown.italic.ambrosia" },
+            "3": { "name": "markup.italic.punctuation.markdown.italic.end.ambrosia" }
+          }
+        },
+        {
+          "match": "(>)\\s+(.*)$",
+          "captures": {
+            "1": { "name": "markup.quote.punctuation.markdown.quote.begin.ambrosia markup.inserted" },
+            "2": { "name": "markup.quote.plain.markdown.quote.ambrosia markup.inserted" }
+          }
+        }
+      ]
+    },
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.block.cook",
+          "begin": "(\\/\\*)(?:\\s*((@)internal)(?=\\s|(\\*\\/)))?",
+          "beginCaptures": {
+            "1": { "name": "punctuation.definition.comment.cook" },
+            "2": { "name": "storage.type.internaldeclaration.cook" },
+            "3": { "name": "punctuation.decorator.internaldeclaration.cook" }
+          },
+          "end": "\\*\\/",
+          "endCaptures": { "0": { "name": "punctuation.definition.comment.cook" } }
+        },
+        {
+          "begin": "(^[ \\t]+)?((--)(?:\\s*((@)internal)(?=\\s|$))?)",
+          "beginCaptures": {
+            "1": { "name": "punctuation.whitespace.comment.leading.cook" },
+            "2": { "name": "comment.line.double-dash.cook" },
+            "3": { "name": "punctuation.definition.comment.cook" },
+            "4": { "name": "storage.type.internaldeclaration.cook" },
+            "5": { "name": "punctuation.decorator.internaldeclaration.cook" }
+          },
+          "end": "(?=$)",
+          "contentName": "comment.line.double-dash.cook"
+        }
+      ]
+    },
+    "variants": {
+      "patterns": [
+        {
+          "match": "(\\[-)([\\w\\s,]+)(-\\])",
+          "captures": {
+            "1": { "name": "punctuation.definition.variant.begin.ambrosia" },
+            "2": { "name": "entity.name.tag.variant.ambrosia string.unquoted.variant.ambrosia" },
+            "3": { "name": "punctuation.definition.variant.end.ambrosia" }
+          }
+        }
+      ]
+    }
+  }
+}
