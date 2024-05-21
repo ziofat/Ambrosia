@@ -7,6 +7,9 @@
     "url": "https://github.com/ziofat/Ambrosia.git",
     "directory": "packages/language-support-extension"
   },
+  "scripts": {
+    "build": ""
+  },
   "engines": {
     "vscode": "^1.50.0"
   },
