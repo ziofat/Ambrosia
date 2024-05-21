@@ -1,5 +1,5 @@
 import { defineUserConfig } from 'vuepress';
-import { viteBundler } from '@vuepress/bundler-vite';
+import { webpackBundler } from '@vuepress/bundler-webpack';
 import { ambrosiaTheme } from 'vuepress-theme-ambrosia';
 // import { CATEGORIES } from '../../scripts/categories';
 
@@ -36,7 +36,10 @@ export default defineUserConfig({
     lang: 'zh-CN',
     title: 'Ambrosia.Kitchen',
     description: '结构化的开源食谱',
-    bundler: viteBundler(),
+    bundler: webpackBundler({
+        postcss: {},
+        vue: {},
+    }),
     theme: ambrosiaTheme({
         navbar: [
             {

@@ -13,14 +13,12 @@ import NotFound from './layouts/404.vue';
 
 defineMermaidConfig({
     securityLevel: 'loose',
-    theme: 'base',
+    theme: 'null',
     themeVariables: {
-        primaryColor: 'transparent',
-        primaryTextColor: '#ECEFF4',
-        primaryBorderColor: '#D8DEE9',
+        mainBkg: 'transparent',
+        nodeTextColor: '#ECEFF4',
+        nodeBorder: '#D8DEE9',
         lineColor: '#D08770',
-        secondaryColor: '#EBCB8B',
-        tertiaryColor: '#A3BE8C',
     },
 });
 

@@ -30,15 +30,15 @@ jobs:
         run: node common/scripts/install-run-rush.js install
       - name: Rush rebuild
         run: node common/scripts/install-run-rush.js rebuild --verbose --production
-      - name: Upload index to Algolia
-        run: npm run index
-        env:
-          ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
-        continue-on-error: true
+      # - name: Upload index to Algolia
+      #   run: npm run index
+      #   env:
+      #     ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+      #   continue-on-error: true
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs/.vuepress/dist
+          publish_dir: ./app/website/.vuepress/dist
           cname: ambrosia.kitchen

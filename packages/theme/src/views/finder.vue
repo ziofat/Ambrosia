@@ -15,6 +15,7 @@ import { computed, defineComponent, ref } from 'vue';
 import RecipeFinder from '../components/recipe-finder.vue';
 import SearchBox from '../components/search-box.vue';
 import { FinderPageFormatter } from '../types/formatter';
+import { usePages } from '@temp/pages';
 
 export default defineComponent({
     name: 'RecipeList',
@@ -26,10 +27,43 @@ export default defineComponent({
         const meta = usePageFrontmatter<FinderPageFormatter>();
         const count = computed(() => meta.value.count);
         const variants = computed(() => meta.value.variants);
-        const recipes = ref([]);
-        const facets = ref([]);
+        const recipes = ref<any>([]);
+        const facets = ref({});
+        const pages: any[] = usePages();
 
-        function onResultChange(results) {
+        function onResultChange(err, results) {
+            if (err) {
+                const fallbackFacets = {};
+                const hits = pages.filter(page => page.frontmatter.recipe).flatMap(page => {
+                    const courseType = page.frontmatter.course.split('/');
+                    courseType.forEach(element => {
+                        if (!fallbackFacets[element]) {
+                            fallbackFacets[element] = 1;
+                        }
+                        fallbackFacets[element]++;
+                    });
+                    if (page.frontmatter.variants) {
+                        return page.frontmatter.variants.map(variant => ({
+                            name: variant,
+                            url: `${page.path}?variant=${variant}`,
+                            image: `recipe-static/${variant}.jpg`,
+                            createdTime: page.frontmatter.createdTime,
+                            courseType,
+                        }));
+                    }
+
+                    return [{
+                        name: page.title,
+                        url: page.path,
+                        image: `recipe-static/${page.title}.jpg`,
+                        createdTime: page.frontmatter.createdTime,
+                        courseType,
+                    }];
+                }).sort((a, b) => b.createdTime - a.createdTime);
+                recipes.value = hits;
+                facets.value = fallbackFacets;
+                return;
+            }
             recipes.value = results.hits;
             facets.value = results.facets.courseType;
         }

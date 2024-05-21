@@ -40,7 +40,9 @@ export default defineComponent({
             index.search(query, {
                 facets: ['courseType'],
             }).then((results) => {
-                context.emit('search', results);
+                context.emit('search', null, results);
+            }).catch((err) => {
+                context.emit('search', err, {});
             });
         };
 

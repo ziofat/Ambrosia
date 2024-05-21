@@ -21,6 +21,8 @@ export const ambrosiaTheme = (options: AmborsiaKitchenTheme) => {
             mdEnhancePlugin({
                 mark: true,
                 mermaid: true,
+                sub: true,
+                sup: true,
             }),
         ],
         clientConfigFile: path.resolve(dirname, 'client.js'),

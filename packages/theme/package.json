@@ -14,17 +14,17 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "",
-    "build": "rimraf --glob ./lib && tsc && cpx \"src/**/*.{d.ts,vue,scss}\" lib",
+    "build": "tsc && cpx \"src/**/*.{d.ts,vue,scss}\" lib",
     "start": "",
     "lint": "eslint src --ext \".ts,.tsx,.vue\""
   },
   "type": "module",
   "dependencies": {
     "@vuepress/client": "2.0.0-rc.9",
-    "@vuepress/plugin-theme-data": "2.0.0-rc.30",
+    "@vuepress/plugin-theme-data": "2.0.0-rc.28",
     "@vuepress/utils": "2.0.0-rc.2",
     "algoliasearch": "^4.23.3",
-    "mermaid": "^9.4.3",
+    "mermaid": "^10.8.0",
     "tslib": "^2.3.1",
     "vue-router": "^4.0.14",
     "vue": "^3.2.31",

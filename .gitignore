@@ -85,10 +85,9 @@ common/autoinstallers/*/.npmrc
 apps/website/.vuepress/.cache
 apps/website/.vuepress/.temp
 apps/website/.vuepress/dist
-apps/website/recipes
+apps/website/recipes/**/*.md
 
 # Build
-apps/website/.vuepress/recipes/
 apps/website/.vuepress/public/thumbnail/*.jpg
 packages/**/lib
 

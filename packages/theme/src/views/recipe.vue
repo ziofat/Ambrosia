@@ -407,6 +407,9 @@ export default defineComponent({
     }
 
 }
+.mermaid-actions {
+    display: none;
+}
 .background {
     position: fixed;
     right: 0;

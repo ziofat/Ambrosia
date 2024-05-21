@@ -8,7 +8,7 @@
     "directory": "packages/language-support-extension"
   },
   "scripts": {
-    "build": "vsce package -o ./lib/ambrosia.vsix --skip-license"
+    "build": "make-dir lib && vsce package -o ./lib/ambrosia.vsix --skip-license"
   },
   "engines": {
     "vscode": "^1.50.0"
@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
-    "@vscode/vsce": "^2.26.1"
+    "@vscode/vsce": "^2.26.1",
+    "make-dir-cli": "^4.0.0"
   }
 }

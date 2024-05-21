@@ -1,12 +1,13 @@
 <template>
-    <div class="recipe-card" :style="`background-image: url('/${recipe.image}')`">
+    <div class="recipe-card">
+        <div class="logo-container">
+            <!-- <p>{{description}}</p> -->
+            <Logo />
+        </div>
+        <div :style="`background-image: url('/${recipe.image}');`" class="topic-image"></div>
         <div class="title">
             <h5>{{recipe.name}}</h5>
             <!-- <div class="sub-type"># {{ courseType }}</div> -->
-        </div>
-        <div class="logo-container" v-if="!recipe.image">
-            <!-- <p>{{description}}</p> -->
-            <Logo />
         </div>
     </div>
 </template>
@@ -67,6 +68,17 @@ export default defineComponent({
         height: 100%;
         pointer-events: none;
         opacity: 0.45;
+    }
+
+    .topic-image {
+        width: 150%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        filter: blur(2px) saturate(0.8);
     }
 
     .logo {
