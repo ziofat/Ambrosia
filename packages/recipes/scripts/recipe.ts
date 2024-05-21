@@ -311,7 +311,7 @@ export class Recipe implements IRecipe {
 
     #handleIngredient(node: IngredientNode) {
         if (this.#state.stepIndex >= 0) {
-            const matches = node.name.matchAll(/\((.*?[^\\])\)/g);
+            const matches = node.name.matchAll(/\[(.*?[^\\])\]/g);
 
             const ingredient = [...matches].reduce((acc, [match, group]) => {
                 acc.name = acc.name.replace(match, '');

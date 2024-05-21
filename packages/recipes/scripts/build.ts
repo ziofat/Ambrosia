@@ -24,10 +24,10 @@ function getDeps(recipe: string): IDependency[] | null {
     return null;
 }
 
-Promise.all(sync('./src/**/*.cook').map((file) => {
-    const [, course] = file.match(/src\/(.+)\/(.+)\.cook$/)!;
+Promise.all(sync('./src/**/*.am').map((file) => {
+    const [, course] = file.match(/src\/(.+)\/(.+)\.am$/)!;
     const source = `>> course: ${course}\n${readFileSync(file, 'utf8')}`;
-    const name = file.split('/').pop()?.replace('.cook', '') ?? '';
+    const name = file.split('/').pop()?.replace('.am', '') ?? '';
     try {
         return new Recipe(name, source);
     } catch (e) {
@@ -47,7 +47,7 @@ Promise.all(sync('./src/**/*.cook').map((file) => {
 }).map(async (recipe) => {
     const { course = 'other' } = recipe.metadata;
     const path = resolve(__dirname, '../lib', course);
-    const createdTime = await getCreatedTime([resolve(__dirname, '../src', course, `${recipe.name}.cook`)], process.cwd());
+    const createdTime = await getCreatedTime([resolve(__dirname, '../src', course, `${recipe.name}.am`)], process.cwd());
     if (!existsSync(path)) {
         mkdirSync(path, { recursive: true });
     }

@@ -1,6 +1,6 @@
 const metadata = /^>>\s*(?<key>.+?):\s*(?<value>.+)/;
 
-const multiwordIngredient = /@(?<mOptionalIngredient>\??)(?<mMainIngredient>!?)(?<mIngredientName>[^@#~[]+?){(?<mIngredientQuantity>[^]*?)(?:\s+(?<mIngredientUnits>[^}]+?))?}/;
+const multiwordIngredient = /@(?<mOptionalIngredient>\??)(?<mMainIngredient>!?)(?<mIngredientName>[^@#~]+?){(?<mIngredientQuantity>[^]*?)(?:\s+(?<mIngredientUnits>[^}]+?))?}/;
 const singleWordIngredient = /@(?<sOptionalIngredient>\??)(?<sMainIngredient>!?)(?<sIngredientName>[^\s,.]+)/;
 
 const multiwordCookware = /#(?<mCookwareName>[^@#~[]+?){(?<mCookwareQuantity>.*?)}/;

@@ -8,7 +8,7 @@
     "directory": "packages/language-support-extension"
   },
   "scripts": {
-    "build": ""
+    "build": "vsce package -o ./lib/ambrosia.vsix --skip-license"
   },
   "engines": {
     "vscode": "^1.50.0"
@@ -43,5 +43,8 @@
         "path": "./syntaxes/ambrosia.tmLanguage.json"
       }
     ]
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^2.26.1"
   }
 }
