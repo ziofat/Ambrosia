@@ -1,0 +1,44 @@
+{
+  "name": "vscode-ambrosia",
+  "version": "1.0.0",
+  "description": "Well structured modernist recipes",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ziofat/Ambrosia.git",
+    "directory": "packages/language-support-extension"
+  },
+  "engines": {
+    "vscode": "^1.50.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "configurationDefaults": {
+      "[ambrosia]": {
+        "editor.wordWrap": "on"
+      }
+    },
+    "languages": [
+      {
+        "id": "ambrosia",
+        "aliases": [
+          "ambrosia",
+          "cooklang extended"
+        ],
+        "extensions": [
+          ".ambrosia",
+          ".am"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "ambrosia",
+        "scopeName": "source.ambrosia",
+        "path": "./syntaxes/ambrosia.tmLanguage.json"
+      }
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "name": "vuepress-theme-ambrosia",
+  "version": "1.0.0",
+  "description": "Well structured modernist recipes",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ziofat/Ambrosia.git",
+    "directory": "packages/theme"
+  },
+  "bugs": {
+    "url": "https://github.com/ziofat/Ambrosia/issues"
+  },
+  "homepage": "https://github.com/ziofat/Ambrosia#readme",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "",
+    "build": "rimraf --glob ./lib && tsc && cpx \"src/**/*.{d.ts,vue,scss}\" lib",
+    "start": "",
+    "lint": "eslint src --ext \".ts,.tsx,.vue\""
+  },
+  "type": "module",
+  "dependencies": {
+    "@vuepress/client": "2.0.0-rc.9",
+    "@vuepress/plugin-theme-data": "2.0.0-rc.30",
+    "@vuepress/utils": "2.0.0-rc.2",
+    "algoliasearch": "^4.23.3",
+    "mermaid": "^9.4.3",
+    "tslib": "^2.3.1",
+    "vue-router": "^4.0.14",
+    "vue": "^3.2.31",
+    "vuepress-plugin-md-enhance": "2.0.0-rc.43"
+  },
+  "devDependencies": {
+    "cpx2": "^7.0.1",
+    "eslint-config-ambrosia": "workspace:*",
+    "eslint": "^8.11.0",
+    "vuepress": "2.0.0-rc.9",
+    "typescript": "^4.6.2",
+    "rimraf": "5.0.7"
+  },
+  "peerDependencies": {
+    "vuepress": "2.0.0-rc.9"
+  }
+}

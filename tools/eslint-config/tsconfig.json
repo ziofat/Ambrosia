@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "module": "esnext",
+        "target": "es5",
+        "lib": ["ESNext"],
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "inlineSources": true,
+        "allowJs": true,
+        "declaration": true,
+        "declarationMap": true,
+        "moduleResolution": "node",
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "strictNullChecks": true,
+        "esModuleInterop": true,
+        "ignoreDeprecations": "5.0",
+        "suppressImplicitAnyIndexErrors": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "downlevelIteration": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": false,
+        "noEmitOnError": false,
+        "baseUrl": "./"
+    },
+    "include": [".eslintrc.js"]
+}

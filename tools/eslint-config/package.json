@@ -1,0 +1,32 @@
+{
+  "name": "eslint-config-ambrosia",
+  "version": "1.0.0",
+  "description": "A common eslint rule set for ambrosia",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "build": "",
+    "start": "",
+    "test": ""
+  },
+  "files": [
+    ".eslintrc.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ziofat/Ambrosia.git",
+    "directory": "tools/eslint-config"
+  },
+  "dependencies": {
+    "@rushstack/eslint-config": "^3.6.10",
+    "@typescript-eslint/eslint-plugin": "^5.16.0",
+    "@typescript-eslint/parser": "^5.16.0",
+    "eslint": "^8.11.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-vue": "^8.5.0",
+    "vue-eslint-parser": "^8.3.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.2"
+  }
+}

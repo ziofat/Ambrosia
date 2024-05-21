@@ -6,7 +6,7 @@
 
 本项目受到了[程序员做饭指南](https://github.com/Anduin2017/HowToCook)的启发, 致力于构建一个以程序员角度来看待菜谱的仓库.
 
-本项目中的菜谱均使用 [Cooklang](https://cooklang.org) 编写, 在其基础上有少量的优化以提高可读性.
+本项目中的菜谱均使用 `Ambrosia` 语法编写, 该语法受 [Cooklang](https://github.com/cooklang/spec) 的启发, 但并不完全相同.
 
 ## 为什么又做一个菜谱仓库
 

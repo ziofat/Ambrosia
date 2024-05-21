@@ -1,0 +1,20 @@
+{
+    "files.associations": {
+        "*.json": "jsonc"
+    },
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "vue"
+    ],
+    "eslint.workingDirectories": [
+        "apps/website",
+        "packages/language-support-extension",
+        "packages/recipes",
+        "packages/theme",
+        "tools/eslint-config",
+    ],
+    "typescript.tsdk": "./packages/recipes/node_modules/typescript/lib"
+}

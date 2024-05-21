@@ -1,0 +1,32 @@
+{
+  "name": "ambrosia-kitchen-website",
+  "version": "1.0.0",
+  "description": "Well structured modernist recipes",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ziofat/Ambrosia.git",
+    "directory": "apps/website"
+  },
+  "bugs": {
+    "url": "https://github.com/ziofat/Ambrosia/issues"
+  },
+  "homepage": "https://github.com/ziofat/Ambrosia#readme",
+  "scripts": {
+    "scan": "cpx \"node_modules/ambrosia-recipes/lib/**/*.md\" recipes",
+    "start": "vuepress dev .",
+    "build": "vuepress build ."
+  },
+  "dependencies": {
+    "ambrosia-recipes": "workspace:*",
+    "vuepress-theme-ambrosia": "workspace:*",
+    "vuepress": "2.0.0-rc.9",
+    "vue": "^3.2.31"
+  },
+  "devDependencies": {
+    "@vuepress/bundler-vite": "^2.0.0-rc.9",
+    "cpx2": "^7.0.1",
+    "eslint-config-ambrosia": "workspace:*",
+    "eslint": "^8.11.0",
+    "typescript": "^4.6.2"
+  }
+}
