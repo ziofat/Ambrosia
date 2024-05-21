@@ -14,7 +14,7 @@
   "scripts": {
     "scan": "make-dir recipes && cpx \"node_modules/ambrosia-recipes/lib/**/*.md\" recipes",
     "start": "npm run scan && vuepress dev .",
-    "build": "npm run scan && vuepress build ."
+    "build": "npm run scan && vuepress build . 2>&1"
   },
   "dependencies": {
     "ambrosia-recipes": "workspace:*",
