@@ -1,1 +1,0 @@
-const e={key:"v-0fafb3df",path:"/guides/technique/saute.html",title:"",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[{level:2,title:"\u7178\u7092",slug:"\u7178\u7092",children:[]}]};export{e as data};

@@ -1,1 +1,0 @@
-const e={key:"v-7ef10991",path:"/guides/technique/stir-fry.html",title:"",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[{level:2,title:"\u7FFB\u7092",slug:"\u7FFB\u7092",children:[]}]};export{e as data};

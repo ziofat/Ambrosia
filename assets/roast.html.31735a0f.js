@@ -1,1 +1,0 @@
-import{_ as e,o as a,a as t,d as r,b as o}from"./app.372aa7dd.js";const s={},c={id:"\u7099\u70E4",tabindex:"-1"},_=o("a",{class:"header-anchor",href:"#\u7099\u70E4","aria-hidden":"true"},"#",-1);function n(d,h){return a(),t("h2",c,[_,r(" \u7099\u70E4")])}var f=e(s,[["render",n],["__file","roast.html.vue"]]);export{f as default};

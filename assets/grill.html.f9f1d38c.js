@@ -1,1 +1,0 @@
-const e={key:"v-0a08854e",path:"/guides/technique/grill.html",title:"",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[{level:2,title:"\u70E7\u70E4",slug:"\u70E7\u70E4",children:[]}]};export{e as data};

@@ -1,1 +1,0 @@
-const e={key:"v-54956ba2",path:"/guides/technique/deep-fry.html",title:"",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[{level:2,title:"\u6CB9\u70B8",slug:"\u6CB9\u70B8",children:[]}]};export{e as data};

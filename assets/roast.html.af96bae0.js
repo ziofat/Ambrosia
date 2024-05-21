@@ -1,1 +1,0 @@
-const e={key:"v-03816d1c",path:"/guides/technique/roast.html",title:"",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[{level:2,title:"\u7099\u70E4",slug:"\u7099\u70E4",children:[]}]};export{e as data};

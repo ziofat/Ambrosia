@@ -1,1 +1,0 @@
-const e={key:"v-b1911eea",path:"/guides/concept/history.html",title:"",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[{level:2,title:"\u70F9\u996A\u53D1\u5C55\u5386\u53F2",slug:"\u70F9\u996A\u53D1\u5C55\u5386\u53F2",children:[]}]};export{e as data};

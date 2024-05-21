@@ -1,1 +1,0 @@
-const e={key:"v-699ab930",path:"/guides/concept/water.html",title:"",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[{level:2,title:"\u6C34\u7684\u7279\u6027",slug:"\u6C34\u7684\u7279\u6027",children:[]}]};export{e as data};
