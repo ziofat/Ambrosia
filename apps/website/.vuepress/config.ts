@@ -82,8 +82,8 @@ export default defineUserConfig({
                             link: '/guides/basic/getting-started.html',
                         },
                         {
-                            text: 'Cooklang 语法扩展',
-                            link: '/guides/basic/cooklang.html',
+                            text: 'Ambrosia 语法',
+                            link: '/guides/basic/ambrosia-lang.html',
                         },
                         {
                             text: '使用电子秤',
