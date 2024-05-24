@@ -2,7 +2,7 @@ export const CATEGORIES = [
     { id: 'base', text: '基底食材', icon: 'jar' },
     { id: 'base/stock-broth', text: '高汤/汤底' }, // 鸡汤, 蔬菜高汤, 牛肉高汤, 鱼高汤, 骨头汤, 蘑菇汤 等
     // { id: 'base/gough-batter', text: '面团/面糊' }, // 面包面团(白面包, 全麦面包, 酸面包), 糕点面团(派皮, 酥皮, 油酥), 面糊(煎饼, 华夫饼, 天妇罗) 等
-    // { id: 'base/sauce', text: '酱汁' }, // 母酱(白酱, 奶油酱, 番茄酱, 荷兰酱), 乳化酱(蛋黄酱), 油醋汁等
+    { id: 'base/sauce', text: '酱汁' }, // 母酱(白酱, 奶油酱, 番茄酱, 荷兰酱), 乳化酱(蛋黄酱), 油醋汁等
     { id: 'flavor_enhancer', text: '风味增强剂', icon: 'blender' },
     // { id: 'flavor_enhancer/spice', text: '香料混合物' }, // 咖喱粉, 辣椒粉, 普罗旺斯香草, 五香粉
     // { id: 'flavor_enhancer/rub-marinade', text: '腌料/擦料' }, // 干擦料, 湿腌料, 卤水

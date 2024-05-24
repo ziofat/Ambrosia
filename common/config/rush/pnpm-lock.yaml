@@ -76,6 +76,7 @@ importers:
       cpx2: ^7.0.1
       eslint: ^8.11.0
       eslint-config-ambrosia: workspace:*
+      markdown-it: ^14.1.0
       mermaid: ^10.8.0
       rimraf: 5.0.7
       tslib: ^2.3.1
@@ -89,11 +90,12 @@ importers:
       '@vuepress/plugin-theme-data': 2.0.0-rc.28_45c20508777497e5765e93c5e50bcf03
       '@vuepress/utils': 2.0.0-rc.2
       algoliasearch: 4.23.3
+      markdown-it: 14.1.0
       mermaid: 10.9.1
       tslib: 2.6.2
       vue: 3.4.27_typescript@4.9.5
       vue-router: 4.3.2_vue@3.4.27
-      vuepress-plugin-md-enhance: 2.0.0-rc.43_026fa6f813038596573dc1de4a5efb95
+      vuepress-plugin-md-enhance: 2.0.0-rc.43_cb54dca425122f0f85e401747bd4de95
     devDependencies:
       cpx2: 7.0.1
       eslint: 8.57.0
@@ -909,7 +911,7 @@ packages:
   /@mdit-vue/types/2.1.0:
     resolution: {integrity: sha512-TMBB/BQWVvwtpBdWD75rkZx4ZphQ6MN0O4QB2Bc0oI5PC2uE57QerhNxdRZ7cvBHE2iY2C+BUNUziCfJbjIRRA==}
 
-  /@mdit/plugin-alert/0.10.1:
+  /@mdit/plugin-alert/0.10.1_markdown-it@14.1.0:
     resolution: {integrity: sha512-Qv6OGDvpWnhjQKaM7m+OGPbNhZL6dZceSdf4eEa2ljpYgnmIxCpcAjWzbbKD8iajIiZLgCaLkgNzfo7fc3u8Pg==}
     peerDependencies:
       markdown-it: ^14.1.0
@@ -918,9 +920,10 @@ packages:
         optional: true
     dependencies:
       '@types/markdown-it': 14.1.1
+      markdown-it: 14.1.0
     dev: false
 
-  /@mdit/plugin-align/0.10.1:
+  /@mdit/plugin-align/0.10.1_markdown-it@14.1.0:
     resolution: {integrity: sha512-gmNt2cuDJkkgomJWNkkDRiVhvXK6kEAnJGt7YwjouzqU57r9xl5wIWluj4bPg7Nmfs7CvxjERmHc6PVgVe6mIg==}
     engines: {node: '>= 18'}
     peerDependencies:
@@ -929,11 +932,12 @@ packages:
       markdown-it:
         optional: true
     dependencies:
-      '@mdit/plugin-container': 0.10.1
+      '@mdit/plugin-container': 0.10.1_markdown-it@14.1.0
       '@types/markdown-it': 14.1.1
+      markdown-it: 14.1.0
     dev: false
 
-  /@mdit/plugin-attrs/0.10.1:
+  /@mdit/plugin-attrs/0.10.1_markdown-it@14.1.0:
     resolution: {integrity: sha512-5cgYIWH5DGbnStu8nB3kx8MCnl8Olz2JBvxUpKp4jsdJDgJz+CGix/MftR7t3fcYhGvU2C8KF4IWpcNNRaoKCw==}
     engines: {node: '>= 18'}
     peerDependencies:
@@ -943,9 +947,10 @@ packages:
         optional: true
     dependencies:
       '@types/markdown-it': 14.1.1
+      markdown-it: 14.1.0
     dev: false
 
-  /@mdit/plugin-container/0.10.1:
+  /@mdit/plugin-container/0.10.1_markdown-it@14.1.0:
     resolution: {integrity: sha512-TgYiV+uvsoByXYLo6t6I5Vf2Babbh/+0NoEwYL/cTQrEa1zJm0h54APbKG9q7hBcMHpSiSi1eNpGcWbaoqvZQg==}
     engines: {node: '>= 18'}
     peerDependencies:
@@ -955,9 +960,10 @@ packages:
         optional: true
     dependencies:
       '@types/markdown-it': 14.1.1
+      markdown-it: 14.1.0
     dev: false
 
-  /@mdit/plugin-demo/0.10.1:
+  /@mdit/plugin-demo/0.10.1_markdown-it@14.1.0:
     resolution: {integrity: sha512-ZiC76VW3U0UTqCeDrAPds1O6wPgKjmStOdT+ssLmtN4wiwdxYhsMRky6+zYu8IXtg4lxQrTx0LwDVLPPKjkNnA==}
     peerDependencies:
       markdown-it: ^14.1.0
@@ -966,9 +972,10 @@ packages:
         optional: true
     dependencies:
       '@types/markdown-it': 14.1.1
+      markdown-it: 14.1.0
     dev: false
 
-  /@mdit/plugin-figure/0.10.1:
+  /@mdit/plugin-figure/0.10.1_markdown-it@14.1.0:
     resolution: {integrity: sha512-ypMPefMk7ekiHBYb5aqqruKi7dRmBNYw2e3/AvTqV8dbNy4wYu8lXUMd78XjZaDvwh87m3OEhaCF6pvVw6Viww==}
     engines: {node: '>= 18'}
     peerDependencies:
@@ -978,18 +985,20 @@ packages:
         optional: true
     dependencies:
       '@types/markdown-it': 14.1.1
+      markdown-it: 14.1.0
     dev: false
 
-  /@mdit/plugin-footnote/0.10.1:
+  /@mdit/plugin-footnote/0.10.1_markdown-it@14.1.0:
     resolution: {integrity: sha512-dPR3uNx3g8X6ErgmfXY2s63hIS9/giZ118if/nB8fimDH0G63BrpMYI/OKIK5tVPzhhqfvxxPGzSbOTg2z4Mqw==}
     engines: {node: '>= 18'}
     peerDependencies:
       markdown-it: ^14.1.0
     dependencies:
       '@types/markdown-it': 14.1.1
+      markdown-it: 14.1.0
     dev: false
 
-  /@mdit/plugin-img-lazyload/0.10.1:
+  /@mdit/plugin-img-lazyload/0.10.1_markdown-it@14.1.0:
     resolution: {integrity: sha512-4/BTaHOmL++ssyjIQGBEnGi0bF9s3AdGW1TnL97/MPNahqKrTJiGDw9trjpThjQTFdQ7HYW3enmJb/w4j/r0bA==}
     engines: {node: '>= 18'}
     peerDependencies:
@@ -999,9 +1008,10 @@ packages:
         optional: true
     dependencies:
       '@types/markdown-it': 14.1.1
+      markdown-it: 14.1.0
     dev: false
 
-  /@mdit/plugin-img-mark/0.10.1:
+  /@mdit/plugin-img-mark/0.10.1_markdown-it@14.1.0:
     resolution: {integrity: sha512-ZeLg2/xG9hy7teAxXIJ64cya3QyVVEitlghASneKLVZvki4W1DNkOddloPWrDn1Zf4AbjMjmv7rW74WOaVT14Q==}
     engines: {node: '>= 18'}
     peerDependencies:
@@ -1011,9 +1021,10 @@ packages:
         optional: true
     dependencies:
       '@types/markdown-it': 14.1.1
+      markdown-it: 14.1.0
     dev: false
 
-  /@mdit/plugin-img-size/0.10.1:
+  /@mdit/plugin-img-size/0.10.1_markdown-it@14.1.0:
     resolution: {integrity: sha512-ZdubSUaw1uB+Lhpy2qoFKW7Y1GWQlwNm6EH0cOQ+73ERMkxuTQwB7lWUn6gaaB5UW0afHgPf2VSUsvhowrW6eg==}
     engines: {node: '>= 18'}
     peerDependencies:
@@ -1023,9 +1034,10 @@ packages:
         optional: true
     dependencies:
       '@types/markdown-it': 14.1.1
+      markdown-it: 14.1.0
     dev: false
 
-  /@mdit/plugin-include/0.10.1:
+  /@mdit/plugin-include/0.10.1_markdown-it@14.1.0:
     resolution: {integrity: sha512-ZI84UplXnGu97yUhVDVIsvCr+iWj82/akKWVa3m6nXOfwr239PfuebO+pLRVaSAlffkjOm5uF1Hgf5tOnzLAEg==}
     peerDependencies:
       markdown-it: ^14.1.0
@@ -1034,10 +1046,11 @@ packages:
         optional: true
     dependencies:
       '@types/markdown-it': 14.1.1
+      markdown-it: 14.1.0
       upath: 2.0.1
     dev: false
 
-  /@mdit/plugin-katex-slim/0.10.1:
+  /@mdit/plugin-katex-slim/0.10.1_markdown-it@14.1.0:
     resolution: {integrity: sha512-cUUCWlukX644y8qnKwvG2OFNIuAfw1bpuB/o+wofKnZR0W+6rxfpejutUw2avZvu7FhDbCpBYN59CE7ag3pDFg==}
     engines: {node: '>= 18'}
     peerDependencies:
@@ -1049,12 +1062,13 @@ packages:
       markdown-it:
         optional: true
     dependencies:
-      '@mdit/plugin-tex': 0.10.1
+      '@mdit/plugin-tex': 0.10.1_markdown-it@14.1.0
       '@types/katex': 0.16.7
       '@types/markdown-it': 14.1.1
+      markdown-it: 14.1.0
     dev: false
 
-  /@mdit/plugin-mark/0.10.1:
+  /@mdit/plugin-mark/0.10.1_markdown-it@14.1.0:
     resolution: {integrity: sha512-TVeiEOTgJygRdvDHekCkNM8Uy2NkEq+IXoGUCmqmBhO2B18bUCoUZCj7w4jdP0aWrPPS1hE2VbRN7K8v62e2mA==}
     engines: {node: '>= 18'}
     peerDependencies:
@@ -1064,9 +1078,10 @@ packages:
         optional: true
     dependencies:
       '@types/markdown-it': 14.1.1
+      markdown-it: 14.1.0
     dev: false
 
-  /@mdit/plugin-mathjax-slim/0.10.1:
+  /@mdit/plugin-mathjax-slim/0.10.1_markdown-it@14.1.0:
     resolution: {integrity: sha512-GHANdZVmNL7Vrnjrb0v4pyrMvaijuys4O+EoMz5iAhC2QQlGfl2iQ05CXvs7DLGBpx2c7XZeg05y2MP2cJK9sA==}
     engines: {node: '>= 18'}
     peerDependencies:
@@ -1078,12 +1093,13 @@ packages:
       mathjax-full:
         optional: true
     dependencies:
-      '@mdit/plugin-tex': 0.10.1
+      '@mdit/plugin-tex': 0.10.1_markdown-it@14.1.0
       '@types/markdown-it': 14.1.1
+      markdown-it: 14.1.0
       upath: 2.0.1
     dev: false
 
-  /@mdit/plugin-plantuml/0.10.1:
+  /@mdit/plugin-plantuml/0.10.1_markdown-it@14.1.0:
     resolution: {integrity: sha512-yX5LEo1pCPsNWd3ErwMdO19psj+SV8edURSZFtT++kzI3irF4A70TBkRozORfcAxm5NhvcrVYOnvMrkMfDFIgg==}
     peerDependencies:
       markdown-it: ^14.1.0
@@ -1091,11 +1107,12 @@ packages:
       markdown-it:
         optional: true
     dependencies:
-      '@mdit/plugin-uml': 0.10.1
+      '@mdit/plugin-uml': 0.10.1_markdown-it@14.1.0
       '@types/markdown-it': 14.1.1
+      markdown-it: 14.1.0
     dev: false
 
-  /@mdit/plugin-spoiler/0.10.1:
+  /@mdit/plugin-spoiler/0.10.1_markdown-it@14.1.0:
     resolution: {integrity: sha512-yztrC45oCq03JZcan6If/lPBSBaaFTUQ+ROojEB/NldgcEBTiB5cnTvfK/tx1Kz0xDiBJNUI5wfy1IpqfQ3bDQ==}
     engines: {node: '>= 18'}
     peerDependencies:
@@ -1105,9 +1122,10 @@ packages:
         optional: true
     dependencies:
       '@types/markdown-it': 14.1.1
+      markdown-it: 14.1.0
     dev: false
 
-  /@mdit/plugin-stylize/0.10.1:
+  /@mdit/plugin-stylize/0.10.1_markdown-it@14.1.0:
     resolution: {integrity: sha512-Yi+le5Nbm4j3o/l6ULFgZHSgZd/esRhmG1+vQQha7rIp7n5d/JncPQLplms55x0/X617UJvJFO0hsRaKK07g7Q==}
     engines: {node: '>= 18'}
     peerDependencies:
@@ -1117,9 +1135,10 @@ packages:
         optional: true
     dependencies:
       '@types/markdown-it': 14.1.1
+      markdown-it: 14.1.0
     dev: false
 
-  /@mdit/plugin-sub/0.10.1:
+  /@mdit/plugin-sub/0.10.1_markdown-it@14.1.0:
     resolution: {integrity: sha512-i2sw4Re5XqQyAR7ADuSkZrhVTF/Zqjo4QtiPEEIYxc+a0raYw+qFFGeNdOi7UAp5ukpZj2+qJuiT307ILXP53A==}
     engines: {node: '>= 18'}
     peerDependencies:
@@ -1129,9 +1148,10 @@ packages:
         optional: true
     dependencies:
       '@types/markdown-it': 14.1.1
+      markdown-it: 14.1.0
     dev: false
 
-  /@mdit/plugin-sup/0.10.1:
+  /@mdit/plugin-sup/0.10.1_markdown-it@14.1.0:
     resolution: {integrity: sha512-t9bDhUnkAx7oE5Vpw3BPYHb29SuRxeGKWRMNxPDjF1rCN2xZJXVr90fdq8mcwNJNoWncCGJ7zobdU2IP4jLrTQ==}
     engines: {node: '>= 18'}
     peerDependencies:
@@ -1141,9 +1161,10 @@ packages:
         optional: true
     dependencies:
       '@types/markdown-it': 14.1.1
+      markdown-it: 14.1.0
     dev: false
 
-  /@mdit/plugin-tab/0.10.1:
+  /@mdit/plugin-tab/0.10.1_markdown-it@14.1.0:
     resolution: {integrity: sha512-irpusUqM4MT5y06z54jHMOqdb1CWCEu0ELW8KEr7R9RaazTryzeLcd/sGXLlVoA+8xRFZ0zmhFpUYAtlmc7IAg==}
     peerDependencies:
       markdown-it: ^14.1.0
@@ -1152,9 +1173,10 @@ packages:
         optional: true
     dependencies:
       '@types/markdown-it': 14.1.1
+      markdown-it: 14.1.0
     dev: false
 
-  /@mdit/plugin-tasklist/0.10.1:
+  /@mdit/plugin-tasklist/0.10.1_markdown-it@14.1.0:
     resolution: {integrity: sha512-yD77xIRMYlH7sZxZnk/ZxUfWhFa3v4znT3mFbXvoJtspmwy0Lgm7gVPxmttdGyIny1p+75vspsXc2XbTI9yySQ==}
     engines: {node: '>= 18'}
     peerDependencies:
@@ -1164,9 +1186,10 @@ packages:
         optional: true
     dependencies:
       '@types/markdown-it': 14.1.1
+      markdown-it: 14.1.0
     dev: false
 
-  /@mdit/plugin-tex/0.10.1:
+  /@mdit/plugin-tex/0.10.1_markdown-it@14.1.0:
     resolution: {integrity: sha512-dnuNqgDKRgs8HG5dmEH7evPYzfCDNL6l3IIDZwpsZGcoKqAMxmncIAFDGeAiQ5U3+YUfcAr+vSkElqn+DQeqcw==}
     engines: {node: '>= 18'}
     peerDependencies:
@@ -1176,9 +1199,10 @@ packages:
         optional: true
     dependencies:
       '@types/markdown-it': 14.1.1
+      markdown-it: 14.1.0
     dev: false
 
-  /@mdit/plugin-uml/0.10.1:
+  /@mdit/plugin-uml/0.10.1_markdown-it@14.1.0:
     resolution: {integrity: sha512-Eg5ij48mxTnQ4PRMWf8SH0wQsd1WJawFHR1+etJNy+iIfLDM4LfszHrpYUyiUbPUpA5kzBsEuaAroYn1zXWiow==}
     engines: {node: '>= 18'}
     peerDependencies:
@@ -1188,6 +1212,7 @@ packages:
         optional: true
     dependencies:
       '@types/markdown-it': 14.1.1
+      markdown-it: 14.1.0
     dev: false
 
   /@microsoft/tsdoc-config/0.16.2:
@@ -7557,7 +7582,7 @@ packages:
       '@vue/shared': 3.4.27
       typescript: 4.9.5
 
-  /vuepress-plugin-md-enhance/2.0.0-rc.43_026fa6f813038596573dc1de4a5efb95:
+  /vuepress-plugin-md-enhance/2.0.0-rc.43_cb54dca425122f0f85e401747bd4de95:
     resolution: {integrity: sha512-VH8xB0U4u5A9uPhjDyO54iEphpPEMlRmr75k29eh9SJ/Bc7FeX36VSzZG6xGDhY2Vepb48q3kEkULv2tT6qIjw==}
     engines: {node: '>=18.19.0', npm: '>=8', pnpm: '>=7', yarn: '>=2'}
     peerDependencies:
@@ -7609,29 +7634,29 @@ packages:
       sass-loader:
         optional: true
     dependencies:
-      '@mdit/plugin-alert': 0.10.1
-      '@mdit/plugin-align': 0.10.1
-      '@mdit/plugin-attrs': 0.10.1
-      '@mdit/plugin-container': 0.10.1
-      '@mdit/plugin-demo': 0.10.1
-      '@mdit/plugin-figure': 0.10.1
-      '@mdit/plugin-footnote': 0.10.1
-      '@mdit/plugin-img-lazyload': 0.10.1
-      '@mdit/plugin-img-mark': 0.10.1
-      '@mdit/plugin-img-size': 0.10.1
-      '@mdit/plugin-include': 0.10.1
-      '@mdit/plugin-katex-slim': 0.10.1
-      '@mdit/plugin-mark': 0.10.1
-      '@mdit/plugin-mathjax-slim': 0.10.1
-      '@mdit/plugin-plantuml': 0.10.1
-      '@mdit/plugin-spoiler': 0.10.1
-      '@mdit/plugin-stylize': 0.10.1
-      '@mdit/plugin-sub': 0.10.1
-      '@mdit/plugin-sup': 0.10.1
-      '@mdit/plugin-tab': 0.10.1
-      '@mdit/plugin-tasklist': 0.10.1
-      '@mdit/plugin-tex': 0.10.1
-      '@mdit/plugin-uml': 0.10.1
+      '@mdit/plugin-alert': 0.10.1_markdown-it@14.1.0
+      '@mdit/plugin-align': 0.10.1_markdown-it@14.1.0
+      '@mdit/plugin-attrs': 0.10.1_markdown-it@14.1.0
+      '@mdit/plugin-container': 0.10.1_markdown-it@14.1.0
+      '@mdit/plugin-demo': 0.10.1_markdown-it@14.1.0
+      '@mdit/plugin-figure': 0.10.1_markdown-it@14.1.0
+      '@mdit/plugin-footnote': 0.10.1_markdown-it@14.1.0
+      '@mdit/plugin-img-lazyload': 0.10.1_markdown-it@14.1.0
+      '@mdit/plugin-img-mark': 0.10.1_markdown-it@14.1.0
+      '@mdit/plugin-img-size': 0.10.1_markdown-it@14.1.0
+      '@mdit/plugin-include': 0.10.1_markdown-it@14.1.0
+      '@mdit/plugin-katex-slim': 0.10.1_markdown-it@14.1.0
+      '@mdit/plugin-mark': 0.10.1_markdown-it@14.1.0
+      '@mdit/plugin-mathjax-slim': 0.10.1_markdown-it@14.1.0
+      '@mdit/plugin-plantuml': 0.10.1_markdown-it@14.1.0
+      '@mdit/plugin-spoiler': 0.10.1_markdown-it@14.1.0
+      '@mdit/plugin-stylize': 0.10.1_markdown-it@14.1.0
+      '@mdit/plugin-sub': 0.10.1_markdown-it@14.1.0
+      '@mdit/plugin-sup': 0.10.1_markdown-it@14.1.0
+      '@mdit/plugin-tab': 0.10.1_markdown-it@14.1.0
+      '@mdit/plugin-tasklist': 0.10.1_markdown-it@14.1.0
+      '@mdit/plugin-tex': 0.10.1_markdown-it@14.1.0
+      '@mdit/plugin-uml': 0.10.1_markdown-it@14.1.0
       '@types/markdown-it': 14.1.1
       '@vuepress/helper': 2.0.0-rc.28_45c20508777497e5765e93c5e50bcf03
       '@vuepress/plugin-sass-palette': 2.0.0-rc.28_45c20508777497e5765e93c5e50bcf03
