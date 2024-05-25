@@ -32,6 +32,7 @@
     "vuepress-plugin-md-enhance": "2.0.0-rc.43"
   },
   "devDependencies": {
+    "@types/markdown-it": "^14.1.1",
     "cpx2": "^7.0.1",
     "eslint-config-ambrosia": "workspace:*",
     "eslint": "^8.11.0",

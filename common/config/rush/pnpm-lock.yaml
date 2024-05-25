@@ -12,15 +12,20 @@ importers:
       cpx2: ^7.0.1
       eslint: ^8.11.0
       eslint-config-ambrosia: workspace:*
+      fast-glob: ^3.2.11
       make-dir-cli: ^4.0.0
       sass-loader: ^14.2.1
+      sharp: ^0.33.4
+      tsx: ^4.10.5
       typescript: ^4.6.2
       vue: ^3.2.31
       vuepress: 2.0.0-rc.9
       vuepress-theme-ambrosia: workspace:*
     dependencies:
       ambrosia-recipes: link:../../packages/recipes
+      fast-glob: 3.3.2
       sass-loader: 14.2.1
+      sharp: 0.33.4
       vue: 3.4.27_typescript@4.9.5
       vuepress: 2.0.0-rc.9_9c7c5c1d01d86260a5b1d33f14fd7979
       vuepress-theme-ambrosia: link:../../packages/theme
@@ -30,6 +35,7 @@ importers:
       eslint: 8.57.0
       eslint-config-ambrosia: link:../../tools/eslint-config
       make-dir-cli: 4.0.0
+      tsx: 4.10.5
       typescript: 4.9.5
 
   ../../packages/language-support-extension:
@@ -49,7 +55,6 @@ importers:
       execa: ^9.1.0
       fast-glob: ^3.2.11
       nanoid: ^3.3.7
-      sharp: ^0.33.4
       tslib: ^2.3.1
       tsx: ^4.10.5
       typescript: ^4.6.2
@@ -58,7 +63,6 @@ importers:
       execa: 9.1.0
       fast-glob: 3.3.2
       nanoid: 3.3.7
-      sharp: 0.33.4
       tslib: 2.6.2
     devDependencies:
       '@types/node': 17.0.45
@@ -69,6 +73,7 @@ importers:
 
   ../../packages/theme:
     specifiers:
+      '@types/markdown-it': ^14.1.1
       '@vuepress/client': 2.0.0-rc.9
       '@vuepress/plugin-theme-data': 2.0.0-rc.28
       '@vuepress/utils': 2.0.0-rc.2
@@ -97,6 +102,7 @@ importers:
       vue-router: 4.3.2_vue@3.4.27
       vuepress-plugin-md-enhance: 2.0.0-rc.43_cb54dca425122f0f85e401747bd4de95
     devDependencies:
+      '@types/markdown-it': 14.1.1
       cpx2: 7.0.1
       eslint: 8.57.0
       eslint-config-ambrosia: link:../../tools/eslint-config
@@ -2809,7 +2815,6 @@ packages:
     dependencies:
       color-name: 1.1.4
       simple-swizzle: 0.2.2
-    dev: false
 
   /color/4.2.3:
     resolution: {integrity: sha512-1rXeuUUiGGrykh+CeBdu5Ie7OJwinCgQY0bc7GCRxy5xVHy+moaqkpL/jqQq0MtQOeYcrqEz4abc5f0KtU7W4A==}
@@ -2817,7 +2822,6 @@ packages:
     dependencies:
       color-convert: 2.0.1
       color-string: 1.9.1
-    dev: false
 
   /colorette/2.0.20:
     resolution: {integrity: sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==}
@@ -4857,7 +4861,6 @@ packages:
 
   /is-arrayish/0.3.2:
     resolution: {integrity: sha512-eVRqCvVlZbuw3GrM63ovNSNAeA1K16kaR/LRY/92w0zxQ5/1YzwblUX652i4Xs9RwAGjW9d9y6X88t8OaAJfWQ==}
-    dev: false
 
   /is-async-function/2.0.0:
     resolution: {integrity: sha512-Y1JXKrfykRJGdlDwdKlLpLyMIiWqWvuSd17TvZk68PLAOGOoF4Xyav1z0Xhoi+gCYjZVeC5SI+hYFOfvXmGRCA==}
@@ -6900,7 +6903,6 @@ packages:
     resolution: {integrity: sha512-JA//kQgZtbuY83m+xT+tXJkmJncGMTFT+C+g2h2R9uxkYIrE2yy9sgmcLhCnw57/WSD+Eh3J97FPEDFnbXnDUg==}
     dependencies:
       is-arrayish: 0.3.2
-    dev: false
 
   /slash/3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}

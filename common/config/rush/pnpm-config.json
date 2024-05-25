@@ -201,5 +201,11 @@
     //   "do-something": "echo Also not a good practice"
     // },
     // "pnpm": { "futurePnpmFeature": true }
+    "pnpm": {
+      "supportedArchitectures": {
+        "os": ["win32", "darwin", "linux", "current"],
+        "cpu": ["x64"]
+      }
+    }
   }
 }

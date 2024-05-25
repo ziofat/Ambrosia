@@ -18,8 +18,7 @@
                             <span class="tag">{{category.name}}</span>
                         </RouterLink>
                     </div>
-                    <div class="recipe-desc">
-                        {{description}}
+                    <div class="recipe-desc" v-html="description">
                     </div>
                     <div class="recipe-info">
                         <div class="recipe-info-card" v-if="time !== 'undefined'">
@@ -97,6 +96,7 @@ import {
 } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { usePageData, usePageFrontmatter } from '@vuepress/client';
+import markdownit from 'markdown-it';
 import { usePages } from '@temp/pages';
 
 export default defineComponent({
@@ -108,6 +108,7 @@ export default defineComponent({
         const title = computed(() => page.value.title);
         const route = useRoute();
         const router = useRouter();
+        const md = markdownit();
 
         const time = computed(() => meta.value.time);
         const yields = computed(() => {
@@ -123,7 +124,7 @@ export default defineComponent({
         });
         const ingredients = computed(() => meta.value.ingredients);
         const servings = computed(() => meta.value.servings);
-        const description = computed(() => meta.value.description);
+        const description = computed(() => md.render(meta.value.description));
         const variants = computed(() => meta.value.variants ?? [title.value]);
         const activeVariant = computed(() => route.query.variant ?? variants.value[0]);
 

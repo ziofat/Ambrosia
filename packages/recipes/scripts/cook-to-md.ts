@@ -46,7 +46,8 @@ ingredients: ${recipe.steps.reduce((acc, map) => {
         map.ingredients.forEach((ingredient) => acc.add(ingredient.name));
         return acc;
     }, new Set()).size}
-description: ${recipe.description}
+description: |
+${recipe.description.split('\n').map((line) => `  ${line}`).join('\n')}
 yield: ${recipe.metadata.yield ?? 'null'}
 servings: ${recipe.metadata.servings ?? 'null'}
 variants: ${recipe.variants.map((v) => `\n  - ${v}`).join('') || 'null'}

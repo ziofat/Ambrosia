@@ -39,6 +39,7 @@ export class Recipe implements IRecipe {
 
     #state = {
         description: false,
+        descriptionFirstContent: false,
         stepIndex: -1,
         lineInfo: {
             instruction: '',
@@ -72,7 +73,7 @@ export class Recipe implements IRecipe {
     }
 
     #parse() {
-        this.#source.split('\n').map((line) => {
+        this.#source.split('\n').map((line, i) => {
             const matches = line.matchAll(tokens);
             const ast: AstNode[] = [];
             let pos = 0;
@@ -177,9 +178,8 @@ export class Recipe implements IRecipe {
 
                 pos = (match.index || 0) + match[0].length;
             });
-
             // remain texts
-            if (pos < line.length) {
+            if (pos < line.length || line.length === 0) {
                 ast.push({
                     type: 'text',
                     content: line.substring(pos),
@@ -278,8 +278,11 @@ export class Recipe implements IRecipe {
     #handleText(node: TextNode) {
         if (this.#state.description) {
             this.#state.lineInfo.instruction += node.content;
+        } else if (!this.#state.descriptionFirstContent && node.content === '') {
+            // skip
         } else {
-            this.description += node.content;
+            this.#state.descriptionFirstContent = true;
+            this.description += `${node.content}\n`;
         }
     }
 

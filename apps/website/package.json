@@ -12,16 +12,19 @@
   },
   "homepage": "https://github.com/ziofat/Ambrosia#readme",
   "scripts": {
-    "scan": "make-dir recipes && cpx \"node_modules/ambrosia-recipes/lib/**/*.md\" recipes",
+    "scan": "make-dir recipes && cpx \"node_modules/ambrosia-recipes/lib/**/*.md\" recipes && tsx .vuepress/scan.ts",
     "start": "npm run scan && vuepress dev .",
     "build": "npm run scan && vuepress build . 2>&1"
   },
   "dependencies": {
     "ambrosia-recipes": "workspace:*",
+    "fast-glob": "^3.2.11",
     "vuepress-theme-ambrosia": "workspace:*",
     "vuepress": "2.0.0-rc.9",
     "vue": "^3.2.31",
-    "sass-loader": "^14.2.1"
+    "sass-loader": "^14.2.1",
+    "sharp": "^0.33.4"
+
   },
   "devDependencies": {
     "@vuepress/bundler-webpack": "2.0.0-rc.9",
@@ -29,6 +32,7 @@
     "eslint-config-ambrosia": "workspace:*",
     "eslint": "^8.11.0",
     "make-dir-cli": "^4.0.0",
-    "typescript": "^4.6.2"
+    "typescript": "^4.6.2",
+    "tsx": "^4.10.5"
   }
 }

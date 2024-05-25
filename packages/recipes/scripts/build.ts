@@ -5,14 +5,9 @@ import {
 } from 'fs';
 import { resolve, join } from 'path';
 import { sync } from 'fast-glob';
-// import sharp from 'sharp';
 import { Recipe, IRecipeDependency } from './recipe';
-import { CATEGORIES } from './categories';
 import { cookToMarkdown, IDependency } from './cook-to-md';
 import { getCreatedTime } from './utils';
-
-let recipeCount = 0;
-let variantsCount = 0;
 
 const dependencyMap = new Map<string, IRecipeDependency[]>();
 
@@ -54,38 +49,9 @@ Promise.all(sync('./src/**/*.am').map((file) => {
     const deps = getDeps(recipe.name);
     const md = cookToMarkdown(recipe, { createdTime }, deps);
     writeFileSync(join(path, `${recipe.name}.md`), md, 'utf-8');
-    recipeCount += 1;
-    variantsCount += recipe.variants.length ? recipe.variants.length - 1 : 0;
     return recipe;
-})).then((recipes) => {
-    recipes.reduce((acc, recipe) => {
-        const { name } = recipe;
-        const { course = 'other' } = recipe.metadata;
-        const [categories] = acc;
-        categories[course] = categories[course] ?? [];
-        categories[course].push(name);
-        return acc;
-    }, [{}])
-        .map((acc) => Object.entries<string[]>(acc)
-            .forEach(([category, names]) => {
-                const md = names.map((name) => `- [${name}](${name}.md)`).join('\n');
-                const title = CATEGORIES.find((c) => c.id === category)?.text ?? '';
-                writeFileSync(resolve(__dirname, `../lib/${category}/README.md`), `# ${title}\n\n${md}`, 'utf-8');
-            }));
-
-    writeFileSync(resolve(__dirname, '../lib/README.md'), `---\nfinder: all\ncount: ${recipeCount}\nvariants: ${variantsCount}\n---`, 'utf-8');
-
+})).then(() => {
     sync('./src/**/*.md').forEach((file) => {
         copyFileSync(file, file.replace('./src', './lib/'));
     });
 });
-
-// Promise.all(sync('./docs/.vuepress/public/recipe-static/*.jpg').map((file) => new Promise((r) => {
-//     const path = resolve(__dirname, `.${file}`);
-//     sharp(path)
-//         .resize(320)
-//         .toFile(path.replace('recipe-static', 'thumbnail'))
-//         .then(r);
-// }))).then(() => {
-//     console.log('files generated');
-// });
