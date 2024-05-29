@@ -14,9 +14,9 @@
                 <!-- <span>{{category.count}}</span> -->
             </div>
         </div>
-        <div class="meta">
+        <!-- <div class="meta">
             <span class="count">共 {{count + variants}} 份食谱(含 {{variants}} 变体)</span>
-        </div>
+        </div> -->
     </div>
     <div class="recipes">
         <RouterLink
@@ -42,14 +42,14 @@ export default defineComponent({
         RecipeCard,
     },
     props: {
-        count: {
-            type: Number,
-            default: 0,
-        },
-        variants: {
-            type: Number,
-            default: 0,
-        },
+        // count: {
+        //     type: Number,
+        //     default: 0,
+        // },
+        // variants: {
+        //     type: Number,
+        //     default: 0,
+        // },
         recipes: {
             type: Array,
             default: [],
@@ -79,8 +79,8 @@ export default defineComponent({
             active,
             categories,
             recipes,
-            count: props.count,
-            variants: props.variants,
+            // count: props.count,
+            // variants: props.variants,
             onClick(category) {
                 const idx = active.indexOf(category.id);
                 if (idx < 0) {

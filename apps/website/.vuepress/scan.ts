@@ -19,6 +19,8 @@ Object.entries(sync('./recipes/**/*.md').reduce((acc, file) => {
     writeFileSync(resolve(__dirname, `../recipes/${category}/README.md`), `# ${title}\n\n${md}`, 'utf-8');
 });
 
+writeFileSync(resolve(__dirname, '../recipes/README.md'), `---\nfinder: all\n---`, 'utf-8');
+
 // Promise.all(sync('./.vuepress/public/recipe-static/*.jpg').map((file) => new Promise((r) => {
 //     const path = resolve(__dirname, `.${file}`);
 //     sharp(path)
