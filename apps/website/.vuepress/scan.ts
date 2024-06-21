@@ -1,7 +1,7 @@
 import { sync } from 'fast-glob';
 import { resolve } from 'path';
-import sharp from 'sharp';
 import { writeFileSync } from 'fs';
+import Jimp from "jimp";
 import { CATEGORIES } from './categories';
 
 Object.entries(sync('./recipes/**/*.md').reduce((acc, file) => {
@@ -21,12 +21,17 @@ Object.entries(sync('./recipes/**/*.md').reduce((acc, file) => {
 
 writeFileSync(resolve(__dirname, '../recipes/README.md'), `---\nfinder: all\n---`, 'utf-8');
 
-// Promise.all(sync('./.vuepress/public/recipe-static/*.jpg').map((file) => new Promise((r) => {
-//     const path = resolve(__dirname, `.${file}`);
-//     sharp(path)
-//         .resize(320)
-//         .toFile(path.replace('recipe-static', 'thumbnail'))
-//         .then(r);
-// }))).then(() => {
-//     console.log('files generated');
-// });
+Promise.all(sync('./.vuepress/public/recipe-static/*.jpg').map((file) => new Promise((r) => {
+    const path = resolve(__dirname, `.${file}`);
+    Jimp.read(path).then((image) => {
+        image
+          .resize(320, 320)
+          .quality(60)
+          .write(path.replace('recipe-static', 'thumbnail'));
+        r(true);
+    }).catch(e => {
+        console.error(e);
+    })
+}))).then(() => {
+    console.log('files generated');
+});
