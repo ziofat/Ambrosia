@@ -57,8 +57,7 @@ function updateIndex() {
             return !exist;
         }).map((r) => r.objectID);
         if (deleted.length > 0) {
-            console.log(deleted);
-            // index.deleteObjects(deleted);
+            index.deleteObjects(deleted);
         }
     });
 }
