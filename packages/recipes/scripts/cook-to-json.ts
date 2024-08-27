@@ -30,7 +30,7 @@ export function cookToJson(recipe: Recipe, idMap: Record<string, string>, create
             const url = variant === recipe.name
                 ? `/recipes/${recipe.metadata.course}/${recipe.name}.html`
                 : `/recipes/${recipe.metadata.course}/${recipe.name}.html?variant=${variant}`;
-            const path = resolve(__dirname, '../docs/.vuepress/public/thumbnail/', `${variant}.jpg`);
+            const path = resolve(__dirname, '../../../apps/website/.vuepress/public/recipe-static/', `${variant}.jpg`);
             recipes.push({
                 objectID: idMap[url] ?? nanoid(8),
                 createdTime,
@@ -59,7 +59,7 @@ export function cookToJson(recipe: Recipe, idMap: Record<string, string>, create
         });
     } else {
         const url = `/recipes/${recipe.metadata.course}/${recipe.name}.html`;
-        const path = resolve(__dirname, '../docs/.vuepress/public/thumbnail/', `${recipe.name}.jpg`);
+        const path = resolve(__dirname, '../../../apps/website/.vuepress/public/recipe-static/', `${recipe.name}.jpg`);
         recipes.push({
             objectID: idMap[url] ?? nanoid(8),
             createdTime,

@@ -27,10 +27,10 @@ function updateIndex() {
         return acc;
     }, {} as Record<string, string>);
 
-    Promise.all(sync('./recipes/**/*.cook').map((file) => {
-        const [, course] = file.match(/recipes\/(.+)\/(.+)\.cook$/)!;
+    Promise.all(sync('./src/**/*.am').map((file) => {
+        const [, course] = file.match(/src\/(.+)\/(.+)\.am$/)!;
         const source = `>> course: ${course}\n${readFileSync(file, 'utf8')}`;
-        const name = file.split('/').pop()?.replace('.cook', '') ?? '';
+        const name = file.split('/').pop()?.replace('.am', '') ?? '';
         try {
             return new Recipe(name, source);
         } catch (e) {
@@ -41,7 +41,7 @@ function updateIndex() {
     }).map(async (recipe) => {
         if (!recipe) return [];
         const { course = 'other' } = recipe.metadata;
-        const createdTime = await getCreatedTime(resolve(__dirname, '../recipes', course, `${recipe.name}.cook`), process.cwd());
+        const createdTime = await getCreatedTime([resolve(__dirname, '../src', course, `${recipe.name}.am`)], process.cwd());
         return cookToJson(recipe, idMap, createdTime);
     })).then((recipes) => {
         recipes.forEach((recipe) => {
@@ -57,7 +57,8 @@ function updateIndex() {
             return !exist;
         }).map((r) => r.objectID);
         if (deleted.length > 0) {
-            index.deleteObjects(deleted);
+            console.log(deleted);
+            // index.deleteObjects(deleted);
         }
     });
 }
