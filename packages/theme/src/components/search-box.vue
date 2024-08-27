@@ -12,7 +12,7 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import algolia from 'algoliasearch';
 
 const debounce = (fn, ms = 0) => {
@@ -25,15 +25,10 @@ const debounce = (fn, ms = 0) => {
 
 export default defineComponent({
     name: 'SearchBox',
-    props: {
-        total: {
-            type: Number,
-            default: 0,
-        },
-    },
     emits: ['search'],
     setup(props, context) {
         const index = algolia('52DE6Z0WUS', 'e09af6bf1350a6803fbc8d6823852912').initIndex('ambrosia_recipes');
+        const total = ref(0);
 
         const search = (event?: Event) => {
             const query = event?.target?.value ?? '';
@@ -41,6 +36,7 @@ export default defineComponent({
                 facets: ['courseType'],
             }).then((results) => {
                 context.emit('search', null, results);
+                total.value = results.nbHits;
             }).catch((err) => {
                 context.emit('search', err, {});
             });
@@ -49,6 +45,7 @@ export default defineComponent({
         search();
         return {
             search: debounce(search, 300),
+            total,
         };
     },
 });

@@ -33,6 +33,7 @@ module.exports = {
         '@typescript-eslint/no-useless-constructor': 'error',
         'import/no-unresolved': 'off',
         'import/extensions': 'off',
+        'import/no-extraneous-dependencies': 'off',
         'class-methods-use-this': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
         indent: 'off',

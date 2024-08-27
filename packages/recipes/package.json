@@ -8,9 +8,11 @@
     "directory": "packages/recipes"
   },
   "scripts": {
-    "build": "tsx scripts/build.ts"
+    "build": "tsx scripts/build.ts",
+    "index": "tsx scripts/algolia.ts"
   },
   "dependencies": {
+    "@vuepress/plugin-git": "2.0.0-rc.42",
     "algoliasearch": "^4.23.3",
     "execa": "^9.1.0",
     "fast-glob": "^3.2.11",

@@ -1,7 +1,7 @@
 import algoliasearch from 'algoliasearch';
 import { sync } from 'fast-glob';
 import { getCreatedTime } from '@vuepress/plugin-git';
-import { readFileSync, existsSync, writeFileSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
 import { resolve } from 'path';
 import { cookToJson, RecipeRecord } from './cook-to-json';
 import { Recipe } from './recipe';

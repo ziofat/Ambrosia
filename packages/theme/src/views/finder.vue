@@ -5,7 +5,7 @@
         </div>
 
         <div class="results">
-            <RecipeFinder :count="count" :variants="variants" :recipes="recipes" :facet="facets" />
+            <RecipeFinder :recipes="recipes" :facet="facets" />
         </div>
     </div>
 </template>
