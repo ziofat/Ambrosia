@@ -290,15 +290,15 @@ export class Recipe implements IRecipe {
         if (!path.includes('./')) {
             return { name: path, link: '' };
         }
-        const match = path.match(/([^/<>]+)(<.+>)?\.cook$/);
+        const match = path.match(/([^/<>]+)(<.+>)?\.am$/);
         if (!match) {
             return { name: path, link: '' };
         }
         const [, name, variant] = match;
-        let link = path.replace('.cook', '.html');
+        let link = path.replace('.am', '.html');
         const variantName = (variant ?? '').replace(/[<>]/g, '');
         if (variant) {
-            link = path.replace(/<(.+)>\.cook/g, '.html?variant=$1');
+            link = path.replace(/<(.+)>\.am/g, '.html?variant=$1');
             this.dependencies.push({
                 name: variantName,
                 recipe: link,

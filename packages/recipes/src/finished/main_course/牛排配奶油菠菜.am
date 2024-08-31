@@ -4,7 +4,7 @@
 
 =======
 
-- 用@粗盐粒{}充分调味@../../main/meat/真空低温牛排.cook{500 g}, 切片
+- 用@粗盐粒{}充分调味@../../main/meat/真空低温牛排.am{500 g}, 切片
 
-- 将@../../complementary/side/奶油菠菜.cook{200 g}放入盘中, 洒上@../../flavor_enhancer/fat/胡萝卜素黄油<菠菜黄油>.cook{10 g}
+- 将@../../complementary/side/奶油菠菜.am{200 g}放入盘中, 洒上@../../flavor_enhancer/fat/胡萝卜素黄油<菠菜黄油>.am{10 g}
   将切片的牛排放在菠菜上, 上桌.

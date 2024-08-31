@@ -20,7 +20,7 @@ export const CATEGORIES = [
     { id: 'complementary/side', text: '配菜' }, // 蔬菜, 米饭, 面条, 燕麦, 土豆
     { id: 'finished', text: '成品菜', icon: 'pan-food' },
     { id: 'finished/stew-soup', text: '炖菜/汤' }, // 鸡肉面汤、牛肉炖菜、扁豆汤等
-    // { id: 'finished/wheat', text: '面食' }, // 意大利面, 汤面, 饼干, 面包等
+    { id: 'finished/wheat', text: '面食' }, // 意大利面, 汤面, 饼干, 面包等
     { id: 'finished/salad', text: '沙拉' },
     { id: 'finished/main_course', text: '主菜' },
     // { id: 'finished/snacks', text: '小吃' },
