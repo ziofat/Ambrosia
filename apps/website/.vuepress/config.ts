@@ -79,6 +79,10 @@ export default defineUserConfig({
                     text: '肉类熟度与中心温度',
                     link: '/handbook/meat-cooking-temperature.html',
                 },
+                {
+                    text: '常用食材',
+                    link: '/handbook/pantry-staples.html',
+                },
             ],
         },
         categories: CATEGORIES,
