@@ -24,5 +24,5 @@ export const CATEGORIES = [
     { id: 'finished/salad', text: '沙拉' },
     { id: 'finished/main_course', text: '主菜' },
     // { id: 'finished/snacks', text: '小吃' },
-    // { id: 'finished/desserts', text: '甜点' },
+    { id: 'finished/dessert', text: '甜点' },
 ];
