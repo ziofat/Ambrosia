@@ -46,7 +46,13 @@ export default defineComponent({
             const match = regexp.exec(ingredient.converter ?? 'not match');
             if (match) {
                 const [, amount, unit, fuzzy, fuzzyType, fuzzyCountString] = match;
-                const count = Math.ceil((ingredient.metric.amount / parseFloat(amount)) * scale.value);
+                const exactlyCount = ingredient.metric.amount / parseFloat(amount);
+                let count: number;
+                if (exactlyCount < 0.5) {
+                    count = Math.ceil(exactlyCount * scale.value * 10) / 10;
+                } else {
+                    count = Math.ceil(exactlyCount * scale.value);
+                }
                 if (fuzzy) {
                     const fuzzyCount = Math.round(parseInt(fuzzyCountString, 10) * scale.value);
                     let min = count - fuzzyCount;
