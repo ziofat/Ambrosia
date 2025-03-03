@@ -6,7 +6,7 @@ const singleWordIngredient = /@(?<sOptionalIngredient>\??)(?<sMainIngredient>!?)
 const multiwordCookware = /#(?<mCookwareName>[^@#~[]+?){(?<mCookwareQuantity>.*?)}/;
 const singleWordCookware = /#(?<sCookwareName>[^\s,.]+)/;
 
-const timer = /~(?<timerName>.*?)(?:{(?<timerQuantity>.*?)(?:\s+(?<timerUnits>.+))?})/;
+const timer = /~(?<timerName>.*?)(?:{(?<timerQuantity>.*?)(?:\s+(?<timerUnits>[^}]+))?})/;
 
 const separator = /^(?<separator>=+)$/;
 const stepStarter = /^(?<stepStarter>-\s)/;
