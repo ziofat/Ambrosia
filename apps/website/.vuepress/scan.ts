@@ -8,6 +8,7 @@ Object.entries(sync('./recipes/**/*.md').reduce((acc, file) => {
     const match = /\.\/recipes\/(?<main>[^\/]+)\/(?<sub>[^\/]+)\/(?<title>[^\.]+)\.md$/.exec(file);
     if (match) {
         const [, main, sub, title ] = match;
+        if (title === 'README') return acc;
         const category = `${main}/${sub}`;
         acc[category] = acc[category] ?? [];
         acc[category].push(title);
