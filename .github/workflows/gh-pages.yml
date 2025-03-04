@@ -31,7 +31,7 @@ jobs:
       - name: Rush rebuild
         run: node common/scripts/install-run-rush.js rebuild --verbose
       - name: Upload index to Algolia
-        run: cd packages/recipes && node common/scripts/install-run-rushx.js index
+        run: cd packages/recipes && node ../../common/scripts/install-run-rushx.js index
         env:
           ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
         continue-on-error: true
